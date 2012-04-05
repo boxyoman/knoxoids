@@ -1,0 +1,301 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FB1146FC152E397C007C8990 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB1146FB152E397C007C8990 /* UIKit.framework */; };
+		FB1146FE152E397C007C8990 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB1146FD152E397C007C8990 /* Foundation.framework */; };
+		FB114700152E397C007C8990 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB1146FF152E397C007C8990 /* CoreGraphics.framework */; };
+		FB114702152E397C007C8990 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB114701152E397C007C8990 /* GLKit.framework */; };
+		FB114704152E397C007C8990 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB114703152E397C007C8990 /* OpenGLES.framework */; };
+		FB11470A152E397C007C8990 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB114708152E397C007C8990 /* InfoPlist.strings */; };
+		FB11470C152E397C007C8990 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FB11470B152E397C007C8990 /* main.m */; };
+		FB114710152E397C007C8990 /* dataAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB11470F152E397C007C8990 /* dataAppDelegate.m */; };
+		FB114712152E397C007C8990 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = FB114711152E397C007C8990 /* Shader.fsh */; };
+		FB114714152E397C007C8990 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = FB114713152E397C007C8990 /* Shader.vsh */; };
+		FB114717152E397C007C8990 /* dataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB114716152E397C007C8990 /* dataViewController.m */; };
+		FB11471A152E397D007C8990 /* dataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB114718152E397D007C8990 /* dataViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FB1146F7152E397C007C8990 /* knoxoids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = knoxoids.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB1146FB152E397C007C8990 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FB1146FD152E397C007C8990 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FB1146FF152E397C007C8990 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		FB114701152E397C007C8990 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		FB114703152E397C007C8990 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		FB114707152E397C007C8990 /* knoxoids-Info.plist */ = {isa = PBXFileReference; path = "knoxoids-Info.plist"; sourceTree = "<group>"; };
+		FB114709152E397C007C8990 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FB11470B152E397C007C8990 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FB11470D152E397C007C8990 /* knoxoids-Prefix.pch */ = {isa = PBXFileReference; path = "knoxoids-Prefix.pch"; sourceTree = "<group>"; };
+		FB11470E152E397C007C8990 /* dataAppDelegate.h */ = {isa = PBXFileReference; path = dataAppDelegate.h; sourceTree = "<group>"; };
+		FB11470F152E397C007C8990 /* dataAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = dataAppDelegate.m; sourceTree = "<group>"; };
+		FB114711152E397C007C8990 /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
+		FB114713152E397C007C8990 /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
+		FB114715152E397C007C8990 /* dataViewController.h */ = {isa = PBXFileReference; path = dataViewController.h; sourceTree = "<group>"; };
+		FB114716152E397C007C8990 /* dataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = dataViewController.m; sourceTree = "<group>"; };
+		FB114719152E397D007C8990 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/dataViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FB1146F4152E397C007C8990 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB1146FC152E397C007C8990 /* UIKit.framework in Frameworks */,
+				FB1146FE152E397C007C8990 /* Foundation.framework in Frameworks */,
+				FB114700152E397C007C8990 /* CoreGraphics.framework in Frameworks */,
+				FB114702152E397C007C8990 /* GLKit.framework in Frameworks */,
+				FB114704152E397C007C8990 /* OpenGLES.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FB1146EC152E397C007C8990 = {
+			isa = PBXGroup;
+			children = (
+				FB114705152E397C007C8990 /* knoxoids */,
+				FB1146FA152E397C007C8990 /* Frameworks */,
+				FB1146F8152E397C007C8990 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FB1146F8152E397C007C8990 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FB1146F7152E397C007C8990 /* knoxoids.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FB1146FA152E397C007C8990 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FB1146FB152E397C007C8990 /* UIKit.framework */,
+				FB1146FD152E397C007C8990 /* Foundation.framework */,
+				FB1146FF152E397C007C8990 /* CoreGraphics.framework */,
+				FB114701152E397C007C8990 /* GLKit.framework */,
+				FB114703152E397C007C8990 /* OpenGLES.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FB114705152E397C007C8990 /* knoxoids */ = {
+			isa = PBXGroup;
+			children = (
+				FB11470E152E397C007C8990 /* dataAppDelegate.h */,
+				FB11470F152E397C007C8990 /* dataAppDelegate.m */,
+				FB114711152E397C007C8990 /* Shader.fsh */,
+				FB114713152E397C007C8990 /* Shader.vsh */,
+				FB114715152E397C007C8990 /* dataViewController.h */,
+				FB114716152E397C007C8990 /* dataViewController.m */,
+				FB114718152E397D007C8990 /* dataViewController.xib */,
+				FB114706152E397C007C8990 /* Supporting Files */,
+			);
+			path = knoxoids;
+			sourceTree = "<group>";
+		};
+		FB114706152E397C007C8990 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FB114707152E397C007C8990 /* knoxoids-Info.plist */,
+				FB114708152E397C007C8990 /* InfoPlist.strings */,
+				FB11470B152E397C007C8990 /* main.m */,
+				FB11470D152E397C007C8990 /* knoxoids-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FB1146F6152E397C007C8990 /* knoxoids */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FB11471D152E397D007C8990 /* Build configuration list for PBXNativeTarget "knoxoids" */;
+			buildPhases = (
+				FB1146F3152E397C007C8990 /* Sources */,
+				FB1146F4152E397C007C8990 /* Frameworks */,
+				FB1146F5152E397C007C8990 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = knoxoids;
+			productName = knoxoids;
+			productReference = FB1146F7152E397C007C8990 /* knoxoids.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FB1146EE152E397C007C8990 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = data;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = Boxyoman;
+			};
+			buildConfigurationList = FB1146F1152E397C007C8990 /* Build configuration list for PBXProject "knoxoids" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FB1146EC152E397C007C8990;
+			productRefGroup = FB1146F8152E397C007C8990 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FB1146F6152E397C007C8990 /* knoxoids */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FB1146F5152E397C007C8990 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB11470A152E397C007C8990 /* InfoPlist.strings in Resources */,
+				FB114712152E397C007C8990 /* Shader.fsh in Resources */,
+				FB114714152E397C007C8990 /* Shader.vsh in Resources */,
+				FB11471A152E397D007C8990 /* dataViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FB1146F3152E397C007C8990 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB11470C152E397C007C8990 /* main.m in Sources */,
+				FB114710152E397C007C8990 /* dataAppDelegate.m in Sources */,
+				FB114717152E397C007C8990 /* dataViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FB114708152E397C007C8990 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FB114709152E397C007C8990 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		FB114718152E397D007C8990 /* dataViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FB114719152E397D007C8990 /* en */,
+			);
+			name = dataViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FB11471B152E397D007C8990 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		FB11471C152E397D007C8990 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FB11471E152E397D007C8990 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "knoxoids/knoxoids-Prefix.pch";
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "knoxoids/knoxoids-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		FB11471F152E397D007C8990 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "knoxoids/knoxoids-Prefix.pch";
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "knoxoids/knoxoids-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FB1146F1152E397C007C8990 /* Build configuration list for PBXProject "knoxoids" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB11471B152E397D007C8990 /* Debug */,
+				FB11471C152E397D007C8990 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FB11471D152E397D007C8990 /* Build configuration list for PBXNativeTarget "knoxoids" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FB11471E152E397D007C8990 /* Debug */,
+				FB11471F152E397D007C8990 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FB1146EE152E397C007C8990 /* Project object */;
+}
