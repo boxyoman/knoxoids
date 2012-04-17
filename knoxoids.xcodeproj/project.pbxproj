@@ -14,11 +14,20 @@
 		FB114704152E397C007C8990 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB114703152E397C007C8990 /* OpenGLES.framework */; };
 		FB11470A152E397C007C8990 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB114708152E397C007C8990 /* InfoPlist.strings */; };
 		FB11470C152E397C007C8990 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FB11470B152E397C007C8990 /* main.m */; };
-		FB114710152E397C007C8990 /* dataAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB11470F152E397C007C8990 /* dataAppDelegate.m */; };
+		FB114710152E397C007C8990 /* appDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB11470F152E397C007C8990 /* appDelegate.m */; };
 		FB114712152E397C007C8990 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = FB114711152E397C007C8990 /* Shader.fsh */; };
 		FB114714152E397C007C8990 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = FB114713152E397C007C8990 /* Shader.vsh */; };
-		FB114717152E397C007C8990 /* dataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB114716152E397C007C8990 /* dataViewController.m */; };
-		FB11471A152E397D007C8990 /* dataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB114718152E397D007C8990 /* dataViewController.xib */; };
+		FB114717152E397C007C8990 /* mainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB114716152E397C007C8990 /* mainViewController.m */; };
+		FB11471A152E397D007C8990 /* mainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB114718152E397D007C8990 /* mainViewController.xib */; };
+		FB114726152E6C85007C8990 /* ball.png in Resources */ = {isa = PBXBuildFile; fileRef = FB114725152E6C85007C8990 /* ball.png */; };
+		FB11472D152E6F7D007C8990 /* 0001.png in Resources */ = {isa = PBXBuildFile; fileRef = FB11472C152E6F7D007C8990 /* 0001.png */; };
+		FB56BE8D152E979800C9CA6D /* game.c in Sources */ = {isa = PBXBuildFile; fileRef = FB56BE8C152E979800C9CA6D /* game.c */; };
+		FB56BE9B152EB4BA00C9CA6D /* openingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB56BE99152EB4BA00C9CA6D /* openingViewController.m */; };
+		FB56BE9C152EB4BA00C9CA6D /* openingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB56BE9A152EB4BA00C9CA6D /* openingViewController.xib */; };
+		FB58A25F1533A49800BA2538 /* ball@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB58A25E1533A49800BA2538 /* ball@2x.png */; };
+		FB61BD2D15338BD7007C5721 /* openingViewControlleriPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB61BD2C15338BD7007C5721 /* openingViewControlleriPad.xib */; };
+		FB61BD3015339403007C5721 /* mainViewControlleriPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB61BD2F15339403007C5721 /* mainViewControlleriPad.xib */; };
+		FBA39DD51531042200B80679 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA39DD41531042200B80679 /* Accelerate.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,17 +37,28 @@
 		FB1146FF152E397C007C8990 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		FB114701152E397C007C8990 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		FB114703152E397C007C8990 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		FB114707152E397C007C8990 /* knoxoids-Info.plist */ = {isa = PBXFileReference; path = "knoxoids-Info.plist"; sourceTree = "<group>"; };
+		FB114707152E397C007C8990 /* knoxoids-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "knoxoids-Info.plist"; sourceTree = "<group>"; };
 		FB114709152E397C007C8990 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FB11470B152E397C007C8990 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		FB11470D152E397C007C8990 /* knoxoids-Prefix.pch */ = {isa = PBXFileReference; path = "knoxoids-Prefix.pch"; sourceTree = "<group>"; };
-		FB11470E152E397C007C8990 /* dataAppDelegate.h */ = {isa = PBXFileReference; path = dataAppDelegate.h; sourceTree = "<group>"; };
-		FB11470F152E397C007C8990 /* dataAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = dataAppDelegate.m; sourceTree = "<group>"; };
+		FB11470D152E397C007C8990 /* knoxoids-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "knoxoids-Prefix.pch"; sourceTree = "<group>"; };
+		FB11470E152E397C007C8990 /* appDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = appDelegate.h; sourceTree = "<group>"; };
+		FB11470F152E397C007C8990 /* appDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = appDelegate.m; sourceTree = "<group>"; };
 		FB114711152E397C007C8990 /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
 		FB114713152E397C007C8990 /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
-		FB114715152E397C007C8990 /* dataViewController.h */ = {isa = PBXFileReference; path = dataViewController.h; sourceTree = "<group>"; };
-		FB114716152E397C007C8990 /* dataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = dataViewController.m; sourceTree = "<group>"; };
-		FB114719152E397D007C8990 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/dataViewController.xib; sourceTree = "<group>"; };
+		FB114715152E397C007C8990 /* mainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mainViewController.h; sourceTree = "<group>"; };
+		FB114716152E397C007C8990 /* mainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mainViewController.m; sourceTree = "<group>"; };
+		FB114719152E397D007C8990 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/mainViewController.xib; sourceTree = "<group>"; };
+		FB114725152E6C85007C8990 /* ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball.png; sourceTree = "<group>"; };
+		FB11472C152E6F7D007C8990 /* 0001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0001.png; sourceTree = "<group>"; };
+		FB56BE8A152E978700C9CA6D /* game.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = game.h; sourceTree = "<group>"; };
+		FB56BE8C152E979800C9CA6D /* game.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = game.c; sourceTree = "<group>"; };
+		FB56BE98152EB4BA00C9CA6D /* openingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = openingViewController.h; path = viewControllers/openingViewController.h; sourceTree = "<group>"; };
+		FB56BE99152EB4BA00C9CA6D /* openingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = openingViewController.m; path = viewControllers/openingViewController.m; sourceTree = "<group>"; };
+		FB56BE9A152EB4BA00C9CA6D /* openingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = openingViewController.xib; path = viewControllers/openingViewController.xib; sourceTree = "<group>"; };
+		FB58A25E1533A49800BA2538 /* ball@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ball@2x.png"; sourceTree = "<group>"; };
+		FB61BD2C15338BD7007C5721 /* openingViewControlleriPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = openingViewControlleriPad.xib; path = viewControllers/openingViewControlleriPad.xib; sourceTree = "<group>"; };
+		FB61BD2F15339403007C5721 /* mainViewControlleriPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = mainViewControlleriPad.xib; path = viewControllers/mainViewControlleriPad.xib; sourceTree = "<group>"; };
+		FBA39DD41531042200B80679 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBA39DD51531042200B80679 /* Accelerate.framework in Frameworks */,
 				FB1146FC152E397C007C8990 /* UIKit.framework in Frameworks */,
 				FB1146FE152E397C007C8990 /* Foundation.framework in Frameworks */,
 				FB114700152E397C007C8990 /* CoreGraphics.framework in Frameworks */,
@@ -60,6 +81,7 @@
 		FB1146EC152E397C007C8990 = {
 			isa = PBXGroup;
 			children = (
+				FB114720152E6ADC007C8990 /* Resource */,
 				FB114705152E397C007C8990 /* knoxoids */,
 				FB1146FA152E397C007C8990 /* Frameworks */,
 				FB1146F8152E397C007C8990 /* Products */,
@@ -77,6 +99,7 @@
 		FB1146FA152E397C007C8990 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FBA39DD41531042200B80679 /* Accelerate.framework */,
 				FB1146FB152E397C007C8990 /* UIKit.framework */,
 				FB1146FD152E397C007C8990 /* Foundation.framework */,
 				FB1146FF152E397C007C8990 /* CoreGraphics.framework */,
@@ -89,13 +112,17 @@
 		FB114705152E397C007C8990 /* knoxoids */ = {
 			isa = PBXGroup;
 			children = (
-				FB11470E152E397C007C8990 /* dataAppDelegate.h */,
-				FB11470F152E397C007C8990 /* dataAppDelegate.m */,
+				FB56BE92152EAEE000C9CA6D /* viewControllers */,
+				FB11470E152E397C007C8990 /* appDelegate.h */,
+				FB11470F152E397C007C8990 /* appDelegate.m */,
 				FB114711152E397C007C8990 /* Shader.fsh */,
 				FB114713152E397C007C8990 /* Shader.vsh */,
-				FB114715152E397C007C8990 /* dataViewController.h */,
-				FB114716152E397C007C8990 /* dataViewController.m */,
-				FB114718152E397D007C8990 /* dataViewController.xib */,
+				FB114715152E397C007C8990 /* mainViewController.h */,
+				FB114716152E397C007C8990 /* mainViewController.m */,
+				FB56BE8A152E978700C9CA6D /* game.h */,
+				FB56BE8C152E979800C9CA6D /* game.c */,
+				FB114718152E397D007C8990 /* mainViewController.xib */,
+				FB61BD2F15339403007C5721 /* mainViewControlleriPad.xib */,
 				FB114706152E397C007C8990 /* Supporting Files */,
 			);
 			path = knoxoids;
@@ -110,6 +137,27 @@
 				FB11470D152E397C007C8990 /* knoxoids-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FB114720152E6ADC007C8990 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				FB58A25E1533A49800BA2538 /* ball@2x.png */,
+				FB11472C152E6F7D007C8990 /* 0001.png */,
+				FB114725152E6C85007C8990 /* ball.png */,
+			);
+			name = Resource;
+			sourceTree = "<group>";
+		};
+		FB56BE92152EAEE000C9CA6D /* viewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FB56BE98152EB4BA00C9CA6D /* openingViewController.h */,
+				FB56BE99152EB4BA00C9CA6D /* openingViewController.m */,
+				FB56BE9A152EB4BA00C9CA6D /* openingViewController.xib */,
+				FB61BD2C15338BD7007C5721 /* openingViewControlleriPad.xib */,
+			);
+			name = viewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,7 +215,13 @@
 				FB11470A152E397C007C8990 /* InfoPlist.strings in Resources */,
 				FB114712152E397C007C8990 /* Shader.fsh in Resources */,
 				FB114714152E397C007C8990 /* Shader.vsh in Resources */,
-				FB11471A152E397D007C8990 /* dataViewController.xib in Resources */,
+				FB11471A152E397D007C8990 /* mainViewController.xib in Resources */,
+				FB114726152E6C85007C8990 /* ball.png in Resources */,
+				FB11472D152E6F7D007C8990 /* 0001.png in Resources */,
+				FB56BE9C152EB4BA00C9CA6D /* openingViewController.xib in Resources */,
+				FB61BD2D15338BD7007C5721 /* openingViewControlleriPad.xib in Resources */,
+				FB61BD3015339403007C5721 /* mainViewControlleriPad.xib in Resources */,
+				FB58A25F1533A49800BA2538 /* ball@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,8 +233,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB11470C152E397C007C8990 /* main.m in Sources */,
-				FB114710152E397C007C8990 /* dataAppDelegate.m in Sources */,
-				FB114717152E397C007C8990 /* dataViewController.m in Sources */,
+				FB114710152E397C007C8990 /* appDelegate.m in Sources */,
+				FB114717152E397C007C8990 /* mainViewController.m in Sources */,
+				FB56BE8D152E979800C9CA6D /* game.c in Sources */,
+				FB56BE9B152EB4BA00C9CA6D /* openingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,12 +251,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		FB114718152E397D007C8990 /* dataViewController.xib */ = {
+		FB114718152E397D007C8990 /* mainViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				FB114719152E397D007C8990 /* en */,
 			);
-			name = dataViewController.xib;
+			name = mainViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -258,7 +314,9 @@
 				GCC_PREFIX_HEADER = "knoxoids/knoxoids-Prefix.pch";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "knoxoids/knoxoids-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -270,7 +328,9 @@
 				GCC_PREFIX_HEADER = "knoxoids/knoxoids-Prefix.pch";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = "knoxoids/knoxoids-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -294,6 +354,7 @@
 				FB11471F152E397D007C8990 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
