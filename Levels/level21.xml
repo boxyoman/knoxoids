@@ -1,0 +1,7 @@
+<level lives="1">
+    <object id="asteroid" px="rand" py="rand" vx="rand" vy="rand" m="21"/>
+    <object id="asteroid" px="rand" py="rand" vx="rand" vy="rand" m="7"/>
+    <object id="alien" px="rand" py="rand" m="6"/>
+    <object id="turret" px="rand" py="rand" type="guided"/>
+    <object id="turret" px="rand" py="rand" type="regular"/>
+</level>

@@ -8,8 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
-#import "openingViewController.h"
+#import <CoreMotion/CMError.h>
+#import <CoreMotion/CMErrorDomain.h>
+#import <CoreMotion/CMMotionManager.h>
 
-@interface mainViewController : GLKViewController<openingViewController>
+#import "openingViewController.h"
+#include "game.h"
+#include "gameGlobals.h"
+
+@interface mainViewController : GLKViewController<openingViewController>{
+    IBOutlet UILabel *levelPopup;
+}
 
 @end

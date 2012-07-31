@@ -1,0 +1,3 @@
+<level lives="0">
+    <object id="alien" px="rand" py="rand" m="4" />
+</level>

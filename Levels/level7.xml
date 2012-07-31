@@ -1,0 +1,3 @@
+<level lives="1">
+    <object id="asteroid" px="0" py="0" vx="0" vy="0" m="30"/>
+</level>

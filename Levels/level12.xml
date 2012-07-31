@@ -1,0 +1,3 @@
+<level lives="0">
+    <object id="turret" px="rand" py="rand" type="guided" />
+</level>

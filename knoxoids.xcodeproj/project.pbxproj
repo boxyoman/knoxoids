@@ -17,17 +17,61 @@
 		FB114710152E397C007C8990 /* appDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB11470F152E397C007C8990 /* appDelegate.m */; };
 		FB114712152E397C007C8990 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = FB114711152E397C007C8990 /* Shader.fsh */; };
 		FB114714152E397C007C8990 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = FB114713152E397C007C8990 /* Shader.vsh */; };
-		FB114717152E397C007C8990 /* mainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB114716152E397C007C8990 /* mainViewController.m */; };
+		FB114717152E397C007C8990 /* mainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FB114716152E397C007C8990 /* mainViewController.mm */; };
 		FB11471A152E397D007C8990 /* mainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB114718152E397D007C8990 /* mainViewController.xib */; };
 		FB114726152E6C85007C8990 /* ball.png in Resources */ = {isa = PBXBuildFile; fileRef = FB114725152E6C85007C8990 /* ball.png */; };
 		FB11472D152E6F7D007C8990 /* 0001.png in Resources */ = {isa = PBXBuildFile; fileRef = FB11472C152E6F7D007C8990 /* 0001.png */; };
-		FB56BE8D152E979800C9CA6D /* game.c in Sources */ = {isa = PBXBuildFile; fileRef = FB56BE8C152E979800C9CA6D /* game.c */; };
+		FB1E9C51159CF6D400920658 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FB1E9C50159CF6D400920658 /* icon.png */; };
+		FB1E9C53159CF6DE00920658 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB1E9C52159CF6DE00920658 /* icon@2x.png */; };
+		FB2C2D5B1595120A00A75152 /* gameGlobals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FB2C2D5A1595120A00A75152 /* gameGlobals.cpp */; };
+		FB50D499158EF1C7006E1B75 /* shipObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = FB50D498158EF1C7006E1B75 /* shipObject.mm */; };
+		FB56BE8D152E979800C9CA6D /* game.mm in Sources */ = {isa = PBXBuildFile; fileRef = FB56BE8C152E979800C9CA6D /* game.mm */; };
 		FB56BE9B152EB4BA00C9CA6D /* openingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB56BE99152EB4BA00C9CA6D /* openingViewController.m */; };
 		FB56BE9C152EB4BA00C9CA6D /* openingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB56BE9A152EB4BA00C9CA6D /* openingViewController.xib */; };
 		FB58A25F1533A49800BA2538 /* ball@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB58A25E1533A49800BA2538 /* ball@2x.png */; };
 		FB61BD2D15338BD7007C5721 /* openingViewControlleriPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB61BD2C15338BD7007C5721 /* openingViewControlleriPad.xib */; };
 		FB61BD3015339403007C5721 /* mainViewControlleriPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB61BD2F15339403007C5721 /* mainViewControlleriPad.xib */; };
+		FB68AD271598CB3F00F38B0C /* foodObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = FB68AD251598CB3F00F38B0C /* foodObject.mm */; };
+		FB68AD2B1598CBE400F38B0C /* asteroidObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = FB68AD291598CBE300F38B0C /* asteroidObject.mm */; };
 		FBA39DD51531042200B80679 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA39DD41531042200B80679 /* Accelerate.framework */; };
+		FBA95D7915C6E8B70011E925 /* sound.mm in Sources */ = {isa = PBXBuildFile; fileRef = FBA95D7715C6E8B70011E925 /* sound.mm */; };
+		FBA95D8115C6E9970011E925 /* openal.mm in Sources */ = {isa = PBXBuildFile; fileRef = FBA95D7F15C6E9970011E925 /* openal.mm */; };
+		FBA95D8415C6F99C0011E925 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA95D8315C6F99C0011E925 /* OpenAL.framework */; };
+		FBA95D8615C6F9BE0011E925 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA95D8515C6F9BD0011E925 /* AudioToolbox.framework */; };
+		FBA95D9315C708290011E925 /* alienShoot.m4a in Resources */ = {isa = PBXBuildFile; fileRef = FBA95D8815C708290011E925 /* alienShoot.m4a */; };
+		FBA95D9515C708290011E925 /* boom2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = FBA95D8A15C708290011E925 /* boom2.m4a */; };
+		FBA95D9615C708290011E925 /* bounce.m4a in Resources */ = {isa = PBXBuildFile; fileRef = FBA95D8B15C708290011E925 /* bounce.m4a */; };
+		FBA95D9715C708290011E925 /* eat2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = FBA95D8C15C708290011E925 /* eat2.m4a */; };
+		FBA95D9815C708290011E925 /* guidedBullet.m4a in Resources */ = {isa = PBXBuildFile; fileRef = FBA95D8D15C708290011E925 /* guidedBullet.m4a */; };
+		FBA95D9915C708290011E925 /* guidedBullet2.m4a in Resources */ = {isa = PBXBuildFile; fileRef = FBA95D8E15C708290011E925 /* guidedBullet2.m4a */; };
+		FBA95D9A15C708290011E925 /* guidedShoot.m4a in Resources */ = {isa = PBXBuildFile; fileRef = FBA95D8F15C708290011E925 /* guidedShoot.m4a */; };
+		FBA95D9B15C708290011E925 /* shoot.m4a in Resources */ = {isa = PBXBuildFile; fileRef = FBA95D9015C708290011E925 /* shoot.m4a */; };
+		FBA95D9C15C708290011E925 /* turretShoot.m4a in Resources */ = {isa = PBXBuildFile; fileRef = FBA95D9115C708290011E925 /* turretShoot.m4a */; };
+		FBA95DB415C71E700011E925 /* level1.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95D9F15C71E700011E925 /* level1.xml */; };
+		FBA95DB515C71E700011E925 /* level10.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DA015C71E700011E925 /* level10.xml */; };
+		FBA95DB615C71E700011E925 /* level11.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DA115C71E700011E925 /* level11.xml */; };
+		FBA95DB715C71E700011E925 /* level12.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DA215C71E700011E925 /* level12.xml */; };
+		FBA95DB815C71E700011E925 /* level13.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DA315C71E700011E925 /* level13.xml */; };
+		FBA95DB915C71E700011E925 /* level14.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DA415C71E700011E925 /* level14.xml */; };
+		FBA95DBA15C71E700011E925 /* level15.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DA515C71E700011E925 /* level15.xml */; };
+		FBA95DBB15C71E700011E925 /* level16.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DA615C71E700011E925 /* level16.xml */; };
+		FBA95DBC15C71E700011E925 /* level17.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DA715C71E700011E925 /* level17.xml */; };
+		FBA95DBD15C71E700011E925 /* level18.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DA815C71E700011E925 /* level18.xml */; };
+		FBA95DBE15C71E700011E925 /* level19.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DA915C71E700011E925 /* level19.xml */; };
+		FBA95DBF15C71E700011E925 /* level2.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DAA15C71E700011E925 /* level2.xml */; };
+		FBA95DC015C71E700011E925 /* level21.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DAB15C71E700011E925 /* level21.xml */; };
+		FBA95DC115C71E700011E925 /* level22.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DAC15C71E700011E925 /* level22.xml */; };
+		FBA95DC215C71E700011E925 /* level3.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DAD15C71E700011E925 /* level3.xml */; };
+		FBA95DC315C71E700011E925 /* level4.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DAE15C71E700011E925 /* level4.xml */; };
+		FBA95DC415C71E700011E925 /* level5.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DAF15C71E700011E925 /* level5.xml */; };
+		FBA95DC515C71E700011E925 /* level6.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DB015C71E700011E925 /* level6.xml */; };
+		FBA95DC615C71E700011E925 /* level7.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DB115C71E700011E925 /* level7.xml */; };
+		FBA95DC715C71E700011E925 /* level8.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DB215C71E700011E925 /* level8.xml */; };
+		FBA95DC815C71E700011E925 /* level9.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DB315C71E700011E925 /* level9.xml */; };
+		FBCF6C6D158D957D00AB7FB3 /* vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FBCF6C6C158D957D00AB7FB3 /* vector.cpp */; };
+		FBCF6C70158D998700AB7FB3 /* spaceObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = FBCF6C6F158D998700AB7FB3 /* spaceObject.mm */; };
+		FBDC45571596447100175D8B /* bulletObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = FBDC45561596447100175D8B /* bulletObject.mm */; };
+		FBF47BAB15C7CA520010CAD1 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB1E9C4D159CF67C00920658 /* CoreMotion.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,19 +90,72 @@
 		FB114711152E397C007C8990 /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
 		FB114713152E397C007C8990 /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
 		FB114715152E397C007C8990 /* mainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mainViewController.h; sourceTree = "<group>"; };
-		FB114716152E397C007C8990 /* mainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mainViewController.m; sourceTree = "<group>"; };
+		FB114716152E397C007C8990 /* mainViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = mainViewController.mm; sourceTree = "<group>"; };
 		FB114719152E397D007C8990 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/mainViewController.xib; sourceTree = "<group>"; };
 		FB114725152E6C85007C8990 /* ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball.png; sourceTree = "<group>"; };
 		FB11472C152E6F7D007C8990 /* 0001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0001.png; sourceTree = "<group>"; };
+		FB1E9C4D159CF67C00920658 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		FB1E9C50159CF6D400920658 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		FB1E9C52159CF6DE00920658 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		FB2C2D58159511F900A75152 /* gameGlobals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gameGlobals.h; sourceTree = "<group>"; };
+		FB2C2D5A1595120A00A75152 /* gameGlobals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gameGlobals.cpp; sourceTree = "<group>"; };
+		FB50D496158EF1B5006E1B75 /* shipObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shipObject.h; sourceTree = "<group>"; };
+		FB50D498158EF1C7006E1B75 /* shipObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = shipObject.mm; sourceTree = "<group>"; };
 		FB56BE8A152E978700C9CA6D /* game.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = game.h; sourceTree = "<group>"; };
-		FB56BE8C152E979800C9CA6D /* game.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = game.c; sourceTree = "<group>"; };
+		FB56BE8C152E979800C9CA6D /* game.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = game.mm; sourceTree = "<group>"; };
 		FB56BE98152EB4BA00C9CA6D /* openingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = openingViewController.h; path = viewControllers/openingViewController.h; sourceTree = "<group>"; };
 		FB56BE99152EB4BA00C9CA6D /* openingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = openingViewController.m; path = viewControllers/openingViewController.m; sourceTree = "<group>"; };
 		FB56BE9A152EB4BA00C9CA6D /* openingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = openingViewController.xib; path = viewControllers/openingViewController.xib; sourceTree = "<group>"; };
 		FB58A25E1533A49800BA2538 /* ball@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ball@2x.png"; sourceTree = "<group>"; };
 		FB61BD2C15338BD7007C5721 /* openingViewControlleriPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = openingViewControlleriPad.xib; path = viewControllers/openingViewControlleriPad.xib; sourceTree = "<group>"; };
 		FB61BD2F15339403007C5721 /* mainViewControlleriPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = mainViewControlleriPad.xib; path = viewControllers/mainViewControlleriPad.xib; sourceTree = "<group>"; };
+		FB68AD251598CB3F00F38B0C /* foodObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = foodObject.mm; sourceTree = "<group>"; };
+		FB68AD261598CB3F00F38B0C /* foodObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = foodObject.h; sourceTree = "<group>"; };
+		FB68AD291598CBE300F38B0C /* asteroidObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = asteroidObject.mm; sourceTree = "<group>"; };
+		FB68AD2A1598CBE400F38B0C /* asteroidObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asteroidObject.h; sourceTree = "<group>"; };
 		FBA39DD41531042200B80679 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		FBA95D7715C6E8B70011E925 /* sound.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = sound.mm; sourceTree = "<group>"; };
+		FBA95D7815C6E8B70011E925 /* sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sound.h; sourceTree = "<group>"; };
+		FBA95D7F15C6E9970011E925 /* openal.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = openal.mm; sourceTree = "<group>"; };
+		FBA95D8015C6E9970011E925 /* openal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = openal.h; sourceTree = "<group>"; };
+		FBA95D8315C6F99C0011E925 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		FBA95D8515C6F9BD0011E925 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		FBA95D8815C708290011E925 /* alienShoot.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = alienShoot.m4a; sourceTree = "<group>"; };
+		FBA95D8A15C708290011E925 /* boom2.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = boom2.m4a; sourceTree = "<group>"; };
+		FBA95D8B15C708290011E925 /* bounce.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = bounce.m4a; sourceTree = "<group>"; };
+		FBA95D8C15C708290011E925 /* eat2.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = eat2.m4a; sourceTree = "<group>"; };
+		FBA95D8D15C708290011E925 /* guidedBullet.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = guidedBullet.m4a; sourceTree = "<group>"; };
+		FBA95D8E15C708290011E925 /* guidedBullet2.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = guidedBullet2.m4a; sourceTree = "<group>"; };
+		FBA95D8F15C708290011E925 /* guidedShoot.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = guidedShoot.m4a; sourceTree = "<group>"; };
+		FBA95D9015C708290011E925 /* shoot.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = shoot.m4a; sourceTree = "<group>"; };
+		FBA95D9115C708290011E925 /* turretShoot.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = turretShoot.m4a; sourceTree = "<group>"; };
+		FBA95D9F15C71E700011E925 /* level1.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1.xml; path = Levels/level1.xml; sourceTree = "<group>"; };
+		FBA95DA015C71E700011E925 /* level10.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level10.xml; path = Levels/level10.xml; sourceTree = "<group>"; };
+		FBA95DA115C71E700011E925 /* level11.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level11.xml; path = Levels/level11.xml; sourceTree = "<group>"; };
+		FBA95DA215C71E700011E925 /* level12.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level12.xml; path = Levels/level12.xml; sourceTree = "<group>"; };
+		FBA95DA315C71E700011E925 /* level13.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level13.xml; path = Levels/level13.xml; sourceTree = "<group>"; };
+		FBA95DA415C71E700011E925 /* level14.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level14.xml; path = Levels/level14.xml; sourceTree = "<group>"; };
+		FBA95DA515C71E700011E925 /* level15.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level15.xml; path = Levels/level15.xml; sourceTree = "<group>"; };
+		FBA95DA615C71E700011E925 /* level16.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level16.xml; path = Levels/level16.xml; sourceTree = "<group>"; };
+		FBA95DA715C71E700011E925 /* level17.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level17.xml; path = Levels/level17.xml; sourceTree = "<group>"; };
+		FBA95DA815C71E700011E925 /* level18.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level18.xml; path = Levels/level18.xml; sourceTree = "<group>"; };
+		FBA95DA915C71E700011E925 /* level19.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level19.xml; path = Levels/level19.xml; sourceTree = "<group>"; };
+		FBA95DAA15C71E700011E925 /* level2.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level2.xml; path = Levels/level2.xml; sourceTree = "<group>"; };
+		FBA95DAB15C71E700011E925 /* level21.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level21.xml; path = Levels/level21.xml; sourceTree = "<group>"; };
+		FBA95DAC15C71E700011E925 /* level22.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level22.xml; path = Levels/level22.xml; sourceTree = "<group>"; };
+		FBA95DAD15C71E700011E925 /* level3.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level3.xml; path = Levels/level3.xml; sourceTree = "<group>"; };
+		FBA95DAE15C71E700011E925 /* level4.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level4.xml; path = Levels/level4.xml; sourceTree = "<group>"; };
+		FBA95DAF15C71E700011E925 /* level5.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level5.xml; path = Levels/level5.xml; sourceTree = "<group>"; };
+		FBA95DB015C71E700011E925 /* level6.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level6.xml; path = Levels/level6.xml; sourceTree = "<group>"; };
+		FBA95DB115C71E700011E925 /* level7.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level7.xml; path = Levels/level7.xml; sourceTree = "<group>"; };
+		FBA95DB215C71E700011E925 /* level8.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level8.xml; path = Levels/level8.xml; sourceTree = "<group>"; };
+		FBA95DB315C71E700011E925 /* level9.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level9.xml; path = Levels/level9.xml; sourceTree = "<group>"; };
+		FBCF6C6B158D956E00AB7FB3 /* vector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vector.h; sourceTree = "<group>"; };
+		FBCF6C6C158D957D00AB7FB3 /* vector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vector.cpp; sourceTree = "<group>"; };
+		FBCF6C6E158D997700AB7FB3 /* spaceObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = spaceObject.h; sourceTree = "<group>"; };
+		FBCF6C6F158D998700AB7FB3 /* spaceObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = spaceObject.mm; sourceTree = "<group>"; };
+		FBDC45541596446500175D8B /* bulletObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bulletObject.h; sourceTree = "<group>"; };
+		FBDC45561596447100175D8B /* bulletObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = bulletObject.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +163,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBF47BAB15C7CA520010CAD1 /* CoreMotion.framework in Frameworks */,
+				FBA95D8615C6F9BE0011E925 /* AudioToolbox.framework in Frameworks */,
+				FBA95D8415C6F99C0011E925 /* OpenAL.framework in Frameworks */,
 				FBA39DD51531042200B80679 /* Accelerate.framework in Frameworks */,
 				FB1146FC152E397C007C8990 /* UIKit.framework in Frameworks */,
 				FB1146FE152E397C007C8990 /* Foundation.framework in Frameworks */,
@@ -78,6 +178,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FB0712C915A37FE300D60ED3 /* levels */ = {
+			isa = PBXGroup;
+			children = (
+				FBA95D9F15C71E700011E925 /* level1.xml */,
+				FBA95DA015C71E700011E925 /* level10.xml */,
+				FBA95DA115C71E700011E925 /* level11.xml */,
+				FBA95DA215C71E700011E925 /* level12.xml */,
+				FBA95DA315C71E700011E925 /* level13.xml */,
+				FBA95DA415C71E700011E925 /* level14.xml */,
+				FBA95DA515C71E700011E925 /* level15.xml */,
+				FBA95DA615C71E700011E925 /* level16.xml */,
+				FBA95DA715C71E700011E925 /* level17.xml */,
+				FBA95DA815C71E700011E925 /* level18.xml */,
+				FBA95DA915C71E700011E925 /* level19.xml */,
+				FBA95DAA15C71E700011E925 /* level2.xml */,
+				FBA95DAB15C71E700011E925 /* level21.xml */,
+				FBA95DAC15C71E700011E925 /* level22.xml */,
+				FBA95DAD15C71E700011E925 /* level3.xml */,
+				FBA95DAE15C71E700011E925 /* level4.xml */,
+				FBA95DAF15C71E700011E925 /* level5.xml */,
+				FBA95DB015C71E700011E925 /* level6.xml */,
+				FBA95DB115C71E700011E925 /* level7.xml */,
+				FBA95DB215C71E700011E925 /* level8.xml */,
+				FBA95DB315C71E700011E925 /* level9.xml */,
+			);
+			name = levels;
+			sourceTree = "<group>";
+		};
 		FB1146EC152E397C007C8990 = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +227,9 @@
 		FB1146FA152E397C007C8990 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FBA95D8515C6F9BD0011E925 /* AudioToolbox.framework */,
+				FBA95D8315C6F99C0011E925 /* OpenAL.framework */,
+				FB1E9C4D159CF67C00920658 /* CoreMotion.framework */,
 				FBA39DD41531042200B80679 /* Accelerate.framework */,
 				FB1146FB152E397C007C8990 /* UIKit.framework */,
 				FB1146FD152E397C007C8990 /* Foundation.framework */,
@@ -118,9 +249,14 @@
 				FB114711152E397C007C8990 /* Shader.fsh */,
 				FB114713152E397C007C8990 /* Shader.vsh */,
 				FB114715152E397C007C8990 /* mainViewController.h */,
-				FB114716152E397C007C8990 /* mainViewController.m */,
+				FB114716152E397C007C8990 /* mainViewController.mm */,
+				FBDC45581596447A00175D8B /* objects */,
 				FB56BE8A152E978700C9CA6D /* game.h */,
-				FB56BE8C152E979800C9CA6D /* game.c */,
+				FB56BE8C152E979800C9CA6D /* game.mm */,
+				FB2C2D58159511F900A75152 /* gameGlobals.h */,
+				FB2C2D5A1595120A00A75152 /* gameGlobals.cpp */,
+				FBCF6C6B158D956E00AB7FB3 /* vector.h */,
+				FBCF6C6C158D957D00AB7FB3 /* vector.cpp */,
 				FB114718152E397D007C8990 /* mainViewController.xib */,
 				FB61BD2F15339403007C5721 /* mainViewControlleriPad.xib */,
 				FB114706152E397C007C8990 /* Supporting Files */,
@@ -142,9 +278,9 @@
 		FB114720152E6ADC007C8990 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				FB58A25E1533A49800BA2538 /* ball@2x.png */,
-				FB11472C152E6F7D007C8990 /* 0001.png */,
-				FB114725152E6C85007C8990 /* ball.png */,
+				FBA95D8715C707D90011E925 /* sounds */,
+				FB0712C915A37FE300D60ED3 /* levels */,
+				FBD15AD8159CF95F0027F539 /* images */,
 			);
 			name = Resource;
 			sourceTree = "<group>";
@@ -158,6 +294,63 @@
 				FB61BD2C15338BD7007C5721 /* openingViewControlleriPad.xib */,
 			);
 			name = viewControllers;
+			sourceTree = "<group>";
+		};
+		FBA95D8215C6E9B00011E925 /* openAL */ = {
+			isa = PBXGroup;
+			children = (
+				FBA95D7815C6E8B70011E925 /* sound.h */,
+				FBA95D7715C6E8B70011E925 /* sound.mm */,
+				FBA95D8015C6E9970011E925 /* openal.h */,
+				FBA95D7F15C6E9970011E925 /* openal.mm */,
+			);
+			name = openAL;
+			sourceTree = "<group>";
+		};
+		FBA95D8715C707D90011E925 /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				FBA95D8815C708290011E925 /* alienShoot.m4a */,
+				FBA95D8A15C708290011E925 /* boom2.m4a */,
+				FBA95D8B15C708290011E925 /* bounce.m4a */,
+				FBA95D8C15C708290011E925 /* eat2.m4a */,
+				FBA95D8D15C708290011E925 /* guidedBullet.m4a */,
+				FBA95D8E15C708290011E925 /* guidedBullet2.m4a */,
+				FBA95D8F15C708290011E925 /* guidedShoot.m4a */,
+				FBA95D9015C708290011E925 /* shoot.m4a */,
+				FBA95D9115C708290011E925 /* turretShoot.m4a */,
+			);
+			name = sounds;
+			sourceTree = "<group>";
+		};
+		FBD15AD8159CF95F0027F539 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				FB1E9C52159CF6DE00920658 /* icon@2x.png */,
+				FB1E9C50159CF6D400920658 /* icon.png */,
+				FB58A25E1533A49800BA2538 /* ball@2x.png */,
+				FB11472C152E6F7D007C8990 /* 0001.png */,
+				FB114725152E6C85007C8990 /* ball.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
+		FBDC45581596447A00175D8B /* objects */ = {
+			isa = PBXGroup;
+			children = (
+				FB50D496158EF1B5006E1B75 /* shipObject.h */,
+				FB50D498158EF1C7006E1B75 /* shipObject.mm */,
+				FBDC45541596446500175D8B /* bulletObject.h */,
+				FBDC45561596447100175D8B /* bulletObject.mm */,
+				FB68AD261598CB3F00F38B0C /* foodObject.h */,
+				FB68AD251598CB3F00F38B0C /* foodObject.mm */,
+				FB68AD2A1598CBE400F38B0C /* asteroidObject.h */,
+				FB68AD291598CBE300F38B0C /* asteroidObject.mm */,
+				FBCF6C6E158D997700AB7FB3 /* spaceObject.h */,
+				FBCF6C6F158D998700AB7FB3 /* spaceObject.mm */,
+				FBA95D8215C6E9B00011E925 /* openAL */,
+			);
+			name = objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,6 +415,38 @@
 				FB61BD2D15338BD7007C5721 /* openingViewControlleriPad.xib in Resources */,
 				FB61BD3015339403007C5721 /* mainViewControlleriPad.xib in Resources */,
 				FB58A25F1533A49800BA2538 /* ball@2x.png in Resources */,
+				FB1E9C51159CF6D400920658 /* icon.png in Resources */,
+				FB1E9C53159CF6DE00920658 /* icon@2x.png in Resources */,
+				FBA95D9315C708290011E925 /* alienShoot.m4a in Resources */,
+				FBA95D9515C708290011E925 /* boom2.m4a in Resources */,
+				FBA95D9615C708290011E925 /* bounce.m4a in Resources */,
+				FBA95D9715C708290011E925 /* eat2.m4a in Resources */,
+				FBA95D9815C708290011E925 /* guidedBullet.m4a in Resources */,
+				FBA95D9915C708290011E925 /* guidedBullet2.m4a in Resources */,
+				FBA95D9A15C708290011E925 /* guidedShoot.m4a in Resources */,
+				FBA95D9B15C708290011E925 /* shoot.m4a in Resources */,
+				FBA95D9C15C708290011E925 /* turretShoot.m4a in Resources */,
+				FBA95DB415C71E700011E925 /* level1.xml in Resources */,
+				FBA95DB515C71E700011E925 /* level10.xml in Resources */,
+				FBA95DB615C71E700011E925 /* level11.xml in Resources */,
+				FBA95DB715C71E700011E925 /* level12.xml in Resources */,
+				FBA95DB815C71E700011E925 /* level13.xml in Resources */,
+				FBA95DB915C71E700011E925 /* level14.xml in Resources */,
+				FBA95DBA15C71E700011E925 /* level15.xml in Resources */,
+				FBA95DBB15C71E700011E925 /* level16.xml in Resources */,
+				FBA95DBC15C71E700011E925 /* level17.xml in Resources */,
+				FBA95DBD15C71E700011E925 /* level18.xml in Resources */,
+				FBA95DBE15C71E700011E925 /* level19.xml in Resources */,
+				FBA95DBF15C71E700011E925 /* level2.xml in Resources */,
+				FBA95DC015C71E700011E925 /* level21.xml in Resources */,
+				FBA95DC115C71E700011E925 /* level22.xml in Resources */,
+				FBA95DC215C71E700011E925 /* level3.xml in Resources */,
+				FBA95DC315C71E700011E925 /* level4.xml in Resources */,
+				FBA95DC415C71E700011E925 /* level5.xml in Resources */,
+				FBA95DC515C71E700011E925 /* level6.xml in Resources */,
+				FBA95DC615C71E700011E925 /* level7.xml in Resources */,
+				FBA95DC715C71E700011E925 /* level8.xml in Resources */,
+				FBA95DC815C71E700011E925 /* level9.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,9 +459,18 @@
 			files = (
 				FB11470C152E397C007C8990 /* main.m in Sources */,
 				FB114710152E397C007C8990 /* appDelegate.m in Sources */,
-				FB114717152E397C007C8990 /* mainViewController.m in Sources */,
-				FB56BE8D152E979800C9CA6D /* game.c in Sources */,
+				FB114717152E397C007C8990 /* mainViewController.mm in Sources */,
+				FB56BE8D152E979800C9CA6D /* game.mm in Sources */,
 				FB56BE9B152EB4BA00C9CA6D /* openingViewController.m in Sources */,
+				FBCF6C6D158D957D00AB7FB3 /* vector.cpp in Sources */,
+				FBCF6C70158D998700AB7FB3 /* spaceObject.mm in Sources */,
+				FB50D499158EF1C7006E1B75 /* shipObject.mm in Sources */,
+				FB2C2D5B1595120A00A75152 /* gameGlobals.cpp in Sources */,
+				FBDC45571596447100175D8B /* bulletObject.mm in Sources */,
+				FB68AD271598CB3F00F38B0C /* foodObject.mm in Sources */,
+				FB68AD2B1598CBE400F38B0C /* asteroidObject.mm in Sources */,
+				FBA95D7915C6E8B70011E925 /* sound.mm in Sources */,
+				FBA95D8115C6E9970011E925 /* openal.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,13 +7,10 @@
 //
 
 #import "mainViewController.h"
-#include "game.h"
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
-#define pi 3.1415
+#define pi M_PI
 // Uniform index.
-
-int crad = 4;
 
 enum
 {
@@ -67,6 +64,8 @@ GLfloat textureVectorData[12] = {
     1.0, 0.0,
 };
 @interface mainViewController () {
+    float crad;
+    
     GLuint _program;
     
     GLKMatrix4 _modelViewProjectionMatrix;
@@ -74,16 +73,21 @@ GLfloat textureVectorData[12] = {
     GLuint _vertexArray;
     GLuint _vertexBuffer;
     GLuint _textureBuffer;
-    game *game;
+    
+    game *currentGame;
+    
+    CMMotionManager *motionManager;
+    
 }
 @property (strong, nonatomic) EAGLContext *context;
 
 - (void)setupGL;
 - (void)tearDownGL;
 
+- (void) drawSpaceObj: (spaceObject) obj perspective: (GLKMatrix4) projectionMatrix;
 - (void) setColor_r: (float) r g: (float) g b: (float) b a: (float) a;
 - (void) setColor_r: (float) r g: (float) g b: (float) b;
-
+- (void) waitFinished: (NSTimer *) timer;
 - (BOOL)loadShaders;
 - (BOOL)loadTextures;
 - (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file;
@@ -110,11 +114,11 @@ GLfloat textureVectorData[12] = {
     
     [self setupGL];
     NSString *openingNib;
-    //check if it is an iPad and change crad if it is an iPad
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        crad *= 2;
+        crad = 8.8;
         openingNib = @"openingViewControlleriPad";
     }else{
+        crad = 4.4;
         openingNib = @"openingViewController";
     }
     
@@ -123,9 +127,21 @@ GLfloat textureVectorData[12] = {
     [self addChildViewController:opening];
     [self.view addSubview:opening.view];
     
-    //Set up game
-    self->game = makeNewGame(self.view.bounds.size.width, self.view.bounds.size.height, crad, background);
     
+    //Set up motionManager for movement
+    motionManager = [[CMMotionManager alloc] init];
+    
+    if (motionManager.isDeviceMotionAvailable) {
+        motionManager.deviceMotionUpdateInterval = 1/40;
+        [motionManager startDeviceMotionUpdates];
+    }
+    
+    //Set up game
+    globals::width = view.bounds.size.width/crad;
+    globals::height = view.bounds.size.height/crad;
+    currentGame = new game;
+    currentGame->setup();
+    currentGame->openal->initSound();
 }
 
 - (void)viewDidUnload
@@ -196,68 +212,112 @@ GLfloat textureVectorData[12] = {
 
 #pragma mark - GLKView and GLKViewController delegate methods
 
-- (void)update
-{
-    update(self->game, self.timeSinceLastUpdate);
+- (void)update{
+    CMAcceleration gravity = motionManager.deviceMotion.gravity;
+    
+    double length = sqrt(gravity.x*gravity.x+gravity.y*gravity.y+gravity.z*gravity.z);
+    printf("%f", length);
+    
+    
+    
+    if (globals::gameTime == currentGame->finishLevelTime && globals::gameTime != 0) {
+        [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(waitFinished:)  userInfo:nil repeats:NO];
+        levelPopup.text = [@"Level: " stringByAppendingString: [[NSNumber numberWithInt: currentGame->level+1] stringValue]];
+        levelPopup.hidden = false;
+    }
+    
+    currentGame->update(self.timeSinceLastUpdate);
+
+}
+
+-(void) waitFinished: (NSTimer *) timer{
+    currentGame->nextLevel();
+    currentGame->levelFinished = false;
+    
+    levelPopup.hidden = true;
 }
 //Drawing Functions
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-    if (game != NULL) {
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        
-        glBindBuffer(GL_ARRAY_BUFFER, _textureBuffer);
-        glEnableVertexAttribArray(attrib[ATTRIB_TEXTURE]);
-        glVertexAttribPointer(attrib[ATTRIB_TEXTURE], 2, GL_FLOAT, GL_FALSE, 0, 0);
-        
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glEnable(GL_BLEND);
-        
-        glBindVertexArrayOES(_vertexArray);
-        
-        // Render the object again with ES2
-        glUseProgram(_program);
-        
-        GLKMatrix4 projectionMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, 0.0f);
-        
-        projectionMatrix = GLKMatrix4Translate(projectionMatrix, -1.0, -1.0, 0.0f);
-        projectionMatrix = GLKMatrix4Scale(projectionMatrix, 1.0f/(self.view.bounds.size.width/2), 1.0f/(self.view.bounds.size.height/2), 1.0f);
-        projectionMatrix = GLKMatrix4Translate(projectionMatrix, 1.0, 1.0, 0);
-        
-        //Draw you
-        [self setColor_r:1 g:1 b:1];
-        [self drawShootingShipX:self->game->you.p[x] Y:self->game->you.p[y] m:self->game->you.m angle:self->game->you.ang gunOn:self->game->you.gunOn perspective:projectionMatrix];
-        
-        glDrawArrays(GL_TRIANGLES, 0, 6);
-        
-        //Draw mFood
-        [self setColor_r:0.6 g:0.6 b:0.6];
-        [self drawCircle_x:game->mFood->p[x] y:game->mFood->p[y] perspective: projectionMatrix];
-        
-        //Draw Food
-        for (int i = 0; i < 30; i++) {
-            if (game->food->p[x][i] != 0) {
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, _textureBuffer);
+    glEnableVertexAttribArray(attrib[ATTRIB_TEXTURE]);
+    glVertexAttribPointer(attrib[ATTRIB_TEXTURE], 2, GL_FLOAT, GL_FALSE, 0, 0);
+    
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_BLEND);
+    
+    glBindVertexArrayOES(_vertexArray);
+    
+    glUseProgram(_program);
+    
+    
+    //Make projection matrix
+    GLKMatrix4 projectionMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, 0.0f);
+    
+    projectionMatrix = GLKMatrix4Translate(projectionMatrix, -1.0, -1.0, 0.0f);
+    projectionMatrix = GLKMatrix4Scale(projectionMatrix, 1.0f/(self.view.bounds.size.width/2), 1.0f/(self.view.bounds.size.height/2), 1.0f);
+    projectionMatrix = GLKMatrix4Scale(projectionMatrix, crad, crad, 1);
+    
+    
+    //show lives
+    shipObject dummy(5, currentGame);
+    float s=dummy.size();
+    dummy.pos.y =s+2;
+    dummy.ang = M_PI/2;
+    for (int i=0; i<currentGame->lives; i++) {
+        dummy.pos.x = i*(s*2+1)+s+1;
+        [self setColor_r:1.0 g:1.0 b:1.0 a:0.4];
+        [self drawShootingShip:dummy perspective:projectionMatrix];
+    }
+    
+    [self setColor_r:1.0 g:1.0 b:1.0];
+    [self drawShootingShip:*currentGame->you perspective:projectionMatrix];
+    
+    //draw asteroids
+    [self setColor_r:0.8 g:0.5 b:0.6];
+    for (int i=0; i<currentGame->numAst; i++) {
+        if (currentGame->asteroids[i] != NULL) {
+            [self drawSpaceObj:*currentGame->asteroids[i] perspective:projectionMatrix];
+        }
+    }
+    
+    //Draw bullets
+    [self setColor_r:0.64 g:0.16 b:0.47];
+    for (int i = 0; i<currentGame->numBullets; i++) {
+        if (currentGame->bullets[i] != NULL) {
+            [self drawSpaceObj:*currentGame->bullets[i] perspective:projectionMatrix];
+        }
+    }
+    
+    //Draw food
+    [self setColor_r:0.6 g:0.6 b:0.6];
+    [self drawSpaceObj:*currentGame->mfood perspective:projectionMatrix];
+    for (int i=0; i<currentGame->numFood; i++) {
+        if (currentGame->foods[i] != NULL) {
+            if(currentGame->foods[i]->bornTime+2*foodLife/3 < globals::gameTime){
+                float a = 1-(globals::gameTime - (currentGame->foods[i]->bornTime+2*foodLife/3))/(foodLife/3);
+                [self setColor_r:0.6 g:0.6 b:0.6 a: a];
+            }else{
                 [self setColor_r:0.6 g:0.6 b:0.6];
-                [self drawCircle_x:game->food->p[x][i] y:game->food->p[y][i] perspective: projectionMatrix];
             }
+            [self drawSpaceObj:*currentGame->foods[i] perspective:projectionMatrix];
         }
-        
-        //Draw Bullets
-        for (int i = 0; i < 30; i++) {
-            if (game->bullet->p[x][i] != 0) {
-                [self setColor_r:0.64 g:0.16 b:0.47];
-                [self drawCircle_x:game->bullet->p[x][i] y:game->bullet->p[y][i] perspective: projectionMatrix];
+    }
+    
+}
+- (void) drawSpaceObj: (spaceObject) obj perspective: (GLKMatrix4) projectionMatrix{
+    if (obj.remove == 0) {
+        float s = obj.size();
+        if (obj.mass > 1) {
+            float ang = M_PI*2/(float)obj.mass;
+            for (int i=0; i<obj.mass; i++) {
+                [self drawCircle_x:obj.pos.x+cos(i*ang)*(s-1) y:obj.pos.y+sin(i*ang)*(s-1) perspective:projectionMatrix];
             }
-        }
-        //Draw ateroids
-        for (int i = 0; i < 20; i++) {
-            if (game->asteroids->p[x][i] != 0) {
-                [self setColor_r:1.0 g:0.4 b:0.5];
-                for(double counter = 0; counter<2*pi; counter=counter+2*pi/game->asteroids->m[i]) {
-                    [self drawCircle_x:game->asteroids->p[x][i]+(size(game, game->asteroids->m[i])-game->crad)*sin(counter) y:game->asteroids->p[y][i]+(size(game, game->asteroids->m[i])-crad)*cos(counter) perspective:projectionMatrix];
-                }
-            }
+        }else if(obj.mass == 1){
+            [self drawCircle_x:obj.pos.x y:obj.pos.y perspective:projectionMatrix];
         }
     }
 }
@@ -278,33 +338,31 @@ GLfloat textureVectorData[12] = {
     glUniform1f(uniforms[UNIFORM_TEXTURE], 0);
     
     GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(x, y, 0.0f);
-    modelViewMatrix = GLKMatrix4Scale(modelViewMatrix, crad, crad, 0);
-    modelViewMatrix = GLKMatrix4Scale(modelViewMatrix, 1.1, 1.1, 0);
+    modelViewMatrix = GLKMatrix4Scale(modelViewMatrix, 1.07, 1.07, 1.0);
     _modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
     glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, _modelViewProjectionMatrix.m);
     
     glDrawArrays(GL_TRIANGLES, 0, 6);
 }
-- (void) drawShootingShipX: (int) x Y: (int) y m: (int) m angle:(float) ang gunOn: (int) gunOn perspective: (GLKMatrix4) projectionMatrix {
+- (void) drawShootingShip: (shipObject) obj perspective: (GLKMatrix4) projectionMatrix {
+    if (obj.remove == 0) {
+        float s = obj.size();
 
-    float counter;
-    
-    for(counter = ang; counter<2*pi+ang; counter=counter+2*pi/(m)) {
-        [self drawCircle_x: x+(size(game, m)-crad)*cos(counter) y:y+(size(game, m)-crad)*sin(counter) perspective: projectionMatrix];
-    }
-    [self setColor_r:0.64 g:0.16 b:0.47];
-    [self drawCircle_x:x+(size(game, m)-crad)*cos(ang) y:y+(size(game, m)-crad)*sin(ang) perspective:projectionMatrix];
-    
-    if(m>=3 && gunOn == 1){
-        [self drawCircle_x:x+(crad+size(game, m))*cos(ang) y:y+(crad+size(game, m))*sin(ang) perspective:projectionMatrix];
-    }
-    if(m>5){
-        [self drawCircle_x:x+(-3*crad+size(game, m))*cos(ang) y:y+(-3*crad+size(game, m))*sin(ang) perspective:projectionMatrix];
+
+        float ang = M_PI*2/(float)obj.mass;
+        for (int i=0; i<obj.mass; i++) {
+            [self drawCircle_x:obj.pos.x+cos(i*ang+obj.ang)*(s-1) y:obj.pos.y+sin(i*ang+obj.ang)*(s-1) perspective:projectionMatrix];
+        }
+
+        [self setColor_r:0.64 g:0.16 b:0.47];
+        if(obj.mass>=3 && obj.gunOn == 1){
+            [self drawCircle_x:obj.pos.x+(s+1)*cos(obj.ang) y:obj.pos.y+(s+1)*sin(obj.ang) perspective:projectionMatrix];
+        }
     }
 }
 //
 - (void) playPushed: (id) sender{
-    changeGameTypeTo(game, survival);
+    currentGame->changeGameType(regularGame);
 }
 
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -312,7 +370,8 @@ GLfloat textureVectorData[12] = {
     UITouch* touch = [touches anyObject];
     if ([touch view] == self.view) {
         CGPoint l = [touch locationInView:self.view];
-        self->game->you.ang = atan2l(bounds.size.height - l.y-self->game->you.p[y], l.x-self->game->you.p[x]);
+        currentGame->you->ang = atan2((bounds.size.height - l.y)/crad-currentGame->you->pos.y,  l.x/crad-currentGame->you->pos.x);
+       
     }
 }
 
@@ -321,13 +380,18 @@ GLfloat textureVectorData[12] = {
     UITouch* touch = [touches anyObject];
     if ([touch view] == self.view) {
         CGPoint l = [touch locationInView:self.view];
-        self->game->you.ang = atan2l(bounds.size.height - l.y-self->game->you.p[y], l.x-self->game->you.p[x]);
+        
+        currentGame->you->ang = atan2((bounds.size.height - l.y)/crad-currentGame->you->pos.y,  l.x/crad-currentGame->you->pos.x);
+        
     }
 }
 -(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+    CGRect bounds = self.view.bounds;
     UITouch* touch = [touches anyObject];
     if ([touch view] == self.view) {
-        shoot(game, game->you.p, game->you.v, &game->you.m, &game->you.ang, &game->you.gunOn);
+        CGPoint l = [touch locationInView:self.view];
+        currentGame->you->ang = atan2((bounds.size.height - l.y)/crad-currentGame->you->pos.y,  l.x/crad-currentGame->you->pos.x);
+        currentGame->youShoot();
     }
 }
 
