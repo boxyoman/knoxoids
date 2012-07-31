@@ -1,5 +1,5 @@
 <level lives="0">
-    <object id="turret" px="rand" py="rand" type="regular" />
-    <object id="asteroid" px="rand" py="rand" vy="rand" vx="rand" m="10" />
-    <object id="asteroid" px="rand" py="rand" vy="rand" vx="rand" m="10" />
+    <object id="turret" px="0" py="0" type="regular" />
+    <object id="asteroid" px="0" py="0" vy="0" vx="0" m="10" />
+    <object id="asteroid" px="0" py="0" vy="0" vx="0" m="10" />
 </level>

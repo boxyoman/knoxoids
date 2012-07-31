@@ -14,6 +14,13 @@
 #include "openal.h"
 #include "sound.h"
 
+enum shipType {
+    yourShip,
+    alienShip,
+    regularTurret,
+    guidedTurret
+};
+
 class shipObject: public spaceObject{
     public:
         vector<double> thrust;
@@ -25,9 +32,11 @@ class shipObject: public spaceObject{
         int gunOn;
         float diedTime;
         bulletObject* shoot();
-        foodObject** destroy();
+        void destroy();
         void ate();
         
+        shipType type;
+    
         shipObject(game *currentGame):spaceObject(currentGame){
             gunOn = 1;
             ang = 0;

@@ -16,6 +16,13 @@ void bulletObject::update(double eTime){
         remove = 1;
     }
     
+    if (target!=NULL && sound == NULL) {
+        sound = currentGame->openal->createSoundSource(this, alBuffer_guidedBullet, true, false);
+    }
+    
     ppos = pos;
+    if (target != NULL) {
+        vel = vel + (pos-target->pos).unit()*eTime;
+    }
     pos = pos + vel * eTime;
 }

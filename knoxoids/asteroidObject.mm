@@ -9,8 +9,8 @@
 #include "asteroidObject.h"
 #include "game.h"
 
-foodObject** astObject::destroy(){
-    foodObject **food = (foodObject**)malloc(sizeof(foodObject**)*mass);
+void astObject::destroy(){
+    currentGame->openal->createSoundSource(this, alBuffer_boom, false, false);
     
     float ang = 2*M_PI/(float)mass;
     float s = size();
@@ -19,13 +19,14 @@ foodObject** astObject::destroy(){
         position = position+pos;
         
         vector<double> velocity = vector<double>(vel.x/mass+cos(ang*i)*20, vel.y/mass+cos(ang*i)*20);
-        food[i] = new foodObject(position, velocity, currentGame);
+        currentGame->addFood(new foodObject(position, velocity, currentGame));
     }
-    return food;
 }
 
-astObject* astObject::splitAsteroid(float ang){
+void astObject::splitAsteroid(float ang){
     astObject *ast = new astObject(currentGame);
+    
+    currentGame->openal->createSoundSource(this, alBuffer_boom, false, false);
     
     if (mass%2 == 0) {
         ast->mass = mass/2;
@@ -43,5 +44,5 @@ astObject* astObject::splitAsteroid(float ang){
     pos = pos-unit*size();
     vel = vel-unit*15;
     
-    return ast;
+    currentGame->addAsteroid(ast);
 }

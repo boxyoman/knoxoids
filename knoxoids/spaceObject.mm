@@ -115,7 +115,7 @@ double spaceObject::didHit(spaceObject *obj, double eTime){
             double time1=-(relPos.x*relVel.x + relPos.y*relVel.y + sqrt(disc))/(relVel.x*relVel.x + relVel.y*relVel.y);
             double time2=-(relPos.x*relVel.x + relPos.y*relVel.y - sqrt(disc))/(relVel.x*relVel.x + relVel.y*relVel.y);
             
-            if(time1 <= time2 && time1 <= eTime && time1>=0){
+            if(time1 <= time2 && time1 <= eTime){
                 return time1;
             }else if(time2 <= eTime && time2>=0){
                 return time2;
@@ -134,7 +134,7 @@ int spaceObject::collision(spaceObject *obj, double eTime){
     if (obj !=NULL && obj->remove==0) {
         double time;
         time = didHit(obj, eTime);
-        if (time >= 0) {
+        if (time != -1) {
             vector<double> v1 = (pos - ppos)/eTime;
             vector<double> v2 = (obj->pos - obj->ppos)/eTime;
             
@@ -175,4 +175,7 @@ int spaceObject::collision(spaceObject *obj, double eTime){
 }
 
 spaceObject::~spaceObject(){
+    if (sound!=NULL) {
+        currentGame->openal->deleteSource(sound);
+    }
 }

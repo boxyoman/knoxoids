@@ -1,4 +1,4 @@
 <level lives="0">
-    <object id="alien" px="rand" py="rand" m="6"/>
-    <object id="asteroid" px="rand" py="rand" vx="rand" vy="rand" m="15"/>
+    <object id="alien" px="0" py="0" m="6"/>
+    <object id="asteroid" px="0" py="0" vx="0" vy="0" m="15"/>
 </level>

@@ -14,7 +14,7 @@
 		FB114704152E397C007C8990 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB114703152E397C007C8990 /* OpenGLES.framework */; };
 		FB11470A152E397C007C8990 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FB114708152E397C007C8990 /* InfoPlist.strings */; };
 		FB11470C152E397C007C8990 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FB11470B152E397C007C8990 /* main.m */; };
-		FB114710152E397C007C8990 /* appDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB11470F152E397C007C8990 /* appDelegate.m */; };
+		FB114710152E397C007C8990 /* appDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = FB11470F152E397C007C8990 /* appDelegate.mm */; };
 		FB114712152E397C007C8990 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = FB114711152E397C007C8990 /* Shader.fsh */; };
 		FB114714152E397C007C8990 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = FB114713152E397C007C8990 /* Shader.vsh */; };
 		FB114717152E397C007C8990 /* mainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FB114716152E397C007C8990 /* mainViewController.mm */; };
@@ -71,7 +71,7 @@
 		FBCF6C6D158D957D00AB7FB3 /* vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FBCF6C6C158D957D00AB7FB3 /* vector.cpp */; };
 		FBCF6C70158D998700AB7FB3 /* spaceObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = FBCF6C6F158D998700AB7FB3 /* spaceObject.mm */; };
 		FBDC45571596447100175D8B /* bulletObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = FBDC45561596447100175D8B /* bulletObject.mm */; };
-		FBF47BAB15C7CA520010CAD1 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB1E9C4D159CF67C00920658 /* CoreMotion.framework */; };
+		FBF0195615C7CBD600EF13C6 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB1E9C4D159CF67C00920658 /* CoreMotion.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,7 +86,7 @@
 		FB11470B152E397C007C8990 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FB11470D152E397C007C8990 /* knoxoids-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "knoxoids-Prefix.pch"; sourceTree = "<group>"; };
 		FB11470E152E397C007C8990 /* appDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = appDelegate.h; sourceTree = "<group>"; };
-		FB11470F152E397C007C8990 /* appDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = appDelegate.m; sourceTree = "<group>"; };
+		FB11470F152E397C007C8990 /* appDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = appDelegate.mm; sourceTree = "<group>"; };
 		FB114711152E397C007C8990 /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
 		FB114713152E397C007C8990 /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
 		FB114715152E397C007C8990 /* mainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mainViewController.h; sourceTree = "<group>"; };
@@ -163,7 +163,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FBF47BAB15C7CA520010CAD1 /* CoreMotion.framework in Frameworks */,
+				FBF0195615C7CBD600EF13C6 /* CoreMotion.framework in Frameworks */,
 				FBA95D8615C6F9BE0011E925 /* AudioToolbox.framework in Frameworks */,
 				FBA95D8415C6F99C0011E925 /* OpenAL.framework in Frameworks */,
 				FBA39DD51531042200B80679 /* Accelerate.framework in Frameworks */,
@@ -182,6 +182,14 @@
 			isa = PBXGroup;
 			children = (
 				FBA95D9F15C71E700011E925 /* level1.xml */,
+				FBA95DAA15C71E700011E925 /* level2.xml */,
+				FBA95DAD15C71E700011E925 /* level3.xml */,
+				FBA95DAE15C71E700011E925 /* level4.xml */,
+				FBA95DAF15C71E700011E925 /* level5.xml */,
+				FBA95DB015C71E700011E925 /* level6.xml */,
+				FBA95DB115C71E700011E925 /* level7.xml */,
+				FBA95DB215C71E700011E925 /* level8.xml */,
+				FBA95DB315C71E700011E925 /* level9.xml */,
 				FBA95DA015C71E700011E925 /* level10.xml */,
 				FBA95DA115C71E700011E925 /* level11.xml */,
 				FBA95DA215C71E700011E925 /* level12.xml */,
@@ -192,16 +200,8 @@
 				FBA95DA715C71E700011E925 /* level17.xml */,
 				FBA95DA815C71E700011E925 /* level18.xml */,
 				FBA95DA915C71E700011E925 /* level19.xml */,
-				FBA95DAA15C71E700011E925 /* level2.xml */,
 				FBA95DAB15C71E700011E925 /* level21.xml */,
 				FBA95DAC15C71E700011E925 /* level22.xml */,
-				FBA95DAD15C71E700011E925 /* level3.xml */,
-				FBA95DAE15C71E700011E925 /* level4.xml */,
-				FBA95DAF15C71E700011E925 /* level5.xml */,
-				FBA95DB015C71E700011E925 /* level6.xml */,
-				FBA95DB115C71E700011E925 /* level7.xml */,
-				FBA95DB215C71E700011E925 /* level8.xml */,
-				FBA95DB315C71E700011E925 /* level9.xml */,
 			);
 			name = levels;
 			sourceTree = "<group>";
@@ -245,7 +245,7 @@
 			children = (
 				FB56BE92152EAEE000C9CA6D /* viewControllers */,
 				FB11470E152E397C007C8990 /* appDelegate.h */,
-				FB11470F152E397C007C8990 /* appDelegate.m */,
+				FB11470F152E397C007C8990 /* appDelegate.mm */,
 				FB114711152E397C007C8990 /* Shader.fsh */,
 				FB114713152E397C007C8990 /* Shader.vsh */,
 				FB114715152E397C007C8990 /* mainViewController.h */,
@@ -458,7 +458,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB11470C152E397C007C8990 /* main.m in Sources */,
-				FB114710152E397C007C8990 /* appDelegate.m in Sources */,
+				FB114710152E397C007C8990 /* appDelegate.mm in Sources */,
 				FB114717152E397C007C8990 /* mainViewController.mm in Sources */,
 				FB56BE8D152E979800C9CA6D /* game.mm in Sources */,
 				FB56BE9B152EB4BA00C9CA6D /* openingViewController.m in Sources */,
@@ -512,7 +512,7 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -530,7 +530,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;

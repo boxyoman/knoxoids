@@ -17,8 +17,11 @@
 class bulletObject: public spaceObject{
     public:
         void update(double);
+        spaceObject *target;
+        
         bulletObject(game *currentGame): spaceObject(currentGame){
             mass = 1;
+            target = NULL;
         }
         
 };

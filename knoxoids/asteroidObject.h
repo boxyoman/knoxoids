@@ -22,8 +22,8 @@ class astObject: public spaceObject{
         astObject(int m, vector<double> position, game *currentGame): spaceObject (m, position, currentGame){};
         astObject(int m, vector<double> position, vector<double> velocity, game *currentGame): spaceObject (m, position, velocity, currentGame){};
         
-        foodObject** destroy();
-        astObject* splitAsteroid(float ang);
+        void destroy();
+        void splitAsteroid(float ang);
 };
 
 #endif /* defined(__knoxoids__asteroidObject__) */

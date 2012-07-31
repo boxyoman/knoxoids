@@ -39,7 +39,7 @@ public:
     void initSound(void);
     
     soundSource* createSoundSource(spaceObject *object, soundBuffers bufferType, bool isLooping, bool shouldFreeSpaceObject);
-    
+    void deleteSource(soundSource *source);
     spaceObject *listener;
     soundSource **sounds;
     int sourceNum;
@@ -50,7 +50,6 @@ public:
     ~openAL();
 private:
     void addSource(soundSource *source);
-    void deleteSource(soundSource *source);
     void updateListener();
     SInt16* getSoundData(NSURL* url, SInt64* frameNum);
     void initBuffers(void);

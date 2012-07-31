@@ -213,10 +213,21 @@ GLfloat textureVectorData[12] = {
 #pragma mark - GLKView and GLKViewController delegate methods
 
 - (void)update{
-    CMAcceleration gravity = motionManager.deviceMotion.gravity;
-    
-    double length = sqrt(gravity.x*gravity.x+gravity.y*gravity.y+gravity.z*gravity.z);
-    printf("%f", length);
+    if (motionManager.accelerometerActive) {
+        CMAcceleration gravity = motionManager.deviceMotion.gravity;
+        CMRotationMatrix rotationMatrix = motionManager.deviceMotion.attitude.rotationMatrix;
+        
+        double length = 9.8;
+        CMAcceleration gravUnit = {gravity.x/length, gravity.y/length, gravity.z/length};
+        
+        CMAcceleration test= {
+            gravUnit.x*rotationMatrix.m11+gravUnit.y*rotationMatrix.m12+gravUnit.z*rotationMatrix.m13,
+            gravUnit.x*rotationMatrix.m21+gravUnit.y*rotationMatrix.m22+gravUnit.z*rotationMatrix.m23,
+            gravUnit.x*rotationMatrix.m31+gravUnit.y*rotationMatrix.m32+gravUnit.z*rotationMatrix.m33,
+        };
+        
+        
+    }
     
     
     
@@ -338,7 +349,7 @@ GLfloat textureVectorData[12] = {
     glUniform1f(uniforms[UNIFORM_TEXTURE], 0);
     
     GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(x, y, 0.0f);
-    modelViewMatrix = GLKMatrix4Scale(modelViewMatrix, 1.07, 1.07, 1.0);
+    modelViewMatrix = GLKMatrix4Scale(modelViewMatrix, 1.1, 1.1, 1.0);
     _modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
     glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, _modelViewProjectionMatrix.m);
     

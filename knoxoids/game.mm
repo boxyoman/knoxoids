@@ -72,7 +72,7 @@ void game::setup(){
     you->vel = you->vel*0;
     you->thrust = you->thrust*0;
     you->gunOn = 1;
-    
+    you->type = yourShip;
     openal->listener = you;
     
     globals::gameTime=0;
@@ -139,12 +139,12 @@ void game::update(double eTime){
                     //If collision make asteroid blowup
                     if (bullets[i]->collision(asteroids[j], eTime) == 1) {
                         if (asteroids[j]->mass > 5) {
-                            addAsteroid(asteroids[j]->splitAsteroid((bullets[i]->pos).angle(asteroids[j]->pos)));
+                            asteroids[j]->splitAsteroid((bullets[i]->pos).angle(asteroids[j]->pos));
                             bullets[i]->remove = 1;
                             notDead = false;
                             break;
                         }else{
-                            addFoods(asteroids[j]->destroy(), asteroids[j]->mass);
+                            asteroids[j]->destroy();
                             asteroids[j]->remove = 1;
                             bullets[i]->remove = 1;
                             notDead = false;
@@ -180,7 +180,7 @@ void game::update(double eTime){
             if (you->remove==0) {
                 if (you->collision(asteroids[i], eTime)==1) {
                     if (gameType != background) {
-                        addFoods(you->destroy(), you->mass);
+                        you->destroy();
                         you->remove=1;
                     }
                 }
