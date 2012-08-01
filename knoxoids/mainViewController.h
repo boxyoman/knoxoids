@@ -11,12 +11,12 @@
 #import <CoreMotion/CMError.h>
 #import <CoreMotion/CMErrorDomain.h>
 #import <CoreMotion/CMMotionManager.h>
-
+#import "pausedViewController.h"
 #import "openingViewController.h"
 #include "game.h"
 #include "gameGlobals.h"
 
-@interface mainViewController : GLKViewController<openingViewController>{
+@interface mainViewController : GLKViewController<openingViewController, pausedViewController>{
     IBOutlet UILabel *levelPopup;
 }
 

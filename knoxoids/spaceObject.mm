@@ -115,7 +115,7 @@ double spaceObject::didHit(spaceObject *obj, double eTime){
             double time1=-(relPos.x*relVel.x + relPos.y*relVel.y + sqrt(disc))/(relVel.x*relVel.x + relVel.y*relVel.y);
             double time2=-(relPos.x*relVel.x + relPos.y*relVel.y - sqrt(disc))/(relVel.x*relVel.x + relVel.y*relVel.y);
             
-            if(time1 <= time2 && time1 <= eTime){
+            if(time1 <= time2 && time1 <= eTime && (time1>=0 || time2>=0)){
                 return time1;
             }else if(time2 <= eTime && time2>=0){
                 return time2;

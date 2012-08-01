@@ -75,7 +75,10 @@ void game::setup(){
     you->type = yourShip;
     openal->listener = you;
     
-    globals::gameTime=0;
+    lives = 2;
+    level = 0;
+    finishLevelTime=0;
+    levelFinished = false;
     
     if (gameType != background) {
         openal->playSouds = true;
@@ -97,7 +100,9 @@ void game::update(double eTime){
         }
     }
     //Update you
-    you->update(eTime);
+    if (you->remove == 0) {
+        you->update(eTime);
+    }
 
     if (you->remove == 0) {
         if (you->collision(mfood, eTime) == 1) {

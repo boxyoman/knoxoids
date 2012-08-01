@@ -213,25 +213,28 @@ GLfloat textureVectorData[12] = {
 #pragma mark - GLKView and GLKViewController delegate methods
 
 - (void)update{
-    if (motionManager.accelerometerActive) {
-        CMAcceleration gravity = motionManager.deviceMotion.gravity;
+    //if (motionManager.accelerometerActive) {
+        //CMAcceleration gravity = motionManager.deviceMotion.gravity;
         CMRotationMatrix rotationMatrix = motionManager.deviceMotion.attitude.rotationMatrix;
-        
-        double length = 9.8;
-        CMAcceleration gravUnit = {gravity.x/length, gravity.y/length, gravity.z/length};
-        
+        CMAcceleration gravity = {0.5,0,0.5};
         CMAcceleration test= {
-            gravUnit.x*rotationMatrix.m11+gravUnit.y*rotationMatrix.m12+gravUnit.z*rotationMatrix.m13,
-            gravUnit.x*rotationMatrix.m21+gravUnit.y*rotationMatrix.m22+gravUnit.z*rotationMatrix.m23,
-            gravUnit.x*rotationMatrix.m31+gravUnit.y*rotationMatrix.m32+gravUnit.z*rotationMatrix.m33,
+            gravity.x*rotationMatrix.m11+gravity.y*rotationMatrix.m12+gravity.z*rotationMatrix.m13,
+            gravity.x*rotationMatrix.m21+gravity.y*rotationMatrix.m22+gravity.z*rotationMatrix.m23,
+            gravity.x*rotationMatrix.m31+gravity.y*rotationMatrix.m32+gravity.z*rotationMatrix.m33,
         };
+        float ang = atan2(test.z, test.y);
+        float ang2 = atan2(test.z, test.x);
+        printf("x: %f y: %f z: %f ang1: %f ang2: %f\n", test.x, test.y, test.z, ang, ang2);
+    
+        //currentGame->you->thrust.x = ang*10;
+        //ang = atan2(test.z, test.x);
+        //currentGame->you->thrust.y = ang*10;
         
-        
-    }
+    //}
     
     
     
-    if (globals::gameTime == currentGame->finishLevelTime && globals::gameTime != 0) {
+    if (globals::gameTime == currentGame->finishLevelTime && currentGame->gameType == regularGame) {
         [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(waitFinished:)  userInfo:nil repeats:NO];
         levelPopup.text = [@"Level: " stringByAppendingString: [[NSNumber numberWithInt: currentGame->level+1] stringValue]];
         levelPopup.hidden = false;
@@ -244,7 +247,6 @@ GLfloat textureVectorData[12] = {
 -(void) waitFinished: (NSTimer *) timer{
     currentGame->nextLevel();
     currentGame->levelFinished = false;
-    
     levelPopup.hidden = true;
 }
 //Drawing Functions
@@ -296,9 +298,13 @@ GLfloat textureVectorData[12] = {
     }
     
     //Draw bullets
-    [self setColor_r:0.64 g:0.16 b:0.47];
     for (int i = 0; i<currentGame->numBullets; i++) {
         if (currentGame->bullets[i] != NULL) {
+            if (currentGame->bullets[i]->target!=NULL) {
+                [self setColor_r:1.0 g:0.16 b:0.47];
+            }else{
+                [self setColor_r:0.64 g:0.16 b:0.47];
+            }
             [self drawSpaceObj:*currentGame->bullets[i] perspective:projectionMatrix];
         }
     }
@@ -358,14 +364,16 @@ GLfloat textureVectorData[12] = {
 - (void) drawShootingShip: (shipObject) obj perspective: (GLKMatrix4) projectionMatrix {
     if (obj.remove == 0) {
         float s = obj.size();
-
-
+        
         float ang = M_PI*2/(float)obj.mass;
         for (int i=0; i<obj.mass; i++) {
             [self drawCircle_x:obj.pos.x+cos(i*ang+obj.ang)*(s-1) y:obj.pos.y+sin(i*ang+obj.ang)*(s-1) perspective:projectionMatrix];
         }
-
-        [self setColor_r:0.64 g:0.16 b:0.47];
+        if (obj.type == guidedTurret) {
+            [self setColor_r:1.0 g:0.16 b:0.47];
+        }else{
+            [self setColor_r:0.64 g:0.16 b:0.47];
+        }
         if(obj.mass>=3 && obj.gunOn == 1){
             [self drawCircle_x:obj.pos.x+(s+1)*cos(obj.ang) y:obj.pos.y+(s+1)*sin(obj.ang) perspective:projectionMatrix];
         }
@@ -379,33 +387,67 @@ GLfloat textureVectorData[12] = {
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     CGRect bounds = self.view.bounds;
     UITouch* touch = [touches anyObject];
-    if ([touch view] == self.view) {
-        CGPoint l = [touch locationInView:self.view];
-        currentGame->you->ang = atan2((bounds.size.height - l.y)/crad-currentGame->you->pos.y,  l.x/crad-currentGame->you->pos.x);
-       
+    if ([touches count] == 1 && self.paused != true) {
+        if ([touch view] == self.view) {
+            CGPoint l = [touch locationInView:self.view];
+            currentGame->you->ang = atan2((bounds.size.height - l.y)/crad-currentGame->you->pos.y,  l.x/crad-currentGame->you->pos.x);
+           
+        }
     }
 }
 
 -(void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
     CGRect bounds = self.view.bounds;
     UITouch* touch = [touches anyObject];
-    if ([touch view] == self.view) {
-        CGPoint l = [touch locationInView:self.view];
-        
-        currentGame->you->ang = atan2((bounds.size.height - l.y)/crad-currentGame->you->pos.y,  l.x/crad-currentGame->you->pos.x);
-        
+    if ([touches count] == 1 && self.paused != true) {
+        if ([touch view] == self.view) {
+            CGPoint l = [touch locationInView:self.view];
+            
+            currentGame->you->ang = atan2((bounds.size.height - l.y)/crad-currentGame->you->pos.y,  l.x/crad-currentGame->you->pos.x);
+            
+        }
     }
 }
 -(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     CGRect bounds = self.view.bounds;
     UITouch* touch = [touches anyObject];
-    if ([touch view] == self.view) {
-        CGPoint l = [touch locationInView:self.view];
-        currentGame->you->ang = atan2((bounds.size.height - l.y)/crad-currentGame->you->pos.y,  l.x/crad-currentGame->you->pos.x);
-        currentGame->youShoot();
+    if ([touches count] == 1 && self.paused != true) {
+        if ([touch view] == self.view) {
+            CGPoint l = [touch locationInView:self.view];
+            currentGame->you->ang = atan2((bounds.size.height - l.y)/crad-currentGame->you->pos.y,  l.x/crad-currentGame->you->pos.x);
+            currentGame->youShoot();
+        }
+    }else if ([touches count] == 2) {
+        NSArray *touchs = [touches allObjects];
+        UITouch *touch1 = [touchs objectAtIndex:0];
+        UITouch *touch2 = [touchs objectAtIndex:1];
+        if ([touch1 tapCount] == 2 && [touch2 tapCount] == 2) {
+            [self pauseGame];
+        }
     }
 }
-
+- (void) pauseGame{
+    self.paused = true;
+    
+    NSString *openingNib;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        openingNib = @"pausedViewControlleriPad";
+    }else{
+        openingNib = @"pausedViewController";
+    }
+    
+    pausedViewController *paused = [[pausedViewController alloc] initWithNibName:openingNib bundle:nil];
+    paused.delegate = (id<pausedViewController>)self;
+    [self addChildViewController:paused];
+    [self.view addSubview:paused.view];
+}
+- (void) resumePushed:(id)sender{
+    self.paused = false;
+}
+- (void) restartPushed:(id)sender{
+    self.paused = false;
+    currentGame->changeGameType(regularGame);
+}
 //Loading OpenGL functions
 - (BOOL)loadTextures{
     CGImageRef image;

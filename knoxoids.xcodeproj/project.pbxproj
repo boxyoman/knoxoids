@@ -33,6 +33,9 @@
 		FB61BD3015339403007C5721 /* mainViewControlleriPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB61BD2F15339403007C5721 /* mainViewControlleriPad.xib */; };
 		FB68AD271598CB3F00F38B0C /* foodObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = FB68AD251598CB3F00F38B0C /* foodObject.mm */; };
 		FB68AD2B1598CBE400F38B0C /* asteroidObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = FB68AD291598CBE300F38B0C /* asteroidObject.mm */; };
+		FB91C7E215C863C800EAA662 /* pausedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB91C7E015C863C800EAA662 /* pausedViewController.m */; };
+		FB91C7E315C863C800EAA662 /* pausedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB91C7E115C863C800EAA662 /* pausedViewController.xib */; };
+		FB91C7E515C863EF00EAA662 /* pausedViewControlleriPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB91C7E415C863EF00EAA662 /* pausedViewControlleriPad.xib */; };
 		FBA39DD51531042200B80679 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA39DD41531042200B80679 /* Accelerate.framework */; };
 		FBA95D7915C6E8B70011E925 /* sound.mm in Sources */ = {isa = PBXBuildFile; fileRef = FBA95D7715C6E8B70011E925 /* sound.mm */; };
 		FBA95D8115C6E9970011E925 /* openal.mm in Sources */ = {isa = PBXBuildFile; fileRef = FBA95D7F15C6E9970011E925 /* openal.mm */; };
@@ -113,6 +116,10 @@
 		FB68AD261598CB3F00F38B0C /* foodObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = foodObject.h; sourceTree = "<group>"; };
 		FB68AD291598CBE300F38B0C /* asteroidObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = asteroidObject.mm; sourceTree = "<group>"; };
 		FB68AD2A1598CBE400F38B0C /* asteroidObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asteroidObject.h; sourceTree = "<group>"; };
+		FB91C7DF15C863C800EAA662 /* pausedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pausedViewController.h; path = viewControllers/pausedViewController.h; sourceTree = "<group>"; };
+		FB91C7E015C863C800EAA662 /* pausedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = pausedViewController.m; path = viewControllers/pausedViewController.m; sourceTree = "<group>"; };
+		FB91C7E115C863C800EAA662 /* pausedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = pausedViewController.xib; path = viewControllers/pausedViewController.xib; sourceTree = "<group>"; };
+		FB91C7E415C863EF00EAA662 /* pausedViewControlleriPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = pausedViewControlleriPad.xib; path = viewControllers/pausedViewControlleriPad.xib; sourceTree = "<group>"; };
 		FBA39DD41531042200B80679 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		FBA95D7715C6E8B70011E925 /* sound.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = sound.mm; sourceTree = "<group>"; };
 		FBA95D7815C6E8B70011E925 /* sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sound.h; sourceTree = "<group>"; };
@@ -292,6 +299,10 @@
 				FB56BE99152EB4BA00C9CA6D /* openingViewController.m */,
 				FB56BE9A152EB4BA00C9CA6D /* openingViewController.xib */,
 				FB61BD2C15338BD7007C5721 /* openingViewControlleriPad.xib */,
+				FB91C7DF15C863C800EAA662 /* pausedViewController.h */,
+				FB91C7E015C863C800EAA662 /* pausedViewController.m */,
+				FB91C7E115C863C800EAA662 /* pausedViewController.xib */,
+				FB91C7E415C863EF00EAA662 /* pausedViewControlleriPad.xib */,
 			);
 			name = viewControllers;
 			sourceTree = "<group>";
@@ -447,6 +458,8 @@
 				FBA95DC615C71E700011E925 /* level7.xml in Resources */,
 				FBA95DC715C71E700011E925 /* level8.xml in Resources */,
 				FBA95DC815C71E700011E925 /* level9.xml in Resources */,
+				FB91C7E315C863C800EAA662 /* pausedViewController.xib in Resources */,
+				FB91C7E515C863EF00EAA662 /* pausedViewControlleriPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,6 +484,7 @@
 				FB68AD2B1598CBE400F38B0C /* asteroidObject.mm in Sources */,
 				FBA95D7915C6E8B70011E925 /* sound.mm in Sources */,
 				FBA95D8115C6E9970011E925 /* openal.mm in Sources */,
+				FB91C7E215C863C800EAA662 /* pausedViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
