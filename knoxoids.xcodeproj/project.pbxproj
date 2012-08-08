@@ -33,6 +33,7 @@
 		FB61BD3015339403007C5721 /* mainViewControlleriPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB61BD2F15339403007C5721 /* mainViewControlleriPad.xib */; };
 		FB68AD271598CB3F00F38B0C /* foodObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = FB68AD251598CB3F00F38B0C /* foodObject.mm */; };
 		FB68AD2B1598CBE400F38B0C /* asteroidObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = FB68AD291598CBE300F38B0C /* asteroidObject.mm */; };
+		FB8AE43315D0D88D0030BF11 /* halo2.png in Resources */ = {isa = PBXBuildFile; fileRef = FB8AE43215D0D88D0030BF11 /* halo2.png */; };
 		FB91C7E215C863C800EAA662 /* pausedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB91C7E015C863C800EAA662 /* pausedViewController.m */; };
 		FB91C7E315C863C800EAA662 /* pausedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB91C7E115C863C800EAA662 /* pausedViewController.xib */; };
 		FB91C7E515C863EF00EAA662 /* pausedViewControlleriPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB91C7E415C863EF00EAA662 /* pausedViewControlleriPad.xib */; };
@@ -71,8 +72,11 @@
 		FBA95DC615C71E700011E925 /* level7.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DB115C71E700011E925 /* level7.xml */; };
 		FBA95DC715C71E700011E925 /* level8.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DB215C71E700011E925 /* level8.xml */; };
 		FBA95DC815C71E700011E925 /* level9.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DB315C71E700011E925 /* level9.xml */; };
+		FBC82C0815CA23A2000D73D7 /* particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FBC82C0615CA23A2000D73D7 /* particle.cpp */; };
+		FBC82C0E15CA3089000D73D7 /* particleSystemManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FBC82C0C15CA3089000D73D7 /* particleSystemManager.cpp */; };
 		FBCF6C6D158D957D00AB7FB3 /* vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FBCF6C6C158D957D00AB7FB3 /* vector.cpp */; };
 		FBCF6C70158D998700AB7FB3 /* spaceObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = FBCF6C6F158D998700AB7FB3 /* spaceObject.mm */; };
+		FBD7E01015D0CD5700050815 /* halo.png in Resources */ = {isa = PBXBuildFile; fileRef = FBD7E00F15D0CD5700050815 /* halo.png */; };
 		FBDC45571596447100175D8B /* bulletObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = FBDC45561596447100175D8B /* bulletObject.mm */; };
 		FBF0195615C7CBD600EF13C6 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB1E9C4D159CF67C00920658 /* CoreMotion.framework */; };
 /* End PBXBuildFile section */
@@ -116,6 +120,7 @@
 		FB68AD261598CB3F00F38B0C /* foodObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = foodObject.h; sourceTree = "<group>"; };
 		FB68AD291598CBE300F38B0C /* asteroidObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = asteroidObject.mm; sourceTree = "<group>"; };
 		FB68AD2A1598CBE400F38B0C /* asteroidObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asteroidObject.h; sourceTree = "<group>"; };
+		FB8AE43215D0D88D0030BF11 /* halo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = halo2.png; sourceTree = "<group>"; };
 		FB91C7DF15C863C800EAA662 /* pausedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pausedViewController.h; path = viewControllers/pausedViewController.h; sourceTree = "<group>"; };
 		FB91C7E015C863C800EAA662 /* pausedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = pausedViewController.m; path = viewControllers/pausedViewController.m; sourceTree = "<group>"; };
 		FB91C7E115C863C800EAA662 /* pausedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = pausedViewController.xib; path = viewControllers/pausedViewController.xib; sourceTree = "<group>"; };
@@ -157,10 +162,15 @@
 		FBA95DB115C71E700011E925 /* level7.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level7.xml; path = Levels/level7.xml; sourceTree = "<group>"; };
 		FBA95DB215C71E700011E925 /* level8.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level8.xml; path = Levels/level8.xml; sourceTree = "<group>"; };
 		FBA95DB315C71E700011E925 /* level9.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level9.xml; path = Levels/level9.xml; sourceTree = "<group>"; };
+		FBC82C0615CA23A2000D73D7 /* particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = particle.cpp; sourceTree = "<group>"; };
+		FBC82C0715CA23A2000D73D7 /* particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = particle.h; sourceTree = "<group>"; };
+		FBC82C0C15CA3089000D73D7 /* particleSystemManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = particleSystemManager.cpp; sourceTree = "<group>"; };
+		FBC82C0D15CA3089000D73D7 /* particleSystemManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = particleSystemManager.h; sourceTree = "<group>"; };
 		FBCF6C6B158D956E00AB7FB3 /* vector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vector.h; sourceTree = "<group>"; };
 		FBCF6C6C158D957D00AB7FB3 /* vector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vector.cpp; sourceTree = "<group>"; };
 		FBCF6C6E158D997700AB7FB3 /* spaceObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = spaceObject.h; sourceTree = "<group>"; };
 		FBCF6C6F158D998700AB7FB3 /* spaceObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = spaceObject.mm; sourceTree = "<group>"; };
+		FBD7E00F15D0CD5700050815 /* halo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = halo.png; sourceTree = "<group>"; };
 		FBDC45541596446500175D8B /* bulletObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bulletObject.h; sourceTree = "<group>"; };
 		FBDC45561596447100175D8B /* bulletObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = bulletObject.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -334,10 +344,23 @@
 			name = sounds;
 			sourceTree = "<group>";
 		};
+		FBC82C0415CA2383000D73D7 /* particles */ = {
+			isa = PBXGroup;
+			children = (
+				FBC82C0715CA23A2000D73D7 /* particle.h */,
+				FBC82C0615CA23A2000D73D7 /* particle.cpp */,
+				FBC82C0D15CA3089000D73D7 /* particleSystemManager.h */,
+				FBC82C0C15CA3089000D73D7 /* particleSystemManager.cpp */,
+			);
+			name = particles;
+			sourceTree = "<group>";
+		};
 		FBD15AD8159CF95F0027F539 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				FB8AE43215D0D88D0030BF11 /* halo2.png */,
 				FB1E9C52159CF6DE00920658 /* icon@2x.png */,
+				FBD7E00F15D0CD5700050815 /* halo.png */,
 				FB1E9C50159CF6D400920658 /* icon.png */,
 				FB58A25E1533A49800BA2538 /* ball@2x.png */,
 				FB11472C152E6F7D007C8990 /* 0001.png */,
@@ -359,6 +382,7 @@
 				FB68AD291598CBE300F38B0C /* asteroidObject.mm */,
 				FBCF6C6E158D997700AB7FB3 /* spaceObject.h */,
 				FBCF6C6F158D998700AB7FB3 /* spaceObject.mm */,
+				FBC82C0415CA2383000D73D7 /* particles */,
 				FBA95D8215C6E9B00011E925 /* openAL */,
 			);
 			name = objects;
@@ -460,6 +484,8 @@
 				FBA95DC815C71E700011E925 /* level9.xml in Resources */,
 				FB91C7E315C863C800EAA662 /* pausedViewController.xib in Resources */,
 				FB91C7E515C863EF00EAA662 /* pausedViewControlleriPad.xib in Resources */,
+				FBD7E01015D0CD5700050815 /* halo.png in Resources */,
+				FB8AE43315D0D88D0030BF11 /* halo2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,6 +511,8 @@
 				FBA95D7915C6E8B70011E925 /* sound.mm in Sources */,
 				FBA95D8115C6E9970011E925 /* openal.mm in Sources */,
 				FB91C7E215C863C800EAA662 /* pausedViewController.m in Sources */,
+				FBC82C0815CA23A2000D73D7 /* particle.cpp in Sources */,
+				FBC82C0E15CA3089000D73D7 /* particleSystemManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,29 +1,6 @@
 #include "game.h"
 #include <stdio.h>
 #include <stdlib.h>
-/*using namespace game;
-
-shipObject *game::you = NULL;
-
-bulletObject **game::bullets;
-int game::numBullets = 5;
-
-foodObject **game::foods;
-int game::numFood = 15;
-
-astObject **game::asteroids;
-int game::numAst = 4;
-
-int game::lives = 2;
-int game::level = 0;
-float game::finishLevelTime=0;
-int game::gameType=background;
-bool game::levelFinished = false;
-foodObject *game::mfood = NULL;
-
-openAL *game::al= new openAL;
-
-int game::enemiesLeft=0;*/
 
 vector<double> getRandomPos(){
     return vector<double>(rand()/(float)RAND_MAX*globals::width,rand()/(float)RAND_MAX*globals::height);
@@ -33,6 +10,7 @@ game::game(){
     numBullets = 5;
     numFood = 15;
     numAst = 4;
+    numShips = 4;
     lives = 2;
     level = 0;
     finishLevelTime=0;
@@ -40,26 +18,32 @@ game::game(){
     levelFinished = false;
     mfood = NULL;
     openal= new openAL();
+    partSysMan = new particleSysManager();
 }
 
 void game::setup(){
     srand(time(NULL));
     
     //setup bullets
-    bullets = (bulletObject**)malloc(sizeof(bulletObject**)*numBullets);
+    bullets = (bulletObject**)malloc(sizeof(bulletObject*)*numBullets);
     for (int i=0; i<numBullets; i++) {
         bullets[i] = NULL;
     }
     //setup food
-    foods = (foodObject**)malloc(sizeof(foodObject**)*numFood);
+    foods = (foodObject**)malloc(sizeof(foodObject*)*numFood);
     for (int i=0; i<numFood; i++) {
         foods[i] = NULL;
     }
     
     //setup asteroids
-    asteroids = (astObject**)malloc(sizeof(astObject**)*numAst);
+    asteroids = (astObject**)malloc(sizeof(astObject*)*numAst);
     for (int i=0; i<numAst; i++) {
         asteroids[i] = NULL;
+    }
+    
+    ships = (shipObject**)malloc(sizeof(shipObject*)*numAst);
+    for (int i=0; i<numShips; i++) {
+        ships[i] = NULL;
     }
     
     //
@@ -69,6 +53,7 @@ void game::setup(){
     you = new shipObject(5, this);
     //Put you in the middle
     you->pos = vector<double>(globals::width/2, globals::height/2);
+    you->ppos = you->pos;
     you->vel = you->vel*0;
     you->thrust = you->thrust*0;
     you->gunOn = 1;
@@ -76,12 +61,14 @@ void game::setup(){
     openal->listener = you;
     
     lives = 2;
-    level = 0;
+    level = 14;
     finishLevelTime=0;
     levelFinished = false;
     
     if (gameType != background) {
         openal->playSouds = true;
+    }else{
+        openal->playSouds = false;
     }
 }
 
@@ -91,6 +78,7 @@ void game::update(double eTime){
     globals::gameTime += eTime;
     
     openal->update();
+    partSysMan->update(eTime);
     
     if (gameType == background) {
         vector<double> diff = mfood->pos-you->pos;
@@ -103,11 +91,27 @@ void game::update(double eTime){
     if (you->remove == 0) {
         you->update(eTime);
     }
-
+    if (you->remove == 1) {
+        if (you->diedTime+youDeathTime<globals::gameTime) {
+            if (lives != 0) {
+                you->remove = 0;
+                you->mass = 5;
+                you->ang = M_PI_2;
+                you->gunOn = 1;
+                you->pos.y = you->size()+2;
+                you->pos.x = (lives-1)*(you->size()*2+1)+you->size()+1;
+                you->ppos = you->pos;
+                you->vel = vector<double>(0,0);
+                
+                lives--;
+            }
+        }
+    }
     if (you->remove == 0) {
         if (you->collision(mfood, eTime) == 1) {
             you->ate();
             mfood->pos = getRandomPos();
+            mfood->ppos = mfood->pos;
             mfood->vel = vector<double>(0,0);
             if (gameType == background) {
                 youShoot();
@@ -116,8 +120,70 @@ void game::update(double eTime){
     }
     
     mfood->update(eTime);
+        
     
     enemiesLeft=0;
+    
+    for (int i=0; i<numShips; i++) {
+        if (ships[i]!=NULL) {
+            enemiesLeft++;
+            bool notDead = true;
+            if (ships[i]->remove==1) {
+                delete ships[i];
+                ships[i] = NULL;
+                continue;
+            }
+            ships[i]->update(eTime);
+            
+            for (int j=i; j<numShips; j++) {
+                if (ships[j]!=NULL && ships[j]->remove==0) {
+                    ships[i]->collision(ships[j], eTime);
+                }
+            }
+            for (int j=0; j<numBullets; j++) {
+                if (bullets[j] != NULL && bullets[j]->remove==0) {
+                    if (ships[i]->collision(bullets[j], eTime) == 1) {
+                        if(ships[i]->shot(bullets[j])){
+                            notDead = false;
+                        }
+                    }
+                }
+            }
+            for (int j=0; j<numAst && notDead; j++) {
+                if (asteroids[j] != NULL && asteroids[j]->remove == 0) {
+                    ships[i]->collision(asteroids[j], eTime);
+                }
+            }
+            for (int j=0; j<numFood && notDead; j++) {
+                if (foods[j] != NULL && foods[j]->remove == 0) {
+                    if (ships[i]->type == alienShip) {
+                        if(ships[i]->didHit(foods[j], eTime) != -1){
+                            ships[i]->eat(foods[j]);
+                            ships[i]->shoot();
+                        }
+                    }else{
+                        ships[i]->collision(foods[j], eTime);
+                    }
+                }
+            }
+            if (mfood->remove == 0 && notDead) {
+                if (ships[i]->type == alienShip) {
+                    if (ships[i]->didHit(mfood, eTime) != -1) {
+                        ships[i]->ate();
+                        mfood->pos = getRandomPos();
+                        mfood->ppos = mfood->pos;
+                        mfood->vel = vector<double>(0,0);
+                        ships[i]->shoot();
+                    }
+                }else{
+                    ships[i]->collision(mfood, eTime);
+                }
+            }
+            if (you->remove == 0 && notDead) {
+                ships[i]->collision(you, eTime);
+            }
+        }
+    }
     
     //Update bullets
     for (int i=0; i<numBullets; i++) {
@@ -131,6 +197,17 @@ void game::update(double eTime){
                 continue;
             }
             bullets[i]->update(eTime);
+            
+            if (bullets[i]->collision(you, eTime) == 1 && gameType != background) {
+                you->shot(bullets[i]);
+                particleSysDef partSysDef;
+                partSysDef.pos = bullets[i]->pos;
+                partSysDef.vel = bullets[i]->vel;
+                partSysDef.color.r = 1.0; partSysDef.color.g = 0.16;partSysDef.color.b = 0.47;
+                partSysDef.numOfParts = 20;
+                
+                notDead = false;
+            }
             
             //check for bullet-bullet collision
             for (int j=i+1; j<game::numBullets && notDead; j++) {
@@ -149,7 +226,7 @@ void game::update(double eTime){
                             notDead = false;
                             break;
                         }else{
-                            asteroids[j]->destroy();
+                            asteroids[j]->destroy(bullets[i]);
                             asteroids[j]->remove = 1;
                             bullets[i]->remove = 1;
                             notDead = false;
@@ -221,9 +298,8 @@ void game::update(double eTime){
             
             //See if collision with you, if so add to your mass and remove food
             if (you->remove == 0) {
-                if (foods[i]->collision(you, eTime)==1) {
-                    you->ate();
-                    foods[i]->remove=1;
+                if (foods[i]->didHit(you, eTime)!=-1) {
+                    you->eat(foods[i]);
                     if (gameType == background) {
                         youShoot();
                     }
@@ -253,10 +329,7 @@ void game::update(double eTime){
 }
 void game::youShoot(){
     if (you->remove ==0) {
-        bulletObject *bullet;
-        bullet = you->shoot();
-        addBullet(bullet);
-
+        you->shoot();
     }
 }
 
@@ -294,13 +367,37 @@ void game::gameCleanup(){
     }
     free(foods);
     
+    //free ship memory
+    for (int i=0; i<numShips; i++) {
+        if (ships[i]!=NULL) {
+            delete ships[i];
+            ships[i] = NULL;
+        }
+    }
+    free(ships);
+    
     delete you;
     delete mfood;
     //Game over
 }
 
 //Adding objects functions
-
+void game::addShip(shipObject *ship){
+    int opening=-1;
+    for (int i=0; i<numShips; i++) {
+        if (ships[i]==NULL) {
+            opening = i;
+            break;
+        }
+    }
+    if (opening==-1) {
+        numShips++;
+        ships = (shipObject**)realloc(ships, sizeof(shipObject*)*(numShips));
+        ships[numShips-1] = ship;
+    }else{
+        ships[opening]=ship;
+    }
+}
 void game::addAsteroid(astObject* asteroid){
     if (asteroid != NULL) {
         int i = 0;
@@ -389,6 +486,11 @@ void game::nextLevel(){
     [loader loadLevelWithStr: str];
 }
 
+game::~game(){
+    gameCleanup();
+    delete openal;
+    delete partSysMan;
+}
 @implementation levelLoader
 
 - (id) initWithGame:(game *)g{
@@ -447,12 +549,48 @@ void game::nextLevel(){
                     ast->pos = getRandomPos();
                 }while ((ast->pos - currentGame->you->pos).mag2() < (currentGame->you->size()+ast->size())*(currentGame->you->size()+ast->size()));
             }
+            ast->ppos = ast->pos;
             //Make sure asteroid starts moving away from the guy
             vector<double> diff = ast->pos - currentGame->you->pos;
             ast->vel = diff.unit() * 20;
             
             ast->mass = [[attributeDict valueForKey:@"m"] integerValue];
             currentGame->addAsteroid(ast);
+        }else if([[attributeDict valueForKey:@"id"] isEqualToString:@"turret"]){
+            shipObject *ship = new shipObject(currentGame);
+            
+            if ([[attributeDict valueForKey:@"type"] isEqualToString:@"regular"]) {
+                ship->type = regularTurret;
+            }else if ([[attributeDict valueForKey:@"type"] isEqualToString:@"guided"]){
+                ship->type = guidedTurret;
+            }
+            
+            ship->pos.x = [[attributeDict valueForKey:@"px"] floatValue];
+            ship->pos.y = [[attributeDict valueForKey:@"py"] floatValue];
+            if(ship->pos.mag2() == 0){
+                do{
+                    ship->pos = getRandomPos();
+                }while ((ship->pos - currentGame->you->pos).mag2() < (currentGame->you->size()+ship->size())*(currentGame->you->size()+ship->size()));
+            }
+            ship->ppos = ship->pos;
+            
+            ship->mass = 3;
+            currentGame->addShip(ship);
+        }else if ([[attributeDict valueForKey:@"id"] isEqualToString:@"alien"]){
+            shipObject *ship = new shipObject(currentGame);
+            ship->type = alienShip;
+            
+            ship->pos.x = [[attributeDict valueForKey:@"px"] floatValue];
+            ship->pos.y = [[attributeDict valueForKey:@"py"] floatValue];
+            if(ship->pos.mag2() == 0){
+                do{
+                    ship->pos = getRandomPos();
+                }while ((ship->pos - currentGame->you->pos).mag2() < (currentGame->you->size()+ship->size())*(currentGame->you->size()+ship->size()));
+            }
+            ship->ppos = ship->pos;
+            
+            ship->mass = 3;
+            currentGame->addShip(ship);
         }
     }
     

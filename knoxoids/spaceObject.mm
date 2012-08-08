@@ -95,30 +95,34 @@ double spaceObject::size(){
 }
 
 double spaceObject::didHit(spaceObject *obj, double eTime){
-    vector<double> v1 = (pos - ppos)/eTime;
-    vector<double> v2 = (obj->pos - obj->ppos)/eTime;
-    
-    vector<double> relativeVel = v1-v2;
-    vector<double> relPos = obj->ppos - ppos;
-    
-    //See if the two objects are moving towards eachother
-    if (relPos.dot(relativeVel) > 0) {
-        vector<double> relVel = relativeVel*-1;
-        double dist = obj->size() + this->size()+.0001;
+    if (obj->remove == 0 && remove ==0) {
+        vector<double> v1 = (pos - ppos)/eTime;
+        vector<double> v2 = (obj->pos - obj->ppos)/eTime;
         
-        // d = √( (relPos.x+relVel.x*t)^2 + (relPos.y+relVel.y*t)^2 )
-        // solved for t, pick smallest t
-        // see if t < eTime
+        vector<double> relativeVel = v1-v2;
+        vector<double> relPos = obj->ppos - ppos;
         
-        double disc = 2*relPos.x*relPos.y*relVel.x*relVel.y + (dist*dist -relPos.y*relPos.y)*relVel.x*relVel.x + (dist*dist - relPos.x*relPos.x)*relVel.y*relVel.y;
-        if(disc >= 0){
-            double time1=-(relPos.x*relVel.x + relPos.y*relVel.y + sqrt(disc))/(relVel.x*relVel.x + relVel.y*relVel.y);
-            double time2=-(relPos.x*relVel.x + relPos.y*relVel.y - sqrt(disc))/(relVel.x*relVel.x + relVel.y*relVel.y);
+        //See if the two objects are moving towards eachother
+        if (relPos.dot(relativeVel) > 0) {
+            vector<double> relVel = relativeVel*-1;
+            double dist = obj->size() + this->size()+.0001;
             
-            if(time1 <= time2 && time1 <= eTime && (time1>=0 || time2>=0)){
-                return time1;
-            }else if(time2 <= eTime && time2>=0){
-                return time2;
+            // d = √( (relPos.x+relVel.x*t)^2 + (relPos.y+relVel.y*t)^2 )
+            // solved for t, pick smallest t
+            // see if t < eTime
+            
+            double disc = 2*relPos.x*relPos.y*relVel.x*relVel.y + (dist*dist -relPos.y*relPos.y)*relVel.x*relVel.x + (dist*dist - relPos.x*relPos.x)*relVel.y*relVel.y;
+            if(disc >= 0){
+                double time1=-(relPos.x*relVel.x + relPos.y*relVel.y + sqrt(disc))/(relVel.x*relVel.x + relVel.y*relVel.y);
+                double time2=-(relPos.x*relVel.x + relPos.y*relVel.y - sqrt(disc))/(relVel.x*relVel.x + relVel.y*relVel.y);
+                
+                if(time1 <= time2 && time1 <= eTime && (time1>=0 || time2>=0)){
+                    return time1;
+                }else if(time2 <= eTime && time2>=0){
+                    return time2;
+                }else{
+                    return -1;
+                }
             }else{
                 return -1;
             }

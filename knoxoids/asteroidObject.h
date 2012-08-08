@@ -12,6 +12,7 @@
 #include <iostream>
 #include "spaceObject.h"
 #include "foodObject.h"
+#include "bulletObject.h"
 #include "openal.h"
 #include "sound.h"
 
@@ -22,7 +23,7 @@ class astObject: public spaceObject{
         astObject(int m, vector<double> position, game *currentGame): spaceObject (m, position, currentGame){};
         astObject(int m, vector<double> position, vector<double> velocity, game *currentGame): spaceObject (m, position, velocity, currentGame){};
         
-        void destroy();
+        void destroy(bulletObject*);
         void splitAsteroid(float ang);
 };
 

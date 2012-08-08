@@ -113,20 +113,8 @@ GLfloat textureVectorData[12] = {
     view.context = self.context;
     
     [self setupGL];
-    NSString *openingNib;
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        crad = 8.8;
-        openingNib = @"openingViewControlleriPad";
-    }else{
-        crad = 4.4;
-        openingNib = @"openingViewController";
-    }
     
-    openingViewController *opening = [[openingViewController alloc] initWithNibName:openingNib bundle:nil];
-    opening.delegate = (id<openingViewController>)self;
-    [self addChildViewController:opening];
-    [self.view addSubview:opening.view];
-    
+    [self loadMenu];
     
     //Set up motionManager for movement
     motionManager = [[CMMotionManager alloc] init];
@@ -143,7 +131,6 @@ GLfloat textureVectorData[12] = {
     currentGame->setup();
     currentGame->openal->initSound();
 }
-
 - (void)viewDidUnload
 {    
     [super viewDidUnload];
@@ -154,6 +141,7 @@ GLfloat textureVectorData[12] = {
         [EAGLContext setCurrentContext:nil];
     }
 	self.context = nil;
+    delete currentGame;
 }
 
 - (void)didReceiveMemoryWarning
@@ -213,9 +201,9 @@ GLfloat textureVectorData[12] = {
 #pragma mark - GLKView and GLKViewController delegate methods
 
 - (void)update{
-    //if (motionManager.accelerometerActive) {
+    if (motionManager.deviceMotionActive) {
         //CMAcceleration gravity = motionManager.deviceMotion.gravity;
-        CMRotationMatrix rotationMatrix = motionManager.deviceMotion.attitude.rotationMatrix;
+        /*CMRotationMatrix rotationMatrix = motionManager.deviceMotion.attitude.rotationMatrix;
         CMAcceleration gravity = {0.5,0,0.5};
         CMAcceleration test= {
             gravity.x*rotationMatrix.m11+gravity.y*rotationMatrix.m12+gravity.z*rotationMatrix.m13,
@@ -224,13 +212,17 @@ GLfloat textureVectorData[12] = {
         };
         float ang = atan2(test.z, test.y);
         float ang2 = atan2(test.z, test.x);
-        printf("x: %f y: %f z: %f ang1: %f ang2: %f\n", test.x, test.y, test.z, ang, ang2);
-    
+        printf("x: %f y: %f z: %f ang1: %f ang2: %f\n", test.x, test.y, test.z, ang, ang2);*/
+        
+        CMAcceleration gravity = motionManager.deviceMotion.gravity;
+        
+        currentGame->you->thrust.x = atan2(gravity.y, -gravity.z)*200;
+        currentGame->you->thrust.y = (-atan2(gravity.x, -gravity.z)+M_PI_4)*120;
         //currentGame->you->thrust.x = ang*10;
         //ang = atan2(test.z, test.x);
         //currentGame->you->thrust.y = ang*10;
         
-    //}
+    }
     
     
     
@@ -273,6 +265,35 @@ GLfloat textureVectorData[12] = {
     projectionMatrix = GLKMatrix4Translate(projectionMatrix, -1.0, -1.0, 0.0f);
     projectionMatrix = GLKMatrix4Scale(projectionMatrix, 1.0f/(self.view.bounds.size.width/2), 1.0f/(self.view.bounds.size.height/2), 1.0f);
     projectionMatrix = GLKMatrix4Scale(projectionMatrix, crad, crad, 1);
+    
+    for (int i=0; i<currentGame->partSysMan->numPartSys; i++) {
+        if(currentGame->partSysMan->partSystems[i]!=NULL){
+            particleSystem *currentSys = currentGame->partSysMan->partSystems[i];
+            for (int j=0; j<currentSys->numParts; j++) {
+                if (currentSys->parts[j]->life != 0) {
+                    
+                    [self setColor_r:currentSys->color.r g:currentSys->color.g b:currentSys->color.b a:currentSys->parts[j]->life];
+                    
+                    //[self drawCircle_x:currentSys->parts[j]->pos.x y:currentSys->parts[j]->pos.y perspective:projectionMatrix];
+                    
+                    glActiveTexture(GL_TEXTURE0);
+                    glBindTexture(GL_TEXTURE_2D, texts[HALO_TEXT]);
+                    glUniform1f(uniforms[UNIFORM_TEXTURE], 0);
+                    
+                    GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(currentSys->parts[j]->pos.x, currentSys->parts[j]->pos.y, 0.0f);
+                    
+                    modelViewMatrix = GLKMatrix4Scale(modelViewMatrix, currentSys->parts[j]->size, currentSys->parts[j]->size, 0);
+                    
+                    _modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
+                    
+                    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, _modelViewProjectionMatrix.m);
+                    
+                    glDrawArrays(GL_TRIANGLES, 0, 6);
+                }
+            }
+        }
+    }
+    
     
     
     //show lives
@@ -324,7 +345,29 @@ GLfloat textureVectorData[12] = {
         }
     }
     
+    
+    //draw ships
+    for (int i=0; i<currentGame->numShips; i++) {
+        if (currentGame->ships[i] != NULL && currentGame->ships[i]->remove==0) {
+            switch (currentGame->ships[i]->type) {
+                case alienShip:
+                    [self setColor_r:1.0 g:0.46 b:0.46];
+                    break;
+                case regularTurret:
+                    [self setColor_r:1.0 g:0.0 b:0.0];
+                    break;
+                case guidedTurret:
+                    [self setColor_r:1.0 g:0.0 b:0.0];
+                    break;
+                default:
+                    break;
+            }
+            [self drawShootingShip:*currentGame->ships[i] perspective:projectionMatrix];
+        }
+    }
+    
 }
+
 - (void) drawSpaceObj: (spaceObject) obj perspective: (GLKMatrix4) projectionMatrix{
     if (obj.remove == 0) {
         float s = obj.size();
@@ -378,10 +421,6 @@ GLfloat textureVectorData[12] = {
             [self drawCircle_x:obj.pos.x+(s+1)*cos(obj.ang) y:obj.pos.y+(s+1)*sin(obj.ang) perspective:projectionMatrix];
         }
     }
-}
-//
-- (void) playPushed: (id) sender{
-    currentGame->changeGameType(regularGame);
 }
 
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -441,6 +480,29 @@ GLfloat textureVectorData[12] = {
     [self addChildViewController:paused];
     [self.view addSubview:paused.view];
 }
+- (void) loadMenu{
+    NSString *openingNib;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        crad = 8.8;
+        openingNib = @"openingViewControlleriPad";
+    }else{
+        crad = 4.4;
+        openingNib = @"openingViewController";
+    }
+    
+    openingViewController *opening = [[openingViewController alloc] initWithNibName:openingNib bundle:nil];
+    opening.delegate = (id<openingViewController>)self;
+    [self addChildViewController:opening];
+    [self.view addSubview:opening.view];
+}
+- (void) playPushed: (id) sender{
+    currentGame->changeGameType(regularGame);
+}
+- (void) menuPushed: (id) sender{
+    currentGame->changeGameType(background);
+    self.paused = false;
+    [self loadMenu];
+}
 - (void) resumePushed:(id)sender{
     self.paused = false;
 }
@@ -481,7 +543,7 @@ GLfloat textureVectorData[12] = {
         return NO;
     }
     
-    image = [UIImage imageNamed:@"0001.png"].CGImage;
+    image = [UIImage imageNamed:@"halo2.png"].CGImage;
     width = CGImageGetWidth(image);
     height = CGImageGetHeight(image);
     
@@ -502,6 +564,7 @@ GLfloat textureVectorData[12] = {
         
         free(textData);
     }else{
+        printf("\n\nfailed to load image\n");
         return NO;
     }
     

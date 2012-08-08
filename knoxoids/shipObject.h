@@ -31,24 +31,30 @@ class shipObject: public spaceObject{
         
         int gunOn;
         float diedTime;
-        bulletObject* shoot();
+        bool shoot();
         void destroy();
         void ate();
+        void eat(foodObject *);
+        float shootTime;
+        bool shot(bulletObject*);
         
         shipType type;
     
         shipObject(game *currentGame):spaceObject(currentGame){
             gunOn = 1;
             ang = 0;
+            shootTime = globals::gameTime;
         };
         
         shipObject(int m, game *currentGame): spaceObject(m, currentGame){
             gunOn = 1;
             ang = 0;
+            shootTime = globals::gameTime;
         };
         shipObject(int m, vector<double> position, game *currentGame): spaceObject (m, position, currentGame){
             gunOn = 1;
             ang = 0;
+            shootTime = globals::gameTime;
         };
 };
 

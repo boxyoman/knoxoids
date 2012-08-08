@@ -10,12 +10,13 @@
 #include "asteroidObject.h"
 #include "openal.h"
 #include "sound.h"
+#include "particleSystemManager.h"
 #include <cstdlib>
 #include <ctime>
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#define timeToNextLevel 3
+#define youDeathTime 5
 
 enum gameType{
     regularGame=0,
@@ -46,6 +47,11 @@ public:
     void addBullet(bulletObject*);
     bulletObject **bullets;
     int numBullets;
+    //alien and ship stuff
+    void addShip(shipObject*);
+    shipObject **ships;
+    int numShips;
+    
     
     shipObject *you;
     
@@ -57,52 +63,16 @@ public:
     int gameType;
     
     openAL *openal;
+    particleSysManager *partSysMan;
     
     void nextLevel();
     
     void changeGameType(int);
     
+    ~game();
+private:
     void gameCleanup();
 };
-
-/*namespace game{
-    void update(double);
-    void setup();
-    
-    void youShoot();
-    
-    //asteroid stuff
-    void addAsteroid(astObject*);
-    extern astObject** asteroids;
-    extern int numAst;
-    //food stuff
-    void addFood(foodObject*);
-    void addFoods(foodObject**, int num);
-    extern foodObject** foods;
-    extern int numFood;
-    extern foodObject *mfood;
-    //Bullet stuff
-    void addBullet(bulletObject*);
-    extern bulletObject **bullets;
-    extern int numBullets;
-    
-    extern shipObject *you;
-    
-    extern int level;
-    extern int lives;
-    extern int enemiesLeft;
-    extern float finishLevelTime;
-    extern bool levelFinished;
-    extern int gameType;
-    
-    extern openAL *al;
-    
-    void nextLevel();
-    
-    void changeGameType(int);
-    
-    void gameCleanup();
-};*/
 
 @interface levelLoader : NSObject<NSXMLParserDelegate>{
     NSXMLParser *praser;

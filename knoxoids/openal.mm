@@ -156,7 +156,7 @@ soundSource* openAL::createSoundSource(spaceObject *object, soundBuffers bufferT
         alSource3f(source->source, AL_VELOCITY, object->vel.x, object->vel.y, 0.0);
         alSourcePlay(source->source);
         alSourcei(source->source, AL_REFERENCE_DISTANCE, 100);
-        
+        source->isLooping = isLooping;
         if (isLooping) {
             alSourcei(source->source, AL_LOOPING, AL_TRUE);
         }
@@ -165,6 +165,9 @@ soundSource* openAL::createSoundSource(spaceObject *object, soundBuffers bufferT
         
         return source;
     }else{
+        if (shouldFreeSpaceObject) {
+            delete object;
+        }
         return NULL;
     }
 }

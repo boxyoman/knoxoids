@@ -28,7 +28,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }
-
+- (IBAction)menuPushed:(id)sender{
+    [self.view removeFromSuperview];
+    [self removeFromParentViewController];
+    [delegate menuPushed:self];
+}
 - (IBAction)restartPushed:(id)sender{
     [self.view removeFromSuperview];
     [self removeFromParentViewController];

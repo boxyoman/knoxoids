@@ -10,17 +10,47 @@
 #include "shipObject.h"
 #include "game.h"
 
+#define turretWaitTime 4
+
 void shipObject::update(double eTime){
     if(wall()){
-        gunOn = 0;
-        currentGame->openal->createSoundSource(this, alBuffer_bounce, false, false);
+        if (type == yourShip || type ==  alienShip) {
+            gunOn = 0;
+            if (type == yourShip) {
+                currentGame->openal->createSoundSource(this, alBuffer_bounce, false, false);
+            }
+        }
     }
     
     ppos = pos;
     vel = vel + (vel*-.05*M_PI*size()*size() + thrust)*eTime;
     pos = pos + vel * eTime;
+    
+    if (type == alienShip) {
+        thrust = (currentGame->mfood->pos-pos).unit()*20;
+        if (vel.mag2() > 900) {
+            vel = vel.unit()*30;
+        }
+        ang = pos.angle(currentGame->you->pos);
+    }
+    
+    if (type == regularTurret || type == guidedTurret) {
+        if (shootTime+turretWaitTime<globals::gameTime) {
+            if (currentGame->you->remove == 0) {
+                gunOn = 1;
+                shoot();
+            }
+        }
+        ang = pos.angle(currentGame->you->pos);
+    }
+    
 }
-
+void shipObject::eat(foodObject *food){
+    if (food->remove == 0) {
+        food->remove = 1;
+        ate();
+    }
+}
 void shipObject::ate(){
     currentGame->openal->createSoundSource(this, alBuffer_eat, false, false);
     if (gunOn==1) {
@@ -30,8 +60,8 @@ void shipObject::ate(){
     }
 }
 
-bulletObject* shipObject::shoot(){
-    if (gunOn) {
+bool shipObject::shoot(){
+    if (gunOn == 1) {
         spaceObject *target = NULL;
         switch (type) {
             case alienShip:
@@ -44,7 +74,7 @@ bulletObject* shipObject::shoot(){
                 currentGame->openal->createSoundSource(this, alBuffer_regularTurretShoot, false, false);
                 break;
             case guidedTurret:
-                currentGame->openal->createSoundSource(this, alBuffer_guidedTurretShoot, false, false);
+                //currentGame->openal->createSoundSource(this, alBuffer_guidedTurretShoot, false, false);
                 target = currentGame->you;
                 break;
             default:
@@ -53,12 +83,16 @@ bulletObject* shipObject::shoot(){
         
         bulletObject *bullet = new bulletObject(currentGame);
         float s = size()+1;
+        float shootSpeed = 125;
+        if (type == guidedTurret) {
+            shootSpeed = 25;
+        }
         
         bullet->pos.x = pos.x+cos(ang)*s;
         bullet->pos.y = pos.y+sin(ang)*s;
-        bullet->vel.x = vel.x+cos(ang)*125;
-        bullet->vel.y = vel.y+sin(ang)*125;
-        
+        bullet->ppos = bullet->pos;
+        bullet->vel.x = vel.x+cos(ang)*shootSpeed;
+        bullet->vel.y = vel.y+sin(ang)*shootSpeed;
         bullet->target = target;
         
         vel = (vel*(1+mass) - bullet->vel) * (1.0/mass);
@@ -68,12 +102,38 @@ bulletObject* shipObject::shoot(){
         }else {
             mass --;
         }
-        return bullet;
+        currentGame->addBullet(bullet);
+        
+        particleSysDef partDef;
+        partDef.pos = pos;
+        partDef.vel = bullet->vel;
+        if (target==NULL) {
+            partDef.color.r = 0.64f;
+        }else{
+            partDef.color.r = 1.0f;
+        }
+        partDef.color.g = 0.16f;
+        partDef.color.b =  0.47f;
+        partDef.numOfParts = 3;
+        currentGame->partSysMan->createNewSystem(partDef);
+        
+        shootTime = globals::gameTime;
+        return true;
     }else {
-        return NULL;
+        return false;
     }
 }
-
+bool shipObject::shot(bulletObject* bullet){
+    bullet->remove = 1;
+    if (mass>5) {
+        mass--;
+        return false;
+    }else{
+        destroy();
+        remove = 1;
+        return true;
+    }
+}
 void shipObject::destroy(){
     currentGame->openal->createSoundSource(this, alBuffer_boom, false, false);
     
@@ -85,7 +145,7 @@ void shipObject::destroy(){
         vector<double> position = vector<double>(cos(ang*i)*(s-1),sin(ang*i)*(s-1));
         position = position+pos;
         
-        vector<double> velocity = vector<double>(vel.x/mass+cos(ang*i)*10, vel.y/mass+cos(ang*i)*10);
+        vector<double> velocity = vector<double>(vel.x/mass+cos(ang*i)*-10, vel.y/mass+cos(ang*i)*-10);
         currentGame->addFood(new foodObject(position, velocity, currentGame));
     }
 }

@@ -12,8 +12,19 @@
 
 void bulletObject::update(double eTime){
     if (wall()) {
-        //need to remove bullet
         remove = 1;
+        particleSysDef partDef;
+        partDef.pos = this->pos;
+        partDef.vel = this->vel;
+        if (target==NULL) {
+            partDef.color.r = 0.64f;
+        }else{
+            partDef.color.r = 1.0f;
+        }
+        partDef.color.g = 0.16f;
+        partDef.color.b =  0.47f;
+        partDef.numOfParts = 10;
+        currentGame->partSysMan->createNewSystem(partDef);
     }
     
     if (target!=NULL && sound == NULL) {
@@ -22,7 +33,10 @@ void bulletObject::update(double eTime){
     
     ppos = pos;
     if (target != NULL) {
-        vel = vel + (pos-target->pos).unit()*eTime;
+        vel = vel + (target->pos-pos).unit()*eTime*160;
+        if (vel.mag2() > 3600) {
+            vel = vel.unit()*60;
+        }
     }
     pos = pos + vel * eTime;
 }

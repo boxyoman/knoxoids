@@ -18,7 +18,7 @@ public:
     ALCuint source;
     int bufferType;
     spaceObject* sObject;
-    vector<double> position;
+    bool isLooping;
     
     bool shouldFreeSpaceObject;
     
