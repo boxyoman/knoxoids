@@ -24,6 +24,7 @@
 		FB1E9C51159CF6D400920658 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FB1E9C50159CF6D400920658 /* icon.png */; };
 		FB1E9C53159CF6DE00920658 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB1E9C52159CF6DE00920658 /* icon@2x.png */; };
 		FB2C2D5B1595120A00A75152 /* gameGlobals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FB2C2D5A1595120A00A75152 /* gameGlobals.cpp */; };
+		FB3493D715D3389F00FDC33E /* level20.xml in Resources */ = {isa = PBXBuildFile; fileRef = FB3493D615D3389F00FDC33E /* level20.xml */; };
 		FB50D499158EF1C7006E1B75 /* shipObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = FB50D498158EF1C7006E1B75 /* shipObject.mm */; };
 		FB56BE8D152E979800C9CA6D /* game.mm in Sources */ = {isa = PBXBuildFile; fileRef = FB56BE8C152E979800C9CA6D /* game.mm */; };
 		FB56BE9B152EB4BA00C9CA6D /* openingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB56BE99152EB4BA00C9CA6D /* openingViewController.m */; };
@@ -106,6 +107,7 @@
 		FB1E9C52159CF6DE00920658 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		FB2C2D58159511F900A75152 /* gameGlobals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gameGlobals.h; sourceTree = "<group>"; };
 		FB2C2D5A1595120A00A75152 /* gameGlobals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gameGlobals.cpp; sourceTree = "<group>"; };
+		FB3493D615D3389F00FDC33E /* level20.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = level20.xml; sourceTree = "<group>"; };
 		FB50D496158EF1B5006E1B75 /* shipObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shipObject.h; sourceTree = "<group>"; };
 		FB50D498158EF1C7006E1B75 /* shipObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = shipObject.mm; sourceTree = "<group>"; };
 		FB56BE8A152E978700C9CA6D /* game.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = game.h; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				FBA95DA715C71E700011E925 /* level17.xml */,
 				FBA95DA815C71E700011E925 /* level18.xml */,
 				FBA95DA915C71E700011E925 /* level19.xml */,
+				FB3493D615D3389F00FDC33E /* level20.xml */,
 				FBA95DAB15C71E700011E925 /* level21.xml */,
 				FBA95DAC15C71E700011E925 /* level22.xml */,
 			);
@@ -486,6 +489,7 @@
 				FB91C7E515C863EF00EAA662 /* pausedViewControlleriPad.xib in Resources */,
 				FBD7E01015D0CD5700050815 /* halo.png in Resources */,
 				FB8AE43315D0D88D0030BF11 /* halo2.png in Resources */,
+				FB3493D715D3389F00FDC33E /* level20.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

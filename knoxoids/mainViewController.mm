@@ -456,15 +456,12 @@ GLfloat textureVectorData[12] = {
             currentGame->you->ang = atan2((bounds.size.height - l.y)/crad-currentGame->you->pos.y,  l.x/crad-currentGame->you->pos.x);
             currentGame->youShoot();
         }
-    }else if ([touches count] == 2) {
-        NSArray *touchs = [touches allObjects];
-        UITouch *touch1 = [touchs objectAtIndex:0];
-        UITouch *touch2 = [touchs objectAtIndex:1];
-        if ([touch1 tapCount] == 2 && [touch2 tapCount] == 2) {
-            [self pauseGame];
-        }
     }
 }
+- (IBAction)twoFingersTwoTaps:(UIGestureRecognizer *)sender{
+    [self pauseGame];
+}
+
 - (void) pauseGame{
     self.paused = true;
     

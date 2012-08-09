@@ -1,0 +1,6 @@
+<level lives="1">
+    <object id="asteroid" px="0" py="0" m="16"/>
+    <object id="alien" px="0" py="0" m="5"/>
+    <object id="turret" px="0" py="0" type="guided"/>
+    <object id="turret" px="0" py="0" type="regular"/>
+</level>

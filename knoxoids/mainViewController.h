@@ -19,5 +19,5 @@
 @interface mainViewController : GLKViewController<openingViewController, pausedViewController>{
     IBOutlet UILabel *levelPopup;
 }
-
+- (IBAction)twoFingersTwoTaps:(UIGestureRecognizer *)sender;
 @end

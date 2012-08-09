@@ -61,7 +61,7 @@ void game::setup(){
     openal->listener = you;
     
     lives = 2;
-    level = 14;
+    level = 0;
     finishLevelTime=0;
     levelFinished = false;
     
