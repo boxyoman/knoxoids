@@ -25,8 +25,9 @@ class shipObject: public spaceObject{
     public:
         vector<double> thrust;
         double ang;
+        bool sheildOn;
+        double sheildOnTime;
         
-    
         void update(double);
         
         int gunOn;
@@ -43,17 +44,20 @@ class shipObject: public spaceObject{
         shipObject(game *currentGame):spaceObject(currentGame){
             gunOn = 1;
             ang = 0;
+            sheildOn=false;
             shootTime = globals::gameTime;
         };
         
         shipObject(int m, game *currentGame): spaceObject(m, currentGame){
             gunOn = 1;
             ang = 0;
+            sheildOn=false;
             shootTime = globals::gameTime;
         };
         shipObject(int m, vector<double> position, game *currentGame): spaceObject (m, position, currentGame){
             gunOn = 1;
             ang = 0;
+            sheildOn=false;
             shootTime = globals::gameTime;
         };
 };

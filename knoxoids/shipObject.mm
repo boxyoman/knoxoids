@@ -47,8 +47,19 @@ void shipObject::update(double eTime){
 }
 void shipObject::eat(foodObject *food){
     if (food->remove == 0) {
+        if (type == yourShip) {
+            if (food->type == lifeFood) {
+                currentGame->lives++;
+            }else if (food->type == sheildFood){
+                sheildOn = true;
+                sheildOnTime = globals::gameTime;
+            }else{
+                ate();
+            }
+        }else{
+            ate();
+        }
         food->remove = 1;
-        ate();
     }
 }
 void shipObject::ate(){
@@ -124,28 +135,58 @@ bool shipObject::shoot(){
     }
 }
 bool shipObject::shot(bulletObject* bullet){
-    bullet->remove = 1;
-    if (mass>5) {
-        mass--;
+    if (sheildOn == true) {
+        particleSysDef partDef;
+        partDef.pos = bullet->pos;
+        partDef.vel = bullet->vel;
+        partDef.color.r = 0.0f;
+        partDef.color.g = 0.0f;
+        partDef.color.b =  1.0f;
+        partDef.numOfParts = 20;
+        currentGame->partSysMan->createNewSystem(partDef);
+        
         return false;
     }else{
-        destroy();
-        remove = 1;
-        return true;
+        bullet->remove = 1;
+        
+        particleSysDef partDef;
+        partDef.pos = bullet->pos;
+        partDef.vel = bullet->vel;
+        if (bullet->target==NULL) {
+            partDef.color.r = 0.64f;
+        }else{
+            partDef.color.r = 1.0f;
+        }
+        partDef.color.g = 0.16f;
+        partDef.color.b =  0.47f;
+        partDef.numOfParts = 20;
+        currentGame->partSysMan->createNewSystem(partDef);
+        
+        if (mass>5) {
+            mass--;
+            return false;
+        }else{
+            destroy();
+            remove = 1;
+            return true;
+        }
     }
 }
 void shipObject::destroy(){
-    currentGame->openal->createSoundSource(this, alBuffer_boom, false, false);
-    
-    diedTime = globals::gameTime;
-    
-    float ang = 2*M_PI/(float)mass;
-    float s = size();
-    for (int i = 0; i<mass; i++) {
-        vector<double> position = vector<double>(cos(ang*i)*(s-1),sin(ang*i)*(s-1));
-        position = position+pos;
+    if (sheildOn == false) {
+        currentGame->openal->createSoundSource(this, alBuffer_boom, false, false);
         
-        vector<double> velocity = vector<double>(vel.x/mass+cos(ang*i)*-10, vel.y/mass+cos(ang*i)*-10);
-        currentGame->addFood(new foodObject(position, velocity, currentGame));
+        diedTime = globals::gameTime;
+        
+        float ang = 2*M_PI/(float)mass;
+        float s = size();
+        for (int i = 0; i<mass; i++) {
+            vector<double> position = vector<double>(cos(ang*i)*(s-1),sin(ang*i)*(s-1));
+            position = position+pos;
+            
+            vector<double> velocity = vector<double>(vel.x/mass+cos(ang*i)*-10, vel.y/mass+cos(ang*i)*-10);
+            currentGame->addFood(new foodObject(position, velocity, currentGame));
+        }
+        remove = 1;
     }
 }

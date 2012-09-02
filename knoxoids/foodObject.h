@@ -14,14 +14,24 @@
 #include "openal.h"
 #include "sound.h"
 
+enum foodType {
+    regularFood,
+    sheildFood,
+    lifeFood
+};
+
 class foodObject: public spaceObject{
     public:
         float bornTime;
         bool shouldBeRemoved;
+        foodType type;
+        
         foodObject(game *currentGame): spaceObject (1, currentGame){
+            type = regularFood;
             bornTime=globals::gameTime;
             shouldBeRemoved=true;
         };
+        
         foodObject(vector<double> position, game *currentGame): spaceObject (1, position, currentGame){
             bornTime=globals::gameTime;
             shouldBeRemoved=true;
@@ -32,7 +42,6 @@ class foodObject: public spaceObject{
         };
         
         void update(double eTime);
-        
 };
 
 #endif /* defined(__knoxoids__foodObject__) */

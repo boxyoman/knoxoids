@@ -23,7 +23,7 @@ void bulletObject::update(double eTime){
         }
         partDef.color.g = 0.16f;
         partDef.color.b =  0.47f;
-        partDef.numOfParts = 10;
+        partDef.numOfParts = 20;
         currentGame->partSysMan->createNewSystem(partDef);
     }
     

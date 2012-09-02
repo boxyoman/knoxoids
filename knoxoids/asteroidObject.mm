@@ -35,8 +35,11 @@ void astObject::destroy(bulletObject *bullet){
     }
     partDef.color.g = 0.16f;
     partDef.color.b =  0.47f;
-    partDef.numOfParts = 10;
+    partDef.numOfParts = 20;
     currentGame->partSysMan->createNewSystem(partDef);
+    
+    bullet->remove = 1;
+    remove = 1;
 }
 
 void astObject::splitAsteroid(float ang){

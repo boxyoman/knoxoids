@@ -73,6 +73,9 @@
 		FBA95DC615C71E700011E925 /* level7.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DB115C71E700011E925 /* level7.xml */; };
 		FBA95DC715C71E700011E925 /* level8.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DB215C71E700011E925 /* level8.xml */; };
 		FBA95DC815C71E700011E925 /* level9.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DB315C71E700011E925 /* level9.xml */; };
+		FBAD12CB15D73A13002C2D4B /* gameOverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD12C915D73A13002C2D4B /* gameOverViewController.m */; };
+		FBAD12CC15D73A13002C2D4B /* gameOverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBAD12CA15D73A13002C2D4B /* gameOverViewController.xib */; };
+		FBAD12CE15D73A37002C2D4B /* gameOverViewControlleriPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBAD12CD15D73A37002C2D4B /* gameOverViewControlleriPad.xib */; };
 		FBC82C0815CA23A2000D73D7 /* particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FBC82C0615CA23A2000D73D7 /* particle.cpp */; };
 		FBC82C0E15CA3089000D73D7 /* particleSystemManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FBC82C0C15CA3089000D73D7 /* particleSystemManager.cpp */; };
 		FBCF6C6D158D957D00AB7FB3 /* vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FBCF6C6C158D957D00AB7FB3 /* vector.cpp */; };
@@ -164,6 +167,10 @@
 		FBA95DB115C71E700011E925 /* level7.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level7.xml; path = Levels/level7.xml; sourceTree = "<group>"; };
 		FBA95DB215C71E700011E925 /* level8.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level8.xml; path = Levels/level8.xml; sourceTree = "<group>"; };
 		FBA95DB315C71E700011E925 /* level9.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level9.xml; path = Levels/level9.xml; sourceTree = "<group>"; };
+		FBAD12C815D73A13002C2D4B /* gameOverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gameOverViewController.h; path = viewControllers/gameOverViewController.h; sourceTree = "<group>"; };
+		FBAD12C915D73A13002C2D4B /* gameOverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = gameOverViewController.m; path = viewControllers/gameOverViewController.m; sourceTree = "<group>"; };
+		FBAD12CA15D73A13002C2D4B /* gameOverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = gameOverViewController.xib; path = viewControllers/gameOverViewController.xib; sourceTree = "<group>"; };
+		FBAD12CD15D73A37002C2D4B /* gameOverViewControlleriPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = gameOverViewControlleriPad.xib; path = viewControllers/gameOverViewControlleriPad.xib; sourceTree = "<group>"; };
 		FBC82C0615CA23A2000D73D7 /* particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = particle.cpp; sourceTree = "<group>"; };
 		FBC82C0715CA23A2000D73D7 /* particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = particle.h; sourceTree = "<group>"; };
 		FBC82C0C15CA3089000D73D7 /* particleSystemManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = particleSystemManager.cpp; sourceTree = "<group>"; };
@@ -270,6 +277,8 @@
 				FB114713152E397C007C8990 /* Shader.vsh */,
 				FB114715152E397C007C8990 /* mainViewController.h */,
 				FB114716152E397C007C8990 /* mainViewController.mm */,
+				FB114718152E397D007C8990 /* mainViewController.xib */,
+				FB61BD2F15339403007C5721 /* mainViewControlleriPad.xib */,
 				FBDC45581596447A00175D8B /* objects */,
 				FB56BE8A152E978700C9CA6D /* game.h */,
 				FB56BE8C152E979800C9CA6D /* game.mm */,
@@ -277,8 +286,6 @@
 				FB2C2D5A1595120A00A75152 /* gameGlobals.cpp */,
 				FBCF6C6B158D956E00AB7FB3 /* vector.h */,
 				FBCF6C6C158D957D00AB7FB3 /* vector.cpp */,
-				FB114718152E397D007C8990 /* mainViewController.xib */,
-				FB61BD2F15339403007C5721 /* mainViewControlleriPad.xib */,
 				FB114706152E397C007C8990 /* Supporting Files */,
 			);
 			path = knoxoids;
@@ -316,6 +323,10 @@
 				FB91C7E015C863C800EAA662 /* pausedViewController.m */,
 				FB91C7E115C863C800EAA662 /* pausedViewController.xib */,
 				FB91C7E415C863EF00EAA662 /* pausedViewControlleriPad.xib */,
+				FBAD12C815D73A13002C2D4B /* gameOverViewController.h */,
+				FBAD12C915D73A13002C2D4B /* gameOverViewController.m */,
+				FBAD12CA15D73A13002C2D4B /* gameOverViewController.xib */,
+				FBAD12CD15D73A37002C2D4B /* gameOverViewControlleriPad.xib */,
 			);
 			name = viewControllers;
 			sourceTree = "<group>";
@@ -490,6 +501,8 @@
 				FBD7E01015D0CD5700050815 /* halo.png in Resources */,
 				FB8AE43315D0D88D0030BF11 /* halo2.png in Resources */,
 				FB3493D715D3389F00FDC33E /* level20.xml in Resources */,
+				FBAD12CC15D73A13002C2D4B /* gameOverViewController.xib in Resources */,
+				FBAD12CE15D73A37002C2D4B /* gameOverViewControlleriPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,6 +530,7 @@
 				FB91C7E215C863C800EAA662 /* pausedViewController.m in Sources */,
 				FBC82C0815CA23A2000D73D7 /* particle.cpp in Sources */,
 				FBC82C0E15CA3089000D73D7 /* particleSystemManager.cpp in Sources */,
+				FBAD12CB15D73A13002C2D4B /* gameOverViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,7 +16,7 @@ void foodObject::update(double eTime){
     vel = vel + (vel*-1.1*M_PI)*eTime;
     pos = pos + vel * eTime;
     
-    if (bornTime+foodLife<globals::gameTime&&shouldBeRemoved) {
+    if (bornTime+foodLife<globals::gameTime&&shouldBeRemoved == true) {
         remove=1;
     }
 }

@@ -36,13 +36,15 @@ particleSystem::particleSystem(particleSysDef partSysDef){
 void particleSystem::update(float eTime){
     int deadParticles=0;
     for (int i=0; i<numParts; i++) {
-        if (parts[i]->life>0.0003) {
-            parts[i]->vel = parts[i]->vel + (parts[i]->vel*-2.0*M_PI)*eTime;
-            parts[i]->pos = parts[i]->pos + parts[i]->vel*eTime;
-            parts[i]->life = parts[i]->vel.mag()/parts[i]->initialVel.mag();
-        }else{
-            deadParticles++;
-            parts[i]->life = 0;
+        if (parts[i]->life != 0) {
+            if (parts[i]->vel.mag2()>0.00000003) {
+                parts[i]->vel = parts[i]->vel + (parts[i]->vel*-2.0*M_PI)*eTime;
+                parts[i]->pos = parts[i]->pos + parts[i]->vel*eTime;
+                parts[i]->life = parts[i]->vel.mag()/parts[i]->initialVel.mag();
+            }else{
+                deadParticles++;
+                parts[i]->life = 0;
+            }
         }
     }
     if (deadParticles == numParts) {

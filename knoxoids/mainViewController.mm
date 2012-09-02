@@ -181,8 +181,6 @@ GLfloat textureVectorData[12] = {
     glGenBuffers(1, &_textureBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, _textureBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(textureVectorData), textureVectorData, GL_STATIC_DRAW);
-    
-    glVertexAttribPointer(attrib[ATTRIB_TEXTURE], 2, GL_FLOAT, GL_FALSE, 0, 0);
 }
 
 - (void)tearDownGL
@@ -232,10 +230,12 @@ GLfloat textureVectorData[12] = {
         levelPopup.hidden = false;
     }
     
+    if (currentGame->gameOver) {
+        [self loadGameOver];
+    }
     currentGame->update(self.timeSinceLastUpdate);
 
 }
-
 -(void) waitFinished: (NSTimer *) timer{
     currentGame->nextLevel();
     currentGame->levelFinished = false;
@@ -335,11 +335,17 @@ GLfloat textureVectorData[12] = {
     [self drawSpaceObj:*currentGame->mfood perspective:projectionMatrix];
     for (int i=0; i<currentGame->numFood; i++) {
         if (currentGame->foods[i] != NULL) {
-            if(currentGame->foods[i]->bornTime+2*foodLife/3 < globals::gameTime){
+            if(currentGame->foods[i]->bornTime+2*foodLife/3 < globals::gameTime && currentGame->foods[i]->shouldBeRemoved){
                 float a = 1-(globals::gameTime - (currentGame->foods[i]->bornTime+2*foodLife/3))/(foodLife/3);
                 [self setColor_r:0.6 g:0.6 b:0.6 a: a];
             }else{
-                [self setColor_r:0.6 g:0.6 b:0.6];
+                if (currentGame->foods[i]->type == lifeFood) {
+                    [self setColor_r:0.0 g:1.0 b:0.0];
+                }else if (currentGame->foods[i]->type == sheildFood){
+                    [self setColor_r:0.0 g:0.0 b:1.0];
+                }else{
+                    [self setColor_r:0.6 g:0.6 b:0.6];
+                }
             }
             [self drawSpaceObj:*currentGame->foods[i] perspective:projectionMatrix];
         }
@@ -491,6 +497,21 @@ GLfloat textureVectorData[12] = {
     opening.delegate = (id<openingViewController>)self;
     [self addChildViewController:opening];
     [self.view addSubview:opening.view];
+}
+- (void) loadGameOver{
+    NSString *openingNib;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        openingNib = @"gameOverViewControlleriPad";
+    }else{
+        openingNib = @"gameOverViewController";
+    }
+    
+    gameOverViewController *gameover = [[gameOverViewController alloc] initWithNibName:openingNib bundle:nil];
+    //gameover.delegate = (id<openingViewController>)self;
+    [self addChildViewController:gameover];
+    [self.view addSubview:gameover.view];
+    
+    self.paused = true;
 }
 - (void) playPushed: (id) sender{
     currentGame->changeGameType(regularGame);

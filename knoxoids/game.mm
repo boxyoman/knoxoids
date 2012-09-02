@@ -19,6 +19,7 @@ game::game(){
     mfood = NULL;
     openal= new openAL();
     partSysMan = new particleSysManager();
+    gameOver = false;
 }
 
 void game::setup(){
@@ -64,6 +65,7 @@ void game::setup(){
     level = 0;
     finishLevelTime=0;
     levelFinished = false;
+    gameOver = false;
     
     if (gameType != background) {
         openal->playSouds = true;
@@ -104,6 +106,8 @@ void game::update(double eTime){
                 you->vel = vector<double>(0,0);
                 
                 lives--;
+            }else{
+                gameOver = true;
             }
         }
     }
@@ -123,7 +127,7 @@ void game::update(double eTime){
         
     
     enemiesLeft=0;
-    
+    //Update Ships
     for (int i=0; i<numShips; i++) {
         if (ships[i]!=NULL) {
             enemiesLeft++;
@@ -222,13 +226,25 @@ void game::update(double eTime){
                     if (bullets[i]->collision(asteroids[j], eTime) == 1) {
                         if (asteroids[j]->mass > 5) {
                             asteroids[j]->splitAsteroid((bullets[i]->pos).angle(asteroids[j]->pos));
+                            
+                            particleSysDef partDef;
+                            partDef.pos = bullets[i]->pos;
+                            partDef.vel = bullets[i]->vel;
+                            if (bullets[i]->target==NULL) {
+                                partDef.color.r = 0.64f;
+                            }else{
+                                partDef.color.r = 1.0f;
+                            }
+                            partDef.color.g = 0.16f;
+                            partDef.color.b =  0.47f;
+                            partDef.numOfParts = 20;
+                            this->partSysMan->createNewSystem(partDef);
                             bullets[i]->remove = 1;
+                            
                             notDead = false;
                             break;
                         }else{
                             asteroids[j]->destroy(bullets[i]);
-                            asteroids[j]->remove = 1;
-                            bullets[i]->remove = 1;
                             notDead = false;
                             break;
                         }
@@ -262,8 +278,18 @@ void game::update(double eTime){
             if (you->remove==0) {
                 if (you->collision(asteroids[i], eTime)==1) {
                     if (gameType != background) {
-                        you->destroy();
-                        you->remove=1;
+                        if (!you->sheildOn) {
+                            you->destroy();
+                        }else{
+                            particleSysDef partDef;
+                            partDef.pos = asteroids[i]->pos;
+                            partDef.vel = asteroids[i]->vel;
+                            partDef.color.r = 0.0f;
+                            partDef.color.g = 0.0f;
+                            partDef.color.b =  1.0f;
+                            partDef.numOfParts = 20;
+                            partSysMan->createNewSystem(partDef);
+                        }
                     }
                 }
             }
@@ -423,6 +449,7 @@ void game::addAsteroid(astObject* asteroid){
 }
 
 //call when an object is destoried and returns food objects
+//no long used
 void game::addFoods(foodObject** food, int num){
     for (int i=0; i<num; i++) {
         addFood(food[i]);
@@ -430,7 +457,10 @@ void game::addFoods(foodObject** food, int num){
     free(food);
 }
 void game::addFood(foodObject* food){
+    static int foodAdded = 0;
+    
     if (food != NULL) {
+        foodAdded ++;
         int i = 0;
         for (;i<=numFood; i++) {
             if (i==numFood) {
@@ -448,6 +478,17 @@ void game::addFood(foodObject* food){
             foods = (foodObject**)realloc(foods, sizeof(foodObject**)*(i+1));
             foods[i] = food;
             numFood ++;
+        }
+        if (gameType != background) {
+            if (foodAdded%200 == 0) {
+                foods[i]->type = lifeFood;
+                foods[i]->shouldBeRemoved = false;
+            }else if (foodAdded%50 == 0) {
+                foods[i]->type = sheildFood;
+                foods[i]->shouldBeRemoved = false;
+            }else{
+                foods[i]->type = regularFood;
+            }
         }
     }
 }
@@ -508,7 +549,7 @@ game::~game(){
     return self;
 }
 
-- (void) loadLevelWithStr: (NSString *) url{
+- (bool) loadLevelWithStr: (NSString *) url{
     
     NSBundle *bundle = [NSBundle mainBundle];
     NSString *test = [bundle pathForResource: url ofType:@"xml"];
@@ -526,9 +567,13 @@ game::~game(){
         if (error) {
             // NSLog([error localizedDescription]);
             printf("xml praser error:(\n");
+            return false;
+        }else{
+            return true;
         }
     }else{
         printf("File not found\n");
+        return false;
     }
 }
 

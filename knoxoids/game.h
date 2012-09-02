@@ -57,6 +57,7 @@ public:
     
     int level;
     int lives;
+    bool gameOver;
     int enemiesLeft;
     float finishLevelTime;
     bool levelFinished;
@@ -80,7 +81,7 @@ private:
     game *currentGame;
 }
 - (id) initWithGame: (game*) g;
-- (void) loadLevelWithStr: (NSString*) url;
+- (bool) loadLevelWithStr: (NSString*) url;
 
 @end
 

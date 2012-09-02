@@ -13,6 +13,7 @@
 #import <CoreMotion/CMMotionManager.h>
 #import "pausedViewController.h"
 #import "openingViewController.h"
+#import "gameOverViewController.h"
 #include "game.h"
 #include "gameGlobals.h"
 
