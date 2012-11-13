@@ -52,9 +52,12 @@
     // e.g. self.myOutlet = nil;
 }
 
+-(NSUInteger) supportedInterfaceOrientations {
+    return [self.parentViewController supportedInterfaceOrientations];
+}
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return (interfaceOrientation == UIInterfaceOrientationLandscapeRight || interfaceOrientation == UIInterfaceOrientationLandscapeLeft);
 }
 
 @end

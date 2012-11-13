@@ -23,6 +23,7 @@ game::game(){
 }
 
 void game::setup(){
+    score->resetScore();
     srand(time(NULL));
     
     //setup bullets
@@ -59,10 +60,12 @@ void game::setup(){
     you->thrust = you->thrust*0;
     you->gunOn = 1;
     you->type = yourShip;
+    you->sheildOn = true;
+    you->sheildOnTime = 100000;
     openal->listener = you;
     
     lives = 2;
-    level = 0;
+    level = 11;
     finishLevelTime=0;
     levelFinished = false;
     gameOver = false;
@@ -93,8 +96,14 @@ void game::update(double eTime){
     if (you->remove == 0) {
         you->update(eTime);
     }
+    if (you->isInvisable) {
+        if (you->diedTime+youDeathTime+5<globals::gameTime) {
+            you->isInvisable = false;
+        }
+    }
+    
     if (you->remove == 1) {
-        if (you->diedTime+youDeathTime<globals::gameTime) {
+        if (you->diedTime+youDeathTime<globals::gameTime) { //if dead
             if (lives != 0) {
                 you->remove = 0;
                 you->mass = 5;
@@ -104,6 +113,8 @@ void game::update(double eTime){
                 you->pos.x = (lives-1)*(you->size()*2+1)+you->size()+1;
                 you->ppos = you->pos;
                 you->vel = vector<double>(0,0);
+                
+                you->isInvisable = true;
                 
                 lives--;
             }else{
@@ -127,6 +138,59 @@ void game::update(double eTime){
         
     
     enemiesLeft=0;
+    
+    
+    //Update bullets
+    for (int i=0; i<numBullets; i++) {
+        if (bullets[i] != NULL) {
+            //used to determine if the bullet has been destoried
+            bool notDead = true;
+            //Delete bullet, if needed, then move on to the next bullet
+            if (bullets[i]->remove) {
+                delete bullets[i];
+                bullets[i] = NULL;
+                continue;
+            }
+            bullets[i]->update(eTime);
+            
+            if (bullets[i]->collision(you, eTime) == 1 && gameType != background) {
+                you->shot(bullets[i]);
+                particleSysDef partSysDef;
+                partSysDef.pos = bullets[i]->pos;
+                partSysDef.vel = bullets[i]->vel;
+                partSysDef.color.r = 1.0; partSysDef.color.g = 0.16;partSysDef.color.b = 0.47;
+                partSysDef.numOfParts = 20;
+                
+                notDead = false;
+            }
+            
+            //check for bullet-bullet collision
+            for (int j=i+1; j<game::numBullets && notDead; j++) {
+                if (bullets[j] != NULL && bullets[j]->remove==0) {
+                    bullets[i]->collision(bullets[j], eTime);
+                }
+            }
+            //Check for bullet-asteroid collision
+            for (int j=0; j<numAst && notDead; j++) {
+                if(asteroids[j] != NULL && asteroids[j]->remove==0){
+                    //If collision make asteroid blowup
+                    if (bullets[i]->collision(asteroids[j], eTime) == 1) {
+                        notDead = asteroids[j]->shot(bullets[i]);
+                        break;
+                    }
+                }
+            }
+            //Check for bullet-food collision
+            for (int j=0; j<numFood && notDead; j++) {
+                if (foods[j]!=NULL && foods[j]->remove==0) {
+                    bullets[i]->collision(foods[j], eTime);
+                }
+            }
+            //check for bullet-mfood collision
+            bullets[i]->collision(mfood, eTime);
+        }
+    }
+    
     //Update Ships
     for (int i=0; i<numShips; i++) {
         if (ships[i]!=NULL) {
@@ -144,6 +208,7 @@ void game::update(double eTime){
                     ships[i]->collision(ships[j], eTime);
                 }
             }
+            //Bullet-ship collisions
             for (int j=0; j<numBullets; j++) {
                 if (bullets[j] != NULL && bullets[j]->remove==0) {
                     if (ships[i]->collision(bullets[j], eTime) == 1) {
@@ -189,79 +254,6 @@ void game::update(double eTime){
         }
     }
     
-    //Update bullets
-    for (int i=0; i<numBullets; i++) {
-        if (bullets[i] != NULL) {
-            //used to determine if the bullet has been destoried
-            bool notDead = true;
-            //Delete bullet, if needed, then move on to the next bullet
-            if (bullets[i]->remove) {
-                delete bullets[i];
-                bullets[i] = NULL;
-                continue;
-            }
-            bullets[i]->update(eTime);
-            
-            if (bullets[i]->collision(you, eTime) == 1 && gameType != background) {
-                you->shot(bullets[i]);
-                particleSysDef partSysDef;
-                partSysDef.pos = bullets[i]->pos;
-                partSysDef.vel = bullets[i]->vel;
-                partSysDef.color.r = 1.0; partSysDef.color.g = 0.16;partSysDef.color.b = 0.47;
-                partSysDef.numOfParts = 20;
-                
-                notDead = false;
-            }
-            
-            //check for bullet-bullet collision
-            for (int j=i+1; j<game::numBullets && notDead; j++) {
-                if (bullets[j] != NULL && bullets[j]->remove==0) {
-                    bullets[i]->collision(bullets[j], eTime);
-                }
-            }
-            //Check for bullet-asteroid collision
-            for (int j=0; j<numAst && notDead; j++) {
-                if(asteroids[j] != NULL && asteroids[j]->remove==0){
-                    //If collision make asteroid blowup
-                    if (bullets[i]->collision(asteroids[j], eTime) == 1) {
-                        if (asteroids[j]->mass > 5) {
-                            asteroids[j]->splitAsteroid((bullets[i]->pos).angle(asteroids[j]->pos));
-                            
-                            particleSysDef partDef;
-                            partDef.pos = bullets[i]->pos;
-                            partDef.vel = bullets[i]->vel;
-                            if (bullets[i]->target==NULL) {
-                                partDef.color.r = 0.64f;
-                            }else{
-                                partDef.color.r = 1.0f;
-                            }
-                            partDef.color.g = 0.16f;
-                            partDef.color.b =  0.47f;
-                            partDef.numOfParts = 20;
-                            this->partSysMan->createNewSystem(partDef);
-                            bullets[i]->remove = 1;
-                            
-                            notDead = false;
-                            break;
-                        }else{
-                            asteroids[j]->destroy(bullets[i]);
-                            notDead = false;
-                            break;
-                        }
-                    }
-                }
-            }
-            //Check for bullet-food collision
-            for (int j=0; j<numFood && notDead; j++) {
-                if (foods[j]!=NULL && foods[j]->remove==0) {
-                    bullets[i]->collision(foods[j], eTime);
-                }
-            }
-            //check for bullet-mfood collision
-            bullets[i]->collision(mfood, eTime);
-        }
-    }
-    
     //Update asteroids
     for (int i=0; i<numAst; i++) {
         if (asteroids[i] != NULL) {
@@ -283,7 +275,7 @@ void game::update(double eTime){
                         }else{
                             particleSysDef partDef;
                             partDef.pos = asteroids[i]->pos;
-                            partDef.vel = asteroids[i]->vel;
+                            partDef.vel = asteroids[i]->vel*3;
                             partDef.color.r = 0.0f;
                             partDef.color.g = 0.0f;
                             partDef.color.b =  1.0f;
@@ -346,6 +338,7 @@ void game::update(double eTime){
             asteroids[0]->pos.x = rand()/(float)RAND_MAX*globals::width;
             asteroids[0]->pos.y = rand()/(float)RAND_MAX*globals::height;
         }while ((asteroids[0]->pos-you->pos).mag2() < (you->size()+asteroids[0]->size())*(you->size()+asteroids[0]->size()));
+        asteroids[0]->ppos = asteroids[0]->pos;
         vector<double> diff = asteroids[0]->pos - you->pos;
         asteroids[0]->vel = diff.unit() * 20;
     }else if(enemiesLeft==0 && levelFinished == false){
@@ -363,6 +356,7 @@ void game::changeGameType(int gt){
     gameType = gt;
     gameCleanup();
     setup();
+    score->resetScore();
 }
 
 void game::gameCleanup(){
@@ -479,17 +473,17 @@ void game::addFood(foodObject* food){
             foods[i] = food;
             numFood ++;
         }
-        if (gameType != background) {
+        //if (gameType != background) {
             if (foodAdded%200 == 0) {
                 foods[i]->type = lifeFood;
                 foods[i]->shouldBeRemoved = false;
-            }else if (foodAdded%50 == 0) {
+            }else if (foodAdded%10 == 0) {
                 foods[i]->type = sheildFood;
                 foods[i]->shouldBeRemoved = false;
             }else{
                 foods[i]->type = regularFood;
             }
-        }
+        //}
     }
 }
 
@@ -532,6 +526,8 @@ game::~game(){
     delete openal;
     delete partSysMan;
 }
+
+
 @implementation levelLoader
 
 - (id) initWithGame:(game *)g{

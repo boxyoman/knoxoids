@@ -9,6 +9,8 @@
 #include <iostream>
 #include "bulletObject.h"
 #include "game.h"
+#include "shipObject.h"
+
 
 void bulletObject::update(double eTime){
     if (wall()) {

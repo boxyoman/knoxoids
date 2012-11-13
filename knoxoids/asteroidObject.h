@@ -25,6 +25,8 @@ class astObject: public spaceObject{
         
         void destroy(bulletObject*);
         void splitAsteroid(float ang);
+    
+        bool shot(bulletObject*);
 };
 
 #endif /* defined(__knoxoids__asteroidObject__) */

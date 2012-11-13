@@ -67,3 +67,34 @@ void astObject::splitAsteroid(float ang){
     
     currentGame->addAsteroid(ast);
 }
+
+bool astObject::shot(bulletObject *bullet){
+    if (bullet->cameFrom == currentGame->you) {
+        currentGame->score->score += 10;
+    }else{
+        currentGame->score->score += 30;
+    }
+    
+    if (mass > 5) {
+        this->splitAsteroid((bullet->pos).angle(pos));
+        
+        particleSysDef partDef;
+        partDef.pos = bullet->pos;
+        partDef.vel = bullet->vel;
+        if (bullet->target==NULL) {
+            partDef.color.r = 0.64f;
+        }else{
+            partDef.color.r = 1.0f;
+        }
+        partDef.color.g = 0.16f;
+        partDef.color.b =  0.47f;
+        partDef.numOfParts = 20;
+        currentGame->partSysMan->createNewSystem(partDef);
+        bullet->remove = 1;
+        
+        return false;
+    }else{
+        this->destroy(bullet);
+        return false;
+    }
+}

@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#include "scoreTracker.h"
 
 @class mainViewController;
 
-@interface appDelegate : UIResponder <UIApplicationDelegate>
+@interface appDelegate : UIResponder <UIApplicationDelegate>{
+    scoreTracker *score;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 

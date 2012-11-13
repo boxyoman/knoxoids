@@ -15,10 +15,14 @@
 #import "openingViewController.h"
 #import "gameOverViewController.h"
 #include "game.h"
+#include "scoreTracker.h"
 #include "gameGlobals.h"
 
-@interface mainViewController : GLKViewController<openingViewController, pausedViewController>{
+@interface mainViewController : GLKViewController<openingViewController, pausedViewController, gameOverViewController>{
     IBOutlet UILabel *levelPopup;
+    IBOutlet UILabel *scoreLabel;
+    scoreTracker *score;
 }
 - (IBAction)twoFingersTwoTaps:(UIGestureRecognizer *)sender;
+- (void)setScoreTracker: (scoreTracker*) s;
 @end

@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface gameOverViewController : UIViewController
+@protocol gameOverViewController <NSObject>
+- (void) restartPushed: (id) sender;
+- (void) menuPushed: (id) sender;
+@end
 
+@interface gameOverViewController : UIViewController{
+    id<gameOverViewController> delegate;
+}
+@property (strong, nonatomic) id<gameOverViewController> delegate;
+-(IBAction)menuPushed:(id)sender;
+-(IBAction)restartPushed:(id)sender;
 @end

@@ -26,8 +26,10 @@ class shipObject: public spaceObject{
         vector<double> thrust;
         double ang;
         bool sheildOn;
-        double sheildOnTime;
+        float sheildOnTime;
         
+        float bornTime;
+    
         void update(double);
         
         int gunOn;
@@ -46,6 +48,7 @@ class shipObject: public spaceObject{
             ang = 0;
             sheildOn=false;
             shootTime = globals::gameTime;
+            bornTime = globals::gameTime;
         };
         
         shipObject(int m, game *currentGame): spaceObject(m, currentGame){
@@ -53,12 +56,14 @@ class shipObject: public spaceObject{
             ang = 0;
             sheildOn=false;
             shootTime = globals::gameTime;
+            bornTime = globals::gameTime;
         };
         shipObject(int m, vector<double> position, game *currentGame): spaceObject (m, position, currentGame){
             gunOn = 1;
             ang = 0;
             sheildOn=false;
             shootTime = globals::gameTime;
+            bornTime = globals::gameTime;
         };
 };
 

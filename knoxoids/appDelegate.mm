@@ -26,9 +26,16 @@
     }
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    score = new scoreTracker();
+    score->init();
+    
     self.viewController = [[mainViewController alloc] initWithNibName:openingNib bundle:nil];
+    [self.viewController setScoreTracker:score];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+    
+    
     return YES;
 }
 

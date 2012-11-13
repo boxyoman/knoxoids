@@ -14,16 +14,27 @@
 
 void shipObject::update(double eTime){
     if(wall()){
-        if (type == yourShip || type ==  alienShip) {
+        if ((type == yourShip || type ==  alienShip) && !sheildOn && !isInvisable) {
             gunOn = 0;
             if (type == yourShip) {
                 currentGame->openal->createSoundSource(this, alBuffer_bounce, false, false);
             }
         }
+        if (sheildOn) {
+            particleSysDef partDef;
+            partDef.pos = pos;
+            partDef.vel = vel*3;
+            
+            partDef.color.r = 0.5f;
+            partDef.color.g = 0.5f;
+            partDef.color.b =  1.0f;
+            partDef.numOfParts = 10;
+            currentGame->partSysMan->createNewSystem(partDef);
+        }
     }
     
     ppos = pos;
-    vel = vel + (vel*-.05*M_PI*size()*size() + thrust)*eTime;
+    vel = vel + (vel*-.05*M_PI*size() + thrust)*eTime;
     pos = pos + vel * eTime;
     
     if (type == alienShip) {
@@ -34,11 +45,17 @@ void shipObject::update(double eTime){
         ang = pos.angle(currentGame->you->pos);
     }
     
+    if (sheildOn&&sheildOnTime+15<globals::gameTime) {
+        sheildOn = false;
+    }
+    
     if (type == regularTurret || type == guidedTurret) {
         if (shootTime+turretWaitTime<globals::gameTime) {
             if (currentGame->you->remove == 0) {
                 gunOn = 1;
                 shoot();
+            }else{
+                shootTime = globals::gameTime;
             }
         }
         ang = pos.angle(currentGame->you->pos);
@@ -63,6 +80,10 @@ void shipObject::eat(foodObject *food){
     }
 }
 void shipObject::ate(){
+    if (this == currentGame->you) {
+        currentGame->score->score+=1;
+    }
+    
     currentGame->openal->createSoundSource(this, alBuffer_eat, false, false);
     if (gunOn==1) {
         mass++;
@@ -93,7 +114,8 @@ bool shipObject::shoot(){
         }
         
         bulletObject *bullet = new bulletObject(currentGame);
-        float s = size()+1;
+        bullet->cameFrom = this;
+        float s = size()+2;
         float shootSpeed = 125;
         if (type == guidedTurret) {
             shootSpeed = 25;
@@ -106,18 +128,19 @@ bool shipObject::shoot(){
         bullet->vel.y = vel.y+sin(ang)*shootSpeed;
         bullet->target = target;
         
-        vel = (vel*(1+mass) - bullet->vel) * (1.0/mass);
-        
         if (mass == 3 && gunOn) {
             gunOn = 0;
         }else {
             mass --;
         }
+        
+        vel = (vel*(1+mass) - bullet->vel) * (1.0/mass);
+        
         currentGame->addBullet(bullet);
         
         particleSysDef partDef;
         partDef.pos = pos;
-        partDef.vel = bullet->vel;
+        partDef.vel = bullet->vel*2;
         if (target==NULL) {
             partDef.color.r = 0.64f;
         }else{
@@ -138,15 +161,29 @@ bool shipObject::shot(bulletObject* bullet){
     if (sheildOn == true) {
         particleSysDef partDef;
         partDef.pos = bullet->pos;
-        partDef.vel = bullet->vel;
-        partDef.color.r = 0.0f;
-        partDef.color.g = 0.0f;
+        partDef.vel = bullet->vel*2;
+        partDef.color.r = 0.5f;
+        partDef.color.g = 0.5f;
         partDef.color.b =  1.0f;
         partDef.numOfParts = 20;
         currentGame->partSysMan->createNewSystem(partDef);
         
+        bullet->target = NULL;
+        
         return false;
+
     }else{
+        
+        if (this != currentGame->you) {
+            if (bullet->cameFrom == currentGame->you) {
+                currentGame->score->score += 30;
+            }else if (bullet->cameFrom == this){
+                currentGame->score->score += 100;
+            }else{
+                currentGame->score->score += 60;
+            }
+        }
+        
         bullet->remove = 1;
         
         particleSysDef partDef;

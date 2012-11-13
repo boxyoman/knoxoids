@@ -20,6 +20,7 @@ spaceObject::spaceObject (game *g){
     remove = 0;
     sound = NULL;
     currentGame = g;
+    isInvisable = false;
 }
 spaceObject::spaceObject (int m, game *g){
     pos = vector<double>(0.0, 0.0);
@@ -29,6 +30,7 @@ spaceObject::spaceObject (int m, game *g){
     remove = 0;
     sound = NULL;
     currentGame = g;
+    isInvisable = false;
 }
 spaceObject::spaceObject (int m, vector<double> position, game *g){
     pos = position;
@@ -38,6 +40,7 @@ spaceObject::spaceObject (int m, vector<double> position, game *g){
     remove = 0;
     sound = NULL;
     currentGame = g;
+    isInvisable = false;
 }
 spaceObject::spaceObject (int m, vector<double> position, vector<double> velocity, game *g){
     pos = position;
@@ -47,6 +50,7 @@ spaceObject::spaceObject (int m, vector<double> position, vector<double> velocit
     remove = 0;
     sound = NULL;
     currentGame = g;
+    isInvisable = false;
 }
 
 int spaceObject::wall(){
@@ -135,7 +139,7 @@ double spaceObject::didHit(spaceObject *obj, double eTime){
 }
 
 int spaceObject::collision(spaceObject *obj, double eTime){
-    if (obj !=NULL && obj->remove==0) {
+    if (obj !=NULL && obj->remove==0 && !isInvisable && !obj->isInvisable) {
         double time;
         time = didHit(obj, eTime);
         if (time != -1) {

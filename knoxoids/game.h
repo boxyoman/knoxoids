@@ -10,6 +10,7 @@
 #include "asteroidObject.h"
 #include "openal.h"
 #include "sound.h"
+#include "scoreTracker.h"
 #include "particleSystemManager.h"
 #include <cstdlib>
 #include <ctime>
@@ -63,6 +64,7 @@ public:
     bool levelFinished;
     int gameType;
     
+    scoreTracker *score;
     openAL *openal;
     particleSysManager *partSysMan;
     

@@ -23,11 +23,13 @@
 		FB11472D152E6F7D007C8990 /* 0001.png in Resources */ = {isa = PBXBuildFile; fileRef = FB11472C152E6F7D007C8990 /* 0001.png */; };
 		FB1E9C51159CF6D400920658 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FB1E9C50159CF6D400920658 /* icon.png */; };
 		FB1E9C53159CF6DE00920658 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB1E9C52159CF6DE00920658 /* icon@2x.png */; };
+		FB2A61AC15F6C502000BAAD9 /* sheild.png in Resources */ = {isa = PBXBuildFile; fileRef = FB2A61AB15F6C502000BAAD9 /* sheild.png */; };
+		FB2A61AF15F6F753000BAAD9 /* cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = FB2A61AE15F6F752000BAAD9 /* cloud.png */; };
 		FB2C2D5B1595120A00A75152 /* gameGlobals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FB2C2D5A1595120A00A75152 /* gameGlobals.cpp */; };
 		FB3493D715D3389F00FDC33E /* level20.xml in Resources */ = {isa = PBXBuildFile; fileRef = FB3493D615D3389F00FDC33E /* level20.xml */; };
 		FB50D499158EF1C7006E1B75 /* shipObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = FB50D498158EF1C7006E1B75 /* shipObject.mm */; };
 		FB56BE8D152E979800C9CA6D /* game.mm in Sources */ = {isa = PBXBuildFile; fileRef = FB56BE8C152E979800C9CA6D /* game.mm */; };
-		FB56BE9B152EB4BA00C9CA6D /* openingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB56BE99152EB4BA00C9CA6D /* openingViewController.m */; };
+		FB56BE9B152EB4BA00C9CA6D /* openingViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FB56BE99152EB4BA00C9CA6D /* openingViewController.mm */; };
 		FB56BE9C152EB4BA00C9CA6D /* openingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB56BE9A152EB4BA00C9CA6D /* openingViewController.xib */; };
 		FB58A25F1533A49800BA2538 /* ball@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FB58A25E1533A49800BA2538 /* ball@2x.png */; };
 		FB61BD2D15338BD7007C5721 /* openingViewControlleriPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB61BD2C15338BD7007C5721 /* openingViewControlleriPad.xib */; };
@@ -35,7 +37,8 @@
 		FB68AD271598CB3F00F38B0C /* foodObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = FB68AD251598CB3F00F38B0C /* foodObject.mm */; };
 		FB68AD2B1598CBE400F38B0C /* asteroidObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = FB68AD291598CBE300F38B0C /* asteroidObject.mm */; };
 		FB8AE43315D0D88D0030BF11 /* halo2.png in Resources */ = {isa = PBXBuildFile; fileRef = FB8AE43215D0D88D0030BF11 /* halo2.png */; };
-		FB91C7E215C863C800EAA662 /* pausedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB91C7E015C863C800EAA662 /* pausedViewController.m */; };
+		FB8C569316092A200074ABC3 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB8C569216092A200074ABC3 /* GameKit.framework */; };
+		FB91C7E215C863C800EAA662 /* pausedViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FB91C7E015C863C800EAA662 /* pausedViewController.mm */; };
 		FB91C7E315C863C800EAA662 /* pausedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB91C7E115C863C800EAA662 /* pausedViewController.xib */; };
 		FB91C7E515C863EF00EAA662 /* pausedViewControlleriPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB91C7E415C863EF00EAA662 /* pausedViewControlleriPad.xib */; };
 		FBA39DD51531042200B80679 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBA39DD41531042200B80679 /* Accelerate.framework */; };
@@ -73,7 +76,7 @@
 		FBA95DC615C71E700011E925 /* level7.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DB115C71E700011E925 /* level7.xml */; };
 		FBA95DC715C71E700011E925 /* level8.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DB215C71E700011E925 /* level8.xml */; };
 		FBA95DC815C71E700011E925 /* level9.xml in Resources */ = {isa = PBXBuildFile; fileRef = FBA95DB315C71E700011E925 /* level9.xml */; };
-		FBAD12CB15D73A13002C2D4B /* gameOverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBAD12C915D73A13002C2D4B /* gameOverViewController.m */; };
+		FBAD12CB15D73A13002C2D4B /* gameOverViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FBAD12C915D73A13002C2D4B /* gameOverViewController.mm */; };
 		FBAD12CC15D73A13002C2D4B /* gameOverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBAD12CA15D73A13002C2D4B /* gameOverViewController.xib */; };
 		FBAD12CE15D73A37002C2D4B /* gameOverViewControlleriPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBAD12CD15D73A37002C2D4B /* gameOverViewControlleriPad.xib */; };
 		FBC82C0815CA23A2000D73D7 /* particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FBC82C0615CA23A2000D73D7 /* particle.cpp */; };
@@ -81,6 +84,8 @@
 		FBCF6C6D158D957D00AB7FB3 /* vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FBCF6C6C158D957D00AB7FB3 /* vector.cpp */; };
 		FBCF6C70158D998700AB7FB3 /* spaceObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = FBCF6C6F158D998700AB7FB3 /* spaceObject.mm */; };
 		FBD7E01015D0CD5700050815 /* halo.png in Resources */ = {isa = PBXBuildFile; fileRef = FBD7E00F15D0CD5700050815 /* halo.png */; };
+		FBDBFFCB161A5D86005BACCF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FBDBFFCA161A5D86005BACCF /* Default-568h@2x.png */; };
+		FBDBFFCE161A5DF1005BACCF /* scoreTracker.mm in Sources */ = {isa = PBXBuildFile; fileRef = FBDBFFCD161A5DF1005BACCF /* scoreTracker.mm */; };
 		FBDC45571596447100175D8B /* bulletObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = FBDC45561596447100175D8B /* bulletObject.mm */; };
 		FBF0195615C7CBD600EF13C6 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB1E9C4D159CF67C00920658 /* CoreMotion.framework */; };
 /* End PBXBuildFile section */
@@ -108,6 +113,8 @@
 		FB1E9C4D159CF67C00920658 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		FB1E9C50159CF6D400920658 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		FB1E9C52159CF6DE00920658 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		FB2A61AB15F6C502000BAAD9 /* sheild.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sheild.png; sourceTree = "<group>"; };
+		FB2A61AE15F6F752000BAAD9 /* cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloud.png; sourceTree = "<group>"; };
 		FB2C2D58159511F900A75152 /* gameGlobals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gameGlobals.h; sourceTree = "<group>"; };
 		FB2C2D5A1595120A00A75152 /* gameGlobals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gameGlobals.cpp; sourceTree = "<group>"; };
 		FB3493D615D3389F00FDC33E /* level20.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = level20.xml; sourceTree = "<group>"; };
@@ -116,7 +123,7 @@
 		FB56BE8A152E978700C9CA6D /* game.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = game.h; sourceTree = "<group>"; };
 		FB56BE8C152E979800C9CA6D /* game.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = game.mm; sourceTree = "<group>"; };
 		FB56BE98152EB4BA00C9CA6D /* openingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = openingViewController.h; path = viewControllers/openingViewController.h; sourceTree = "<group>"; };
-		FB56BE99152EB4BA00C9CA6D /* openingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = openingViewController.m; path = viewControllers/openingViewController.m; sourceTree = "<group>"; };
+		FB56BE99152EB4BA00C9CA6D /* openingViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = openingViewController.mm; path = viewControllers/openingViewController.mm; sourceTree = "<group>"; };
 		FB56BE9A152EB4BA00C9CA6D /* openingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = openingViewController.xib; path = viewControllers/openingViewController.xib; sourceTree = "<group>"; };
 		FB58A25E1533A49800BA2538 /* ball@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ball@2x.png"; sourceTree = "<group>"; };
 		FB61BD2C15338BD7007C5721 /* openingViewControlleriPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = openingViewControlleriPad.xib; path = viewControllers/openingViewControlleriPad.xib; sourceTree = "<group>"; };
@@ -126,8 +133,10 @@
 		FB68AD291598CBE300F38B0C /* asteroidObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = asteroidObject.mm; sourceTree = "<group>"; };
 		FB68AD2A1598CBE400F38B0C /* asteroidObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asteroidObject.h; sourceTree = "<group>"; };
 		FB8AE43215D0D88D0030BF11 /* halo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = halo2.png; sourceTree = "<group>"; };
+		FB8C568B160929C20074ABC3 /* scoreTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scoreTracker.h; sourceTree = "<group>"; };
+		FB8C569216092A200074ABC3 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		FB91C7DF15C863C800EAA662 /* pausedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pausedViewController.h; path = viewControllers/pausedViewController.h; sourceTree = "<group>"; };
-		FB91C7E015C863C800EAA662 /* pausedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = pausedViewController.m; path = viewControllers/pausedViewController.m; sourceTree = "<group>"; };
+		FB91C7E015C863C800EAA662 /* pausedViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = pausedViewController.mm; path = viewControllers/pausedViewController.mm; sourceTree = "<group>"; };
 		FB91C7E115C863C800EAA662 /* pausedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = pausedViewController.xib; path = viewControllers/pausedViewController.xib; sourceTree = "<group>"; };
 		FB91C7E415C863EF00EAA662 /* pausedViewControlleriPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = pausedViewControlleriPad.xib; path = viewControllers/pausedViewControlleriPad.xib; sourceTree = "<group>"; };
 		FBA39DD41531042200B80679 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -168,7 +177,7 @@
 		FBA95DB215C71E700011E925 /* level8.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level8.xml; path = Levels/level8.xml; sourceTree = "<group>"; };
 		FBA95DB315C71E700011E925 /* level9.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level9.xml; path = Levels/level9.xml; sourceTree = "<group>"; };
 		FBAD12C815D73A13002C2D4B /* gameOverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gameOverViewController.h; path = viewControllers/gameOverViewController.h; sourceTree = "<group>"; };
-		FBAD12C915D73A13002C2D4B /* gameOverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = gameOverViewController.m; path = viewControllers/gameOverViewController.m; sourceTree = "<group>"; };
+		FBAD12C915D73A13002C2D4B /* gameOverViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = gameOverViewController.mm; path = viewControllers/gameOverViewController.mm; sourceTree = "<group>"; };
 		FBAD12CA15D73A13002C2D4B /* gameOverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = gameOverViewController.xib; path = viewControllers/gameOverViewController.xib; sourceTree = "<group>"; };
 		FBAD12CD15D73A37002C2D4B /* gameOverViewControlleriPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = gameOverViewControlleriPad.xib; path = viewControllers/gameOverViewControlleriPad.xib; sourceTree = "<group>"; };
 		FBC82C0615CA23A2000D73D7 /* particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = particle.cpp; sourceTree = "<group>"; };
@@ -180,6 +189,8 @@
 		FBCF6C6E158D997700AB7FB3 /* spaceObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = spaceObject.h; sourceTree = "<group>"; };
 		FBCF6C6F158D998700AB7FB3 /* spaceObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = spaceObject.mm; sourceTree = "<group>"; };
 		FBD7E00F15D0CD5700050815 /* halo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = halo.png; sourceTree = "<group>"; };
+		FBDBFFCA161A5D86005BACCF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		FBDBFFCD161A5DF1005BACCF /* scoreTracker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = scoreTracker.mm; sourceTree = "<group>"; };
 		FBDC45541596446500175D8B /* bulletObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bulletObject.h; sourceTree = "<group>"; };
 		FBDC45561596447100175D8B /* bulletObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = bulletObject.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -189,6 +200,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB8C569316092A200074ABC3 /* GameKit.framework in Frameworks */,
 				FBF0195615C7CBD600EF13C6 /* CoreMotion.framework in Frameworks */,
 				FBA95D8615C6F9BE0011E925 /* AudioToolbox.framework in Frameworks */,
 				FBA95D8415C6F99C0011E925 /* OpenAL.framework in Frameworks */,
@@ -236,6 +248,7 @@
 		FB1146EC152E397C007C8990 = {
 			isa = PBXGroup;
 			children = (
+				FBDBFFCA161A5D86005BACCF /* Default-568h@2x.png */,
 				FB114720152E6ADC007C8990 /* Resource */,
 				FB114705152E397C007C8990 /* knoxoids */,
 				FB1146FA152E397C007C8990 /* Frameworks */,
@@ -254,6 +267,7 @@
 		FB1146FA152E397C007C8990 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FB8C569216092A200074ABC3 /* GameKit.framework */,
 				FBA95D8515C6F9BD0011E925 /* AudioToolbox.framework */,
 				FBA95D8315C6F99C0011E925 /* OpenAL.framework */,
 				FB1E9C4D159CF67C00920658 /* CoreMotion.framework */,
@@ -316,15 +330,15 @@
 			isa = PBXGroup;
 			children = (
 				FB56BE98152EB4BA00C9CA6D /* openingViewController.h */,
-				FB56BE99152EB4BA00C9CA6D /* openingViewController.m */,
+				FB56BE99152EB4BA00C9CA6D /* openingViewController.mm */,
 				FB56BE9A152EB4BA00C9CA6D /* openingViewController.xib */,
 				FB61BD2C15338BD7007C5721 /* openingViewControlleriPad.xib */,
 				FB91C7DF15C863C800EAA662 /* pausedViewController.h */,
-				FB91C7E015C863C800EAA662 /* pausedViewController.m */,
+				FB91C7E015C863C800EAA662 /* pausedViewController.mm */,
 				FB91C7E115C863C800EAA662 /* pausedViewController.xib */,
 				FB91C7E415C863EF00EAA662 /* pausedViewControlleriPad.xib */,
 				FBAD12C815D73A13002C2D4B /* gameOverViewController.h */,
-				FBAD12C915D73A13002C2D4B /* gameOverViewController.m */,
+				FBAD12C915D73A13002C2D4B /* gameOverViewController.mm */,
 				FBAD12CA15D73A13002C2D4B /* gameOverViewController.xib */,
 				FBAD12CD15D73A37002C2D4B /* gameOverViewControlleriPad.xib */,
 			);
@@ -372,6 +386,8 @@
 		FBD15AD8159CF95F0027F539 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				FB2A61AE15F6F752000BAAD9 /* cloud.png */,
+				FB2A61AB15F6C502000BAAD9 /* sheild.png */,
 				FB8AE43215D0D88D0030BF11 /* halo2.png */,
 				FB1E9C52159CF6DE00920658 /* icon@2x.png */,
 				FBD7E00F15D0CD5700050815 /* halo.png */,
@@ -396,6 +412,8 @@
 				FB68AD291598CBE300F38B0C /* asteroidObject.mm */,
 				FBCF6C6E158D997700AB7FB3 /* spaceObject.h */,
 				FBCF6C6F158D998700AB7FB3 /* spaceObject.mm */,
+				FB8C568B160929C20074ABC3 /* scoreTracker.h */,
+				FBDBFFCD161A5DF1005BACCF /* scoreTracker.mm */,
 				FBC82C0415CA2383000D73D7 /* particles */,
 				FBA95D8215C6E9B00011E925 /* openAL */,
 			);
@@ -503,6 +521,9 @@
 				FB3493D715D3389F00FDC33E /* level20.xml in Resources */,
 				FBAD12CC15D73A13002C2D4B /* gameOverViewController.xib in Resources */,
 				FBAD12CE15D73A37002C2D4B /* gameOverViewControlleriPad.xib in Resources */,
+				FB2A61AC15F6C502000BAAD9 /* sheild.png in Resources */,
+				FB2A61AF15F6F753000BAAD9 /* cloud.png in Resources */,
+				FBDBFFCB161A5D86005BACCF /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,7 +538,7 @@
 				FB114710152E397C007C8990 /* appDelegate.mm in Sources */,
 				FB114717152E397C007C8990 /* mainViewController.mm in Sources */,
 				FB56BE8D152E979800C9CA6D /* game.mm in Sources */,
-				FB56BE9B152EB4BA00C9CA6D /* openingViewController.m in Sources */,
+				FB56BE9B152EB4BA00C9CA6D /* openingViewController.mm in Sources */,
 				FBCF6C6D158D957D00AB7FB3 /* vector.cpp in Sources */,
 				FBCF6C70158D998700AB7FB3 /* spaceObject.mm in Sources */,
 				FB50D499158EF1C7006E1B75 /* shipObject.mm in Sources */,
@@ -527,10 +548,11 @@
 				FB68AD2B1598CBE400F38B0C /* asteroidObject.mm in Sources */,
 				FBA95D7915C6E8B70011E925 /* sound.mm in Sources */,
 				FBA95D8115C6E9970011E925 /* openal.mm in Sources */,
-				FB91C7E215C863C800EAA662 /* pausedViewController.m in Sources */,
+				FB91C7E215C863C800EAA662 /* pausedViewController.mm in Sources */,
 				FBC82C0815CA23A2000D73D7 /* particle.cpp in Sources */,
 				FBC82C0E15CA3089000D73D7 /* particleSystemManager.cpp in Sources */,
-				FBAD12CB15D73A13002C2D4B /* gameOverViewController.m in Sources */,
+				FBAD12CB15D73A13002C2D4B /* gameOverViewController.mm in Sources */,
+				FBDBFFCE161A5DF1005BACCF /* scoreTracker.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,6 +626,7 @@
 		FB11471E152E397D007C8990 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "knoxoids/knoxoids-Prefix.pch";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
@@ -618,6 +641,7 @@
 		FB11471F152E397D007C8990 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "knoxoids/knoxoids-Prefix.pch";
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";

@@ -78,6 +78,8 @@ GLfloat textureVectorData[12] = {
     
     CMMotionManager *motionManager;
     
+    GLfloat currentColor[4];
+    
 }
 @property (strong, nonatomic) EAGLContext *context;
 
@@ -128,6 +130,7 @@ GLfloat textureVectorData[12] = {
     globals::width = view.bounds.size.width/crad;
     globals::height = view.bounds.size.height/crad;
     currentGame = new game;
+    currentGame->score = score;
     currentGame->setup();
     currentGame->openal->initSound();
 }
@@ -149,6 +152,19 @@ GLfloat textureVectorData[12] = {
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc. that aren't in use.
 }
+
+
+
+-(NSUInteger) supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskLandscape;
+}
+-(UIInterfaceOrientation) preferredInterfaceOrientationForPresentation{
+    return UIDeviceOrientationLandscapeRight;
+}
+-(BOOL) shouldAutorotate{
+    return YES;
+}
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -200,29 +216,19 @@ GLfloat textureVectorData[12] = {
 
 - (void)update{
     if (motionManager.deviceMotionActive) {
-        //CMAcceleration gravity = motionManager.deviceMotion.gravity;
-        /*CMRotationMatrix rotationMatrix = motionManager.deviceMotion.attitude.rotationMatrix;
-        CMAcceleration gravity = {0.5,0,0.5};
-        CMAcceleration test= {
-            gravity.x*rotationMatrix.m11+gravity.y*rotationMatrix.m12+gravity.z*rotationMatrix.m13,
-            gravity.x*rotationMatrix.m21+gravity.y*rotationMatrix.m22+gravity.z*rotationMatrix.m23,
-            gravity.x*rotationMatrix.m31+gravity.y*rotationMatrix.m32+gravity.z*rotationMatrix.m33,
-        };
-        float ang = atan2(test.z, test.y);
-        float ang2 = atan2(test.z, test.x);
-        printf("x: %f y: %f z: %f ang1: %f ang2: %f\n", test.x, test.y, test.z, ang, ang2);*/
-        
+        //Change depending on the orientation
+        int a = 1;
+        if(self.interfaceOrientation == UIDeviceOrientationLandscapeLeft){
+            a = -1;
+        }
+        //set thrusters based on angle of device
         CMAcceleration gravity = motionManager.deviceMotion.gravity;
-        
-        currentGame->you->thrust.x = atan2(gravity.y, -gravity.z)*200;
-        currentGame->you->thrust.y = (-atan2(gravity.x, -gravity.z)+M_PI_4)*120;
-        //currentGame->you->thrust.x = ang*10;
-        //ang = atan2(test.z, test.x);
-        //currentGame->you->thrust.y = ang*10;
+        currentGame->you->thrust.x = a*atan2(gravity.y, -gravity.z)*200;
+        currentGame->you->thrust.y = (-a*atan2(gravity.x, -gravity.z)+M_PI_4)*120;
         
     }
     
-    
+    scoreLabel.text = [@"Score: " stringByAppendingString: [[NSNumber numberWithInt:score->score] stringValue]];
     
     if (globals::gameTime == currentGame->finishLevelTime && currentGame->gameType == regularGame) {
         [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(waitFinished:)  userInfo:nil repeats:NO];
@@ -307,8 +313,40 @@ GLfloat textureVectorData[12] = {
         [self drawShootingShip:dummy perspective:projectionMatrix];
     }
     
-    [self setColor_r:1.0 g:1.0 b:1.0];
+    
+    //Draw you
+    float a = 1.0f;
+    if (currentGame->you->isInvisable) {
+        float t = globals::gameTime-(currentGame->you->diedTime+youDeathTime);
+        a = sin(10*t)*.5;
+        a = (a<0)?-a+.2:a+.2;
+    }
+    
+    [self setColor_r:1.0 g:1.0 b:1.0 a: a];
     [self drawShootingShip:*currentGame->you perspective:projectionMatrix];
+    if (currentGame->you->sheildOn) {
+        float a = 1.0f;
+        //blink shield
+        if(currentGame->you->sheildOnTime+11<globals::gameTime){
+            
+            float t = globals::gameTime-currentGame->you->sheildOnTime;
+            a = sin(8*t)*.5;
+            a = (a<0)?-a+.2:a+.2;
+        }
+        [self setColor_r:0.5 g:0.5 b:1.0 a:a];
+        
+        
+        glBindTexture(GL_TEXTURE_2D, texts[SHEILD_TEXT]);
+        GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(currentGame->you->pos.x, currentGame->you->pos.y, 0.0f);
+        modelViewMatrix = GLKMatrix4Scale(modelViewMatrix, 1.1, 1.1, 1.0);
+        float size = currentGame->you->size();
+        modelViewMatrix = GLKMatrix4Scale(modelViewMatrix, size*1.1, size*1.1, 1.0);
+        _modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
+        glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, _modelViewProjectionMatrix.m);
+        
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+    }
+    
     
     //draw asteroids
     [self setColor_r:0.8 g:0.5 b:0.6];
@@ -342,7 +380,7 @@ GLfloat textureVectorData[12] = {
                 if (currentGame->foods[i]->type == lifeFood) {
                     [self setColor_r:0.0 g:1.0 b:0.0];
                 }else if (currentGame->foods[i]->type == sheildFood){
-                    [self setColor_r:0.0 g:0.0 b:1.0];
+                    [self setColor_r:0.5 g:0.5 b:1.0];
                 }else{
                     [self setColor_r:0.6 g:0.6 b:0.6];
                 }
@@ -391,11 +429,21 @@ GLfloat textureVectorData[12] = {
 - (void) setColor_r: (float) r g: (float) g b: (float) b {
     GLfloat color[4] = {r, g, b, 1.0};
     glVertexAttrib4fv(attrib[ATTRIB_COLOR], color);
+    
+    currentColor[0] = color[0];
+    currentColor[1] = color[1];
+    currentColor[2] = color[2];
+    currentColor[3] = color[3];
 }
 
 - (void) setColor_r: (float) r g: (float) g b: (float) b a: (float) a {
     GLfloat color[4] = {r, g, b, a};
     glVertexAttrib4fv(attrib[ATTRIB_COLOR], color);
+    
+    currentColor[0] = color[0];
+    currentColor[1] = color[1];
+    currentColor[2] = color[2];
+    currentColor[3] = color[3];
 }
 - (void) drawCircle_x:(float) x y:(float) y perspective: (GLKMatrix4) projectionMatrix
 {   
@@ -414,15 +462,23 @@ GLfloat textureVectorData[12] = {
     if (obj.remove == 0) {
         float s = obj.size();
         
+        float shipColor[4] = {currentColor[0],currentColor[1],currentColor[2], currentColor[3]};
+        
+        if (obj.type == guidedTurret) { [self setColor_r:1.0 g:0.16 b:0.47]; }else{ [self setColor_r:0.64 g:0.16 b:0.47]; }
+        
+        if ((obj.type == regularTurret || obj.type == guidedTurret) && obj.gunOn == 0) {
+            float dist = (globals::gameTime-obj.shootTime)/4*(s+1);
+            [self drawCircle_x:obj.pos.x+(dist)*cos(obj.ang) y:obj.pos.y+(dist)*sin(obj.ang) perspective:projectionMatrix];
+        }
+        
+        [self setColor_r:shipColor[0] g:shipColor[1] b:shipColor[2] a:shipColor[3]];
+        
         float ang = M_PI*2/(float)obj.mass;
         for (int i=0; i<obj.mass; i++) {
             [self drawCircle_x:obj.pos.x+cos(i*ang+obj.ang)*(s-1) y:obj.pos.y+sin(i*ang+obj.ang)*(s-1) perspective:projectionMatrix];
         }
-        if (obj.type == guidedTurret) {
-            [self setColor_r:1.0 g:0.16 b:0.47];
-        }else{
-            [self setColor_r:0.64 g:0.16 b:0.47];
-        }
+        if (obj.type == guidedTurret) { [self setColor_r:1.0 g:0.16 b:0.47]; }else{ [self setColor_r:0.64 g:0.16 b:0.47]; }
+        
         if(obj.mass>=3 && obj.gunOn == 1){
             [self drawCircle_x:obj.pos.x+(s+1)*cos(obj.ang) y:obj.pos.y+(s+1)*sin(obj.ang) perspective:projectionMatrix];
         }
@@ -507,11 +563,14 @@ GLfloat textureVectorData[12] = {
     }
     
     gameOverViewController *gameover = [[gameOverViewController alloc] initWithNibName:openingNib bundle:nil];
-    //gameover.delegate = (id<openingViewController>)self;
+    gameover.delegate = (id<gameOverViewController>)self;
     [self addChildViewController:gameover];
     [self.view addSubview:gameover.view];
     
     self.paused = true;
+}
+- (void) setScoreTracker:(scoreTracker *)s{
+    score = s;
 }
 - (void) playPushed: (id) sender{
     currentGame->changeGameType(regularGame);
@@ -610,7 +669,6 @@ GLfloat textureVectorData[12] = {
         return NO;
     }
     
-    
     return YES;
 }
 
@@ -676,7 +734,6 @@ GLfloat textureVectorData[12] = {
     uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX] = glGetUniformLocation(_program, "modelViewProjectionMatrix");
     uniforms[UNIFORM_PROJECTION_MATRIX] = glGetUniformLocation(_program, "projectionMatrix");
     uniforms[UNIFORM_TEXTURE] = glGetUniformLocation(_program, "uSampler");
-    
     
     // Release vertex and fragment shaders.
     if (vertShader) {

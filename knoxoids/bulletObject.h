@@ -14,11 +14,15 @@
 #include "openal.h"
 #include "sound.h"
 
+class shipObject;
+
 class bulletObject: public spaceObject{
     public:
         void update(double);
         spaceObject *target;
-        
+    
+        shipObject *cameFrom;
+    
         bulletObject(game *currentGame): spaceObject(currentGame){
             mass = 1;
             target = NULL;

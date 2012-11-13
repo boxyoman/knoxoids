@@ -27,6 +27,8 @@ class spaceObject{
         soundSource *sound;
         game *currentGame;
     
+        BOOL isInvisable;
+    
         //updates the objects position
         virtual void update(double);
     
