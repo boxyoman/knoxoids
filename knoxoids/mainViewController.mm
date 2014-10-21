@@ -182,8 +182,6 @@ GLfloat textureVectorData[12] = {
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
     
-    glGenVertexArraysOES(1, &_vertexArray);
-    glBindVertexArrayOES(_vertexArray);
     
     glGenBuffers(1, &_vertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
@@ -191,8 +189,6 @@ GLfloat textureVectorData[12] = {
     
     glEnableVertexAttribArray(GLKVertexAttribPosition);
     glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
-    
-    glBindVertexArrayOES(0);
     
     glGenBuffers(1, &_textureBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, _textureBuffer);
@@ -204,7 +200,6 @@ GLfloat textureVectorData[12] = {
     [EAGLContext setCurrentContext:self.context];
     
     glDeleteBuffers(1, &_vertexBuffer);
-    glDeleteVertexArraysOES(1, &_vertexArray);
     
     if (_program) {
         glDeleteProgram(_program);
@@ -259,8 +254,6 @@ GLfloat textureVectorData[12] = {
     
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
-    
-    glBindVertexArrayOES(_vertexArray);
     
     glUseProgram(_program);
     
@@ -594,8 +587,8 @@ GLfloat textureVectorData[12] = {
     int height;
     
     image = [UIImage imageNamed:@"ball.png"].CGImage;
-    width = CGImageGetWidth(image);
-    height = CGImageGetHeight(image);
+    width = (int)CGImageGetWidth(image);
+    height = (int)CGImageGetHeight(image);
     
     if (image) {
         textData = (GLubyte *)calloc(width * height * 4, sizeof(GLubyte));
@@ -619,8 +612,8 @@ GLfloat textureVectorData[12] = {
     }
     
     image = [UIImage imageNamed:@"halo2.png"].CGImage;
-    width = CGImageGetWidth(image);
-    height = CGImageGetHeight(image);
+    width = (int)CGImageGetWidth(image);
+    height = (int)CGImageGetHeight(image);
     
     if (image) {
         textData = (GLubyte *)calloc(width * height * 4, sizeof(GLubyte));
@@ -644,8 +637,8 @@ GLfloat textureVectorData[12] = {
     }
     
     image = [UIImage imageNamed:@"sheild.png"].CGImage;
-    width = CGImageGetWidth(image);
-    height = CGImageGetHeight(image);
+    width = (int)CGImageGetWidth(image);
+    height = (int)CGImageGetHeight(image);
     
     if (image) {
         textData = (GLubyte *)calloc(width * height * 4, sizeof(GLubyte));
