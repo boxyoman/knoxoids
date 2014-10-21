@@ -60,12 +60,11 @@ void game::setup(){
     you->thrust = you->thrust*0;
     you->gunOn = 1;
     you->type = yourShip;
-    you->sheildOn = true;
-    you->sheildOnTime = 100000;
+    you->sheildOn = false;
     openal->listener = you;
     
     lives = 2;
-    level = 11;
+    level = 0;
     finishLevelTime=0;
     levelFinished = false;
     gameOver = false;
@@ -93,9 +92,6 @@ void game::update(double eTime){
         }
     }
     //Update you
-    if (you->remove == 0) {
-        you->update(eTime);
-    }
     if (you->isInvisable) {
         if (you->diedTime+youDeathTime+5<globals::gameTime) {
             you->isInvisable = false;
@@ -123,6 +119,7 @@ void game::update(double eTime){
         }
     }
     if (you->remove == 0) {
+        you->update(eTime);
         if (you->collision(mfood, eTime) == 1) {
             you->ate();
             mfood->pos = getRandomPos();
@@ -473,17 +470,20 @@ void game::addFood(foodObject* food){
             foods[i] = food;
             numFood ++;
         }
-        //if (gameType != background) {
-            if (foodAdded%200 == 0) {
+        if (gameType != background) {
+            int r = (int)round(200.0f*rand()/(float)RAND_MAX);
+            if (r==163) {
                 foods[i]->type = lifeFood;
                 foods[i]->shouldBeRemoved = false;
-            }else if (foodAdded%10 == 0) {
+            }else if (r <= 10) {
                 foods[i]->type = sheildFood;
                 foods[i]->shouldBeRemoved = false;
             }else{
                 foods[i]->type = regularFood;
             }
-        //}
+        }else{
+            foods[i]->type = regularFood;
+        }
     }
 }
 
@@ -512,13 +512,16 @@ void game::addBullet(bulletObject* bullet){
 
 void game::nextLevel(){
     level++;
-    
-    //Get filename
-    NSString* str = [@"level" stringByAppendingString: [[NSNumber numberWithInt:level] stringValue]];
-    
-    
-    levelLoader *loader = [[levelLoader alloc] initWithGame: this];
-    [loader loadLevelWithStr: str];
+    if (level <= 22) {
+        //Get filename
+        NSString* str = [@"level" stringByAppendingString: [[NSNumber numberWithInt:level] stringValue]];
+        
+        
+        levelLoader *loader = [[levelLoader alloc] initWithGame: this];
+        [loader loadLevelWithStr: str];
+    }else{
+        
+    }
 }
 
 game::~game(){

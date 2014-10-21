@@ -29,6 +29,10 @@ void bulletObject::update(double eTime){
         currentGame->partSysMan->createNewSystem(partDef);
     }
     
+    if (target==NULL&&sound!=NULL) {
+        currentGame->openal->deleteSource(sound);
+    }
+    
     if (target!=NULL && sound == NULL) {
         sound = currentGame->openal->createSoundSource(this, alBuffer_guidedBullet, true, false);
     }
@@ -41,4 +45,10 @@ void bulletObject::update(double eTime){
         }
     }
     pos = pos + vel * eTime;
+}
+
+bulletObject::~bulletObject(){
+    if (sound!=NULL) {
+        currentGame->openal->deleteSource(sound);
+    }
 }

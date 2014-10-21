@@ -24,10 +24,28 @@
     }
     return self;
 }
+
+-(IBAction)settingsPushed:(id)sender{
+    NSString *settingNib;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        settingNib = @"settingsViewControlleriPad";
+    }else{
+        settingNib = @"settingsViewController";
+    }
+    
+    settingsViewController *settings = [[settingsViewController alloc] initWithNibName:settingNib bundle:nil];
+    settings.delegate = (id<settingsProtocal>)self;
+    [self addChildViewController:settings];
+    [self.view addSubview:settings.view];
+}
+
 -(IBAction)playPushed:(id)sender{
     [self.view removeFromSuperview];
     [self removeFromParentViewController];
     [delegate playPushed: self];
+}
+-(void)backSettingPushed: (id)sender{
+    
 }
 - (void)viewDidLoad
 {

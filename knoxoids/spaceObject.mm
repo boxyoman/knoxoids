@@ -183,7 +183,5 @@ int spaceObject::collision(spaceObject *obj, double eTime){
 }
 
 spaceObject::~spaceObject(){
-    if (sound!=NULL) {
-        currentGame->openal->deleteSource(sound);
-    }
+    
 }

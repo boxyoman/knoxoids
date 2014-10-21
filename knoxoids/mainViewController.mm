@@ -280,8 +280,6 @@ GLfloat textureVectorData[12] = {
                     
                     [self setColor_r:currentSys->color.r g:currentSys->color.g b:currentSys->color.b a:currentSys->parts[j]->life];
                     
-                    //[self drawCircle_x:currentSys->parts[j]->pos.x y:currentSys->parts[j]->pos.y perspective:projectionMatrix];
-                    
                     glActiveTexture(GL_TEXTURE0);
                     glBindTexture(GL_TEXTURE_2D, texts[HALO_TEXT]);
                     glUniform1f(uniforms[UNIFORM_TEXTURE], 0);
@@ -447,7 +445,7 @@ GLfloat textureVectorData[12] = {
 }
 - (void) drawCircle_x:(float) x y:(float) y perspective: (GLKMatrix4) projectionMatrix
 {   
-    glActiveTexture(GL_TEXTURE0);
+    //glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texts[CIRCLE_TEXT]);
     glUniform1f(uniforms[UNIFORM_TEXTURE], 0);
     
@@ -542,10 +540,10 @@ GLfloat textureVectorData[12] = {
 - (void) loadMenu{
     NSString *openingNib;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        crad = 8.8;
+        crad = 8.0;
         openingNib = @"openingViewControlleriPad";
     }else{
-        crad = 4.4;
+        crad = 4.0;
         openingNib = @"openingViewController";
     }
     
@@ -610,7 +608,7 @@ GLfloat textureVectorData[12] = {
         glGenTextures(TEXT_NUM, texts);
         glBindTexture(GL_TEXTURE_2D, texts[CIRCLE_TEXT]);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,GL_LINEAR);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, textData);
         glEnable(GL_TEXTURE_2D);
         

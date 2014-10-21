@@ -34,7 +34,7 @@ void shipObject::update(double eTime){
     }
     
     ppos = pos;
-    vel = vel + (vel*-.05*M_PI*size() + thrust)*eTime;
+    vel = vel + (vel*-.05*M_PI*size()*size() + thrust)*eTime;
     pos = pos + vel * eTime;
     
     if (type == alienShip) {
@@ -106,7 +106,7 @@ bool shipObject::shoot(){
                 currentGame->openal->createSoundSource(this, alBuffer_regularTurretShoot, false, false);
                 break;
             case guidedTurret:
-                //currentGame->openal->createSoundSource(this, alBuffer_guidedTurretShoot, false, false);
+                currentGame->openal->createSoundSource(this, alBuffer_guidedTurretShoot, false, false);
                 target = currentGame->you;
                 break;
             default:
@@ -124,8 +124,7 @@ bool shipObject::shoot(){
         bullet->pos.x = pos.x+cos(ang)*s;
         bullet->pos.y = pos.y+sin(ang)*s;
         bullet->ppos = bullet->pos;
-        bullet->vel.x = vel.x+cos(ang)*shootSpeed;
-        bullet->vel.y = vel.y+sin(ang)*shootSpeed;
+        bullet->vel = vector<double>(ang)*shootSpeed;
         bullet->target = target;
         
         if (mass == 3 && gunOn) {

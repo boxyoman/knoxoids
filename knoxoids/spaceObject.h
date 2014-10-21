@@ -20,7 +20,7 @@ class spaceObject{
         vector<double> pos;
         vector<double> vel;
         
-        vector<double> ppos;
+        vector<double> ppos;    //previous position
         int remove;
         int mass;
         

@@ -27,7 +27,8 @@ class bulletObject: public spaceObject{
             mass = 1;
             target = NULL;
         }
-        
+        ~bulletObject();
+    
 };
 
 #endif

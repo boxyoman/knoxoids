@@ -21,9 +21,9 @@ void openAL::initSound(void){
             alEnable(AL_DISTANCE_MODEL);
             alEnable(AL_SPEED_OF_SOUND);
             alEnable(AL_DOPPLER_FACTOR);
-            alDopplerFactor(1);
+            alDopplerFactor(10);
             alDistanceModel(AL_INVERSE_DISTANCE_CLAMPED);
-            alSpeedOfSound(1000);
+            alSpeedOfSound(500);
             initBuffers();
             
             sourceNum = 10;
@@ -198,6 +198,8 @@ void openAL::deleteSource(soundSource *source){
 }
 void openAL::update(){
     updateListener();
+    
+    //update sources
     for (int i=0; i<sourceNum; i++) {
         if (sounds[i]!=NULL) {
             if(sounds[i]->update() == false){
